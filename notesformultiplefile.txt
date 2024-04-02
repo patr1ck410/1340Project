@@ -1,0 +1,24 @@
+Funcition def in <Funcition>.cpp
+need a header file of <Funcition>.h
+
+//main.cpp
+#include "<Funcition>.h"
+
+
+
+///
+
+// <Funcition>.cpp
+
+#include "<Funcition>.h"
+///
+
+// <Funcition>.h
+#ifndef FUNCTION_H
+#define FUNCTION_H
+
+int gcd(int a, int b);
+
+
+#endif
+///

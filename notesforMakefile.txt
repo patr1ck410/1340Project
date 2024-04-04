@@ -1,0 +1,14 @@
+<function1>.o: <function1>.cpp <function1>.h
+    g++ -c $<
+
+"-c" for generate the .o file
+<function2>.o: <function2>.cpp <function2>.h
+    g++ -c $<
+.
+.
+.
+<function n>.o: <function n>.cpp <function n>.h
+    g++ -c $<
+
+<main>: <funcition1>.o <function2>.o ...<function n>.o
+    g++ $< -o $@

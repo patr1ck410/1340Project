@@ -1,4 +1,18 @@
-#include<iostreeam>
-#include"initialization.h"
-using namespace std;
-void 
+#include <iostream>
+#include "initialization.h"
+void printwelcome()
+{
+    
+}
+
+void printoption()
+{
+
+}
+
+
+void initializegame()
+{
+    printwelcome();
+    printoption();
+};

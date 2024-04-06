@@ -3,39 +3,26 @@
 #include "startgame.h"
 #include <random>
 #include <cstdlib>
+#include <string>
+#include <fstream>
 #include <time.h>
-
-
-enum class Suit = {CLUB, DIAMOND, HEART, SPADE};
-enum class Rank = {TWO, THREE, FOUR, FIVE, SIX, SEVEN, RIGHT, NINE, TEN, JACK, QUEEN, ACE};
-
-struct Card{
-    Suit suit;
-    Rank rank;
-};
-
-class Deck{
-public:
-    void setupdeck(){
-        int index = 0;
-        for (int suit = 0; suit < 4; suit++){
-            for (int rank = 0; rank < 13; rank++){
-                cards[index++] = {static_cast<Suit>(suit), static_cast<Rank>(rank)};
-            }
-        }
-    }
-    void shuffle(){
-        srand(time(0));
-    }
-private:
-    static const int NumOfCards = 52;
-    Card cards[NumOfCards];
-};
-
+struct 
 int main()
 {
-    initializegame();
-    startgame();
-    Deck deck;
-    deck.setupcards();
+	ifstream data;
+	data.open("lastgame.txt") // lastgame.txt saves last game details
+	double poolsize;
+	int numbernum;
+	if (data.fail()==False){    // lastgame.txt exists
+		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
+		bool ans;
+		cin >> ans;
+		if (ans==true)
+			retrievegame();//not done
+	}
+			 
+	initializegame();
+	startgame();
+	Deck deck;
+	deck.setupcards();
 }

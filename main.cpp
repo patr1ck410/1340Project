@@ -32,12 +32,21 @@ int main()
 			newgame=false;
 		}
 	}
+	player *head = NULL , *tail=NULL;
 	if (newgame==false){
 		cout << "Number of players?" << endl;
 		cin >> playernum;
-				 
-	initializegame();
-	startgame();
-	Deck deck;
-	deck.setupcards();
+		for (int i=0;i<playernum;i++)
+			cout << "Input Player " << i << "name: " ;
+			string name;
+			cin >> name;
+			appendplayer(head,tail,name); // for input player info in struct 
+		}
+	bool ongoing=true;
+	while (ongoing){
+		initializegame(); // deck is ready 
+		distribute(); // for distributing two cards
+		
+		
+	}
 }

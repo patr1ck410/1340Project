@@ -25,7 +25,7 @@ int main()
 		if (ans==true){
 			data.close();
 			player playerlist;
-			retrievegame(playerlist);//not done
+			retrievegame(playerlist, playernum);//not done
 			newgame=true;
 		}
 	}

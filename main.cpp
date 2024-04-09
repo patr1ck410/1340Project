@@ -44,7 +44,8 @@ int main()
 		}
 	bool ongoing=true;
 	while (ongoing){
-		initializegame(); // deck is ready 
+		int deck[4][13];
+		gamestart(deck,); // deck is ready 
 		distribute(); // for distributing two cards
 		
 		

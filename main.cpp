@@ -6,11 +6,12 @@
 #include <string>
 #include <fstream>
 #include <time.h>
+using namespace std;
 struct player{
 	string name;
 	double chips;
 	bool ingame;
-	int hand[][];
+	int hand[2][2];
 	double chipsput;
 	bool allin;
 	player *next;
@@ -40,13 +41,19 @@ int main()
 			cout << "Input Player " << i << "name: " ;
 			string name;
 			cin >> name;
-			appendplayer(head,tail,name); // for input player info in struct 
+			bool lastplayer = (I==(playernum-1))
+			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
 		}
 	bool ongoing=true;
+	int cardsremaining =5;
 	while (ongoing){
 		int deck[4][13];
-		gamestart(deck,); // deck is ready 
+		gamestart(deck); // deck is ready 
 		distribute(); // for distributing two cards
+		action();// for player action
+		for (int i =0 ;i<3 ; i++)
+			flop();// for fkop cards
+		
 		
 		
 	}

@@ -44,8 +44,10 @@ int main()
 			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
 		}
 	bool ongoing=true;
-	int cardsremaining =5;
 	while (ongoing){
+		double poolsize=0;
+		int playerinpool=playernum;
+		int cardsremianing =5;
 		int deck[4][13];
 		gamestart(deck); // deck is ready 
 		distribute(); // for distributing two cards

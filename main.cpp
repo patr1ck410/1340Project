@@ -1,26 +1,20 @@
 #include <iostream>
 #include "initialization.h"
-#include "startgame.h"
+#include "insert.h"
+#include "structures.h"
+#include "retrieve.h"
 #include <random>
 #include <cstdlib>
 #include <string>
 #include <fstream>
 #include <time.h>
 using namespace std;
-struct player{
-	string name;
-	double chips;
-	bool ingame;
-	int hand[2][2];
-	double chipsput;
-	bool allin;
-	player *next;
-};
+// the definination of player is now defined in "structures.h"
 	 
 int main()
 {
 	ifstream data;
-	data.open("lastgame.txt") // lastgame.txt saves last game details
+	data.open("lastgame.txt"); // lastgame.txt saves last game details
 	double poolsize;
 	int playernum;
 	bool newgame=false;
@@ -29,7 +23,9 @@ int main()
 		bool ans;
 		cin >> ans;
 		if (ans==true){
-			retrievegame();//not done
+			data.close();
+			player playerlist;
+			retrievegame(playerlist);//not done
 			newgame=true;
 		}
 	}
@@ -44,7 +40,7 @@ int main()
 			cout << "Input Player " << i << "name: " ;
 			string name;
 			cin >> name;
-			bool lastplayer = ( i == (playernum-1))
+			bool lastplayer = ( i == (playernum-1));
 			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
 		}
 	bool ongoing=true;

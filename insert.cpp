@@ -1,4 +1,5 @@
 #include<iostream> 
+#include <insert.h>
 using namespace std;
 void appendplayer( player * &head,player * & tail ,string pname, bool lastplayer){
 	player * p = new player;
@@ -6,15 +7,15 @@ void appendplayer( player * &head,player * & tail ,string pname, bool lastplayer
 	p -> chips = 100;
 	p -> ingame = true;
 	p -> chipsput = 0;
-	p -> allin-> false;
-	p -> next = NULL:
+	p -> allin = false;
+	p -> next = NULL;
 	if (head= NULL){
 		head = p;
 		tail = p;
 	}
 	else {
 		tail -> next = p;
-		tail =p;
+		tail = p ;
 	}
 	return 0;
 }

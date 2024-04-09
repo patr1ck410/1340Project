@@ -1,25 +1,28 @@
 #include "retrieve.h"
 #include "structures.h"
 #include <fstream>
+#include <sstream>
 using namespace std;
-
-void retrievegame(player  *& playerlist)
+void retrievegame(player  *& playerlist, int & playernum)
 {
     ifstream lastgame;
     lastgame.open("lastgame.txt");
     string data;
-    int i =0;
 
-    while (lastgame >> data)
+    int i =0;
+    while (getline(lastgame, data))
     {
-        lastgame >> 
-            playerlist[i].name >>
-            playerlist[i].chips >> 
-            playerlist[i].ingame >> 
-            playerlist[i].hand >>
-            playerlist[i].chipsput>>
-            playerlist[i].allin>>
-            playerlist[i].next;
+        istringstream iss(data);
+        string temp[2];
+        int j = 0;
+        while (iss >> data)
+        {
+            temp[j] = data;
+            j++;
+        }
+        playerlist[i].name = temp[0];
+        playerlist[i].chips = stoi(temp[1]);
+        i++;
     }
     
 

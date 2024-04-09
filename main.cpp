@@ -37,11 +37,14 @@ int main()
 	if (newgame==true){
 		cout << "Number of players?" << endl;
 		cin >> playernum;
+		/*
+		need to set playernumber limit
+		*/
 		for (int i=0;i<playernum;i++)
 			cout << "Input Player " << i << "name: " ;
 			string name;
 			cin >> name;
-			bool lastplayer = (I==(playernum-1))
+			bool lastplayer = ( i == (playernum-1))
 			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
 		}
 	bool ongoing=true;

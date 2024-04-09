@@ -1,6 +1,6 @@
 #include<iostream> 
 using namespace std;
-void appendplayer( head, tail , pname){
+void appendplayer( player * &head,player * & tail ,string pname, bool lastplayer){
 	player * p = new player;
 	p -> name = pname;
 	p -> chips = 100;

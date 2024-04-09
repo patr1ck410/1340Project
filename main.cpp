@@ -22,18 +22,18 @@ int main()
 	data.open("lastgame.txt") // lastgame.txt saves last game details
 	double poolsize;
 	int playernum;
-	bool newgame;
-	if (data.fail()==False){    // lastgame.txt exists
+	bool newgame=false;
+	if (data.fail()==false){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
 		if (ans==true){
 			retrievegame();//not done
-			newgame=false;
+			newgame=true;
 		}
 	}
 	player *head = NULL , *tail=NULL;
-	if (newgame==false){
+	if (newgame==true){
 		cout << "Number of players?" << endl;
 		cin >> playernum;
 		for (int i=0;i<playernum;i++)

@@ -1,5 +1,6 @@
 #include<iostream> 
 #include <insert.h>
+#include <structures.h>
 using namespace std;
 void appendplayer( player * &head,player * & tail ,string pname, bool lastplayer){
 	player * p = new player;

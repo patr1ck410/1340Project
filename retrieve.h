@@ -3,7 +3,6 @@
 struct player;
 
 
-void retrievegame();
-
+void retrievegame(player  *& playerlist, int & playernum);
 
 #endif

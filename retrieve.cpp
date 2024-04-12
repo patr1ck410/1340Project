@@ -8,7 +8,6 @@ void retrievegame(player  *& playerlist, int & playernum)
     ifstream lastgame;
     lastgame.open("lastgame.txt");
     string data;
-
     int i =0;
     while (getline(lastgame, data))
     {
@@ -24,6 +23,4 @@ void retrievegame(player  *& playerlist, int & playernum)
         playerlist[i].chips = stoi(temp[1]);
         i++;
     }
-    
-
 };

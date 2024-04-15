@@ -17,7 +17,7 @@ int main()
 	data.open("lastgame.txt"); // lastgame.txt saves last game details
 	double poolsize;
 	int playernum;
-	bool newgame=false;
+	bool newgame=true;
 	if (data.fail()==false){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
@@ -25,24 +25,28 @@ int main()
 		if (ans==true){
 			data.close();
 			player * head = NULL, * tail= NULL;
-			retrievegame(head, tail, playernum);//not done
-			newgame=true;
+			retrievegame(head, tail, playernum);
+			newgame=false;
+		}
+		else
+		{
+			newgame = true;
 		}
 	}
 	player *head = NULL , *tail=NULL;
-		if (newgame==true){
-			cout << "Number of players?" << endl;
-			cin >> playernum;
-			/*
-			need to set playernumber limit
-			*/
-			for (int i=0;i<playernum;i++)
-				cout << "Input Player " << i << "name: " ;
-				string name;
-				cin >> name;
-				bool lastplayer = ( i == (playernum-1));
-				appendplayer(head,tail,name,lastplayer); // for input player info in struct 
-			}
+	if (newgame==true){
+		cout << "Number of players?" << endl;
+		cin >> playernum;
+		/*
+		need to set playernumber limit
+		*/
+		for (int i=0;i<playernum;i++)
+			cout << "Input Player " << i << "name: " ;
+			string name;
+			cin >> name;
+			bool lastplayer = ( i == (playernum-1));
+			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
+		}
 	bool ongoing=true;
 	while (ongoing){
 		double poolsize=0;
@@ -58,4 +62,5 @@ int main()
 		
 		
 	}
+	savegame(head, tail);
 }

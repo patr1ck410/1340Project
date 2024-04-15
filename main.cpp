@@ -2,7 +2,7 @@
 #include "initialization.h"
 #include "insert.h"
 #include "structures.h"
-#include "retrieve.h"
+#include "loadandsave.h"
 #include <random>
 #include <cstdlib>
 #include <string>
@@ -24,8 +24,8 @@ int main()
 		cin >> ans;
 		if (ans==true){
 			data.close();
-			player playerlist;
-			retrievegame(playerlist);//not done
+			player * head = NULL, * tail= NULL;
+			retrievegame(head, tail, playernum);//not done
 			newgame=true;
 		}
 	}

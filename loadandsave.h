@@ -4,6 +4,6 @@ struct player;
 
 
 void retrievegame(player  *& head, player *& tail, int & playernum);
-void savegame();
+void savegame(player *& head, player *& tail);
 
 #endif

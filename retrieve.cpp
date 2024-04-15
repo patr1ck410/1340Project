@@ -32,4 +32,21 @@ void retrievegame(player  *& head, player *& tail, int & playernum)
     }
     p->next = head;
     }
+}
+
+void savegame(player *& head, player *& tail)
+{
+    ofstream lastgame ;
+    lastgame.open("lastgame.txt");
+
+    player * current = head;
+	while (current != tail)
+	{
+		lastgame << current->name << " " << current->chips <<"\n";
+		current = current->next;
+	}
+    lastgame << current->name << " " << current->chips;
+    lastgame.close();
+
 };
+

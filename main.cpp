@@ -40,13 +40,14 @@ int main()
 		/*
 		need to set playernumber limit
 		*/
-		for (int i=0;i<playernum;i++)
+		for (int i=0;i<playernum;i++){
 			cout << "Input Player " << i << "name: " ;
 			string name;
 			cin >> name;
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(head,tail,name,lastplayer); // for input player info in struct 
 		}
+	}
 	bool ongoing=true;
 	while (ongoing){
 		double poolsize=0;

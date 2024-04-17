@@ -9,8 +9,10 @@
 #include <fstream>
 #include <time.h>
 using namespace std;
-// the definination of player is now defined in "structures.h"
-	 
+// the definition of player is now defined in "structures.h"
+void checktype() { //check which type of poker hand player have
+	//check player have flush 
+}
 int main()
 {
 	ifstream data;

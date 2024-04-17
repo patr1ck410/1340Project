@@ -4,7 +4,7 @@ void action (player *button , double *poolsize ,int playernum ){
 	bool endturn=false;
 	player * current= button;
 	double max=0;
-	while (endturn == false ){
+	while (!endturn ){
 		if (current -> ingame == false || current -> allin == true){
 			current = current -> next ;
 			continue; // pass to next player if the player has all in or fold
@@ -54,9 +54,12 @@ void action (player *button , double *poolsize ,int playernum ){
 		else 
 			current->ingame =false;
 		player * check = button;
-		for 
-		
-		
+		endturn== true;
+		for (i=0 ; i < playernum ; i++){ // check if all players have put same amount of chips (max) , or have all in 
+			if (current -> ingame == true && current-> allin == false && current -> chipsput< max ){
+				endturn=false;
+				break;
+			}		
 	}
 	player * current=button;
 	for (i=0;i<playernum;i++){

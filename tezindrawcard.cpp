@@ -5,7 +5,7 @@
 #include "structures.h"
 using namespace std;
 
-void cardDraw(Deck &deck, int card[][]){
+void cardDraw(Deck &deck, int &card[][]){
    srand(time(NULL));
    bool exists = false;
    while(!exists){

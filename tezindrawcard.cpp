@@ -28,7 +28,7 @@ void distribute(Deck &deck, player *button, int playernum)
 {
    for(int i = 0; i < playernum ; i++)
    {
-      for (int j =0; j<2 ;j++)
+      for (int j = 0; j < 2 ;j++)
       {
          cardDraw(deck, int &card[]);
          button->hand[j][0] = card[0] ; //suit

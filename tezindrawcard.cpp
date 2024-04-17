@@ -5,16 +5,18 @@
 #include "structures.h"
 using namespace std;
 
-void cardDraw(Deck &deck, player* head, int &suit, int &rank){
+void cardDraw(Deck &deck, int card[][]){
    srand(time(NULL));
-   while(head != nullptr){
+   bool exists = false;
+   while(!exists){
       int randomsuit = rand() % 4;
       int randomrank = rand() % 13;
-      while(!deck[randomsuit][randomrank]){
-         int randomsuit = rand() % 4;
-         int randomrank = rand() % 13;
+      if(deck[randomsuit][randomrank]){
+         exists = true;
+         card[0] = randomsuit;
+         card[1] = randomrank;
+         deck[randomsuit][randomrank] = false;
+         return;
       }
-      head->hand[randomsuit][randomrank];
-      head = head->next;
    }
                                           

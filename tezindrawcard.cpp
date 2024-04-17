@@ -19,4 +19,12 @@ void cardDraw(Deck &deck, int &card[][]){
          return;
       }
    }
-                                          
+
+void distribute(Deck &deck, player *head, int playernum){
+   for(int i = 0; i < playernum * 2; i++){
+      cardDraw(deck, int &card[][]);
+      head->hand[card[0][card[1]];
+      head = head->next;
+   }
+}
+

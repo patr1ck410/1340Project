@@ -29,7 +29,7 @@ int main()
 			newgame=true;
 		}
 	}
-	player *head = NULL , *tail=NULL;
+	player *button = NULL ;
 		if (newgame==true){
 			cout << "Number of players?" << endl;
 			cin >> playernum;
@@ -41,7 +41,7 @@ int main()
 				string name;
 				cin >> name;
 				bool lastplayer = ( i == (playernum-1));
-				appendplayer(head,tail,name,lastplayer); // for input player info in struct 
+				appendplayer(button,name,lastplayer); // for input player info in struct 
 			}
 	bool ongoing=true;
 	while (ongoing){

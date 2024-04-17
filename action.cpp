@@ -2,7 +2,7 @@
 using namespace std;
 void action (player *button , double *poolsize ,int playernum ){
 	bool endturn=false;
-	current= button;
+	player * current= button;
 	double max=0;
 	while (endturn == false ){
 		if (current -> ingame == false || current -> allin == true){
@@ -53,11 +53,15 @@ void action (player *button , double *poolsize ,int playernum ){
 		}
 		else 
 			current->ingame =false;
+		player * check = button;
+		for 
+		
 		
 	}
-	current=button;
+	player * current=button;
 	for (i=0;i<playernum;i++){
 		poolsize+=current->chipsput;
+		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
 

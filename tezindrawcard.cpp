@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include "initialization.h"
+#include "structures.h"
 using namespace std;
 
 void cardDraw(Deck &deck, int &suit, int &rank){

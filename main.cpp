@@ -2,7 +2,7 @@
 #include "initialization.h"
 #include "insert.h"
 #include "structures.h"
-#include "retrieve.h"
+#include "loadandsave.h"
 #include <random>
 #include <cstdlib>
 #include <string>
@@ -16,7 +16,7 @@ int main()
 	ifstream data;
 	data.open("lastgame.txt"); // lastgame.txt saves last game details
 	double poolsize;
-	int playernum;
+	int playernum = 0;
 	bool newgame=false;
 	if (data.fail()==false){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
@@ -24,25 +24,31 @@ int main()
 		cin >> ans;
 		if (ans==true){
 			data.close();
-			player playerlist;
-			retrievegame(playerlist);//not done
-			newgame=true;
+			player * button = NULL, * tail= NULL;
+			retrievegame(button, tail, playernum);
+			newgame=false;
+		}
+		else
+		{
+			newgame = true;
 		}
 	}
 	player *button = NULL ;
-		if (newgame==true){
+		if (newgame==true)
+		{
 			cout << "Number of players?" << endl;
 			cin >> playernum;
 			/*
 			need to set playernumber limit
 			*/
-			for (int i=0;i<playernum;i++)
+			for (int i=0;i<playernum;i++){
 				cout << "Input Player " << i << "name: " ;
 				string name;
 				cin >> name;
 				bool lastplayer = ( i == (playernum-1));
 				appendplayer(button,name,lastplayer); // for input player info in struct 
 			}
+		}
 	bool ongoing=true;
 	while (ongoing){
 		double poolsize=0;

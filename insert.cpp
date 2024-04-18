@@ -1,6 +1,6 @@
 #include<iostream> 
-#include <insert.h>
-#include <structures.h>
+#include "insert.h"
+#include "structures.h"
 using namespace std;
 void appendplayer( player * &button ,string pname, bool lastplayer){
 	player * p = new player;
@@ -10,11 +10,11 @@ void appendplayer( player * &button ,string pname, bool lastplayer){
 	p -> chipsput = 0;
 	p -> allin = false;
 	if (lastplayer==true)
-		p -> next =head;
+		p -> next =button;
 	else
 		p -> next = NULL;
-	if (head= NULL)
+	if (button= NULL)
 		button = p;
 	
-	return 0;
+
 }

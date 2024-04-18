@@ -5,7 +5,7 @@
 #include "structures.h"
 using namespace std;
 
-void cardDraw(Deck &deck, int &card[])
+void cardDraw(bool (&deck)[4][13], int (& card)[])
 {
    srand(time(NULL));
    bool exists = false;
@@ -24,13 +24,14 @@ void cardDraw(Deck &deck, int &card[])
    }
 }
 
-void distribute(Deck &deck, player *button, int playernum)
+void distribute(bool (&deck)[4][13], player *button, int playernum)
 {
    for(int i = 0; i < playernum ; i++)
    {
       for (int j = 0; j < 2 ;j++)
       {
-         cardDraw(deck, int &card[]);
+         int card[2];
+         cardDraw(deck, card);
          button->hand[j][0] = card[0] ; //suit
          button->hand[j][1] = card[1] ; //rank
          button = button->next;

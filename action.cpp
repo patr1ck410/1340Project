@@ -22,9 +22,10 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 		int opt;
 		cin >> opt;
 		bool check = false;
+		double betsize;
 		while (!check) // validate the action, incorrect then input again
 		{ 
-			while (opt > 1|| opt < 3)
+			while (opt > 1 || opt < 3)
 			{
 				cout <<"Invalid choice . Please choose again. " << endl;
 				cin >> opt;
@@ -33,7 +34,6 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 			if (opt == 2)
 			{
 				cout << "input bet size" <<endl;
-				double betsize;
 				cin >> betsize ;
 				if (betsize < max *2 || betsize > current ->chips)
 				{
@@ -41,7 +41,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 					cin >> opt;
 					continue;
 				}
-			check = true; 
+				check = true; 
 			}
 			if (opt==1)
 			{
@@ -53,7 +53,8 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 					current -> chips = 0; // allin if chips remaining is not enough
 					playerleft-=1; 
 				}
-				else{
+				else
+				{
 					current -> chipsput += diff;
 					current -> chips-=diff;
 				}
@@ -82,6 +83,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 				}
 				check=check->next;
 			}		
+		}
 	}
 	player * current=button;
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
@@ -90,7 +92,12 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
+<<<<<<< HEAD
 	if (playerleft==1)
 		terminate=true;
 }
 	
+=======
+
+}
+>>>>>>> c5620ab1003856faf78b11727970eb2622c59443

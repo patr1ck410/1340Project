@@ -5,7 +5,7 @@
 #include "structures.h"
 using namespace std;
 
-void cardDraw(bool &deck[4][13], int card[])
+void cardDraw(bool (&deck)[4][13], int card[])
 {
    srand(time(NULL));
    bool flag = false;
@@ -23,7 +23,7 @@ void cardDraw(bool &deck[4][13], int card[])
    }
 }
 
-void distribute(bool &deck[4][13], player *button, int playernum)
+void distribute(bool (&deck)[4][13], player *button, int playernum)
 {
    for(int i = 0; i < playernum; i++)
    {
@@ -47,7 +47,7 @@ void flop(bool (&deck)[4][13], int (&publiccard)[5][2])   //publicard define in 
       cardDraw(deck, card);
       publiccard[i][0] = card[0];
       publiccard[i][1] = card[1];
-      printcard()      //haven't desgin function
+      printcard();      //haven't desgin function
    }
 }
 

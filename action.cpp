@@ -22,6 +22,7 @@ void action (player *button , double &poolsize ,int playernum )
 		int opt;
 		cin >> opt;
 		bool check = false;
+		double betsize;
 		while (!check) // validate the action, incorrect then input again
 		{ 
 			while (opt > 1 || opt < 3)
@@ -33,7 +34,6 @@ void action (player *button , double &poolsize ,int playernum )
 			if (opt == 2)
 			{
 				cout << "input bet size" <<endl;
-				double betsize;
 				cin >> betsize ;
 				if (betsize < max *2 || betsize > current ->chips)
 				{

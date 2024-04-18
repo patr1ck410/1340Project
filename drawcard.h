@@ -12,7 +12,11 @@ void cardDraw(bool (&deck)[4][13], int (& card)[]);
 
 void distribute(bool (&deck)[4][13], player *button, int playernum);
 
-void flop(bool (&deck)[4][13], int (&publiccard)[2][2]);
+void flop(bool (&deck)[4][13], int (&publiccard)[5][2]);
 
+
+void river(bool (&deck)[4][13], int (&publiccard)[5][2]);
+
+void turn(bool (&deck)[4][13], int (&publiccard)[5][2]);
 
 #endif

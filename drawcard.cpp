@@ -19,7 +19,6 @@ void cardDraw(bool (&deck)[4][13], int (& card)[])
          card[0] = randomsuit;
          card[1] = randomrank;
          deck[randomsuit][randomrank] = false;
-         return;
       }
    }
 }
@@ -62,3 +61,31 @@ void flop(bool (&deck)[4][13], int (&publiccard)[2][2]){ //publiccard define in 
    }
 }
 
+void turn(bool &deck[4][13], int &publiccard[2][2])
+{
+   srand(time(NULL));
+   bool flag = false;
+   while(!flag)
+   {
+      int randomsuit = rand() % 4;
+      int randomrank = rand() % 13;
+      if(deck[randomsuit][randomrank])
+      {
+         flag = true;
+         publiccard[3][0] = randomsuit;
+         publiccard[3][1] = randomrank;
+         deck[randomsuit][randomrank] = false;
+         printcard();
+      }   
+   }
+}
+
+void river(bool &deck[4][13], int &publiccard[2][2])
+{
+   int card[2];
+   cardDraw(deck, card);
+   publiccard[4][0] = card[0];
+   publiccard[4][1] = card[1];
+   printcard();
+}
+   

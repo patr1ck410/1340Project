@@ -3,6 +3,7 @@
 #include "insert.h"
 #include "structures.h"
 #include "loadandsave.h"
+#include "drawcard.h"
 #include <random>
 #include <cstdlib>
 #include <string>
@@ -54,9 +55,9 @@ int main()
 		double poolsize=0;
 		int playerinpool=playernum;
 		int cardsremianing =5;
-		int deck[4][13];
+		bool deck[4][13];
 		gamestart(deck); // deck is ready 
-		distribute(); // for distributing two cards
+		distribute(deck, button, playernum); // for distributing two cards
 		action();// for player action
 		for (int i =0 ;i<3 ; i++)
 			flop();// for flop cards

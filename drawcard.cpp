@@ -39,7 +39,7 @@ void distribute(bool (&deck)[4][13], player *button, int playernum)
    }
 }
 
-void flop(bool &deck[4][13], int &publiccard[2][2]){ //publiccard define in main function
+void flop(bool (&deck)[4][13], int (&publiccard)[2][2]){ //publiccard define in main function
                                                      //2d array like hands[2][2]
    srand(time(NULL));
    for(int i = 0; i < 3; i++)
@@ -48,7 +48,7 @@ void flop(bool &deck[4][13], int &publiccard[2][2]){ //publiccard define in main
       while(!flag)
       {
          int randomsuit = rand() % 4;
-         inr randomrank = rand() % 13;
+         int randomrank = rand() % 13;
          if(deck[randomsuit][randomrank])
          {
             flag = true;

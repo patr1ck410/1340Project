@@ -60,8 +60,9 @@ int main()
 		gamestart(deck); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
 		action(button, poolsize, playernum);// for player action
+		int publiccard[2][2];
 		for (int i =0 ;i<3 ; i++)
-			flop();// for flop cards
+			flop(deck,publiccard);// for flop cards
 		
 		
 		

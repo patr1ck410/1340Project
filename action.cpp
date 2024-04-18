@@ -2,7 +2,7 @@
 #include "action.h"
 #include "structures.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum )
+void action (player *button , double &poolsize ,int playernum,int &playerleft )
 {
 	bool endturn=false;
 	player * current= button;
@@ -50,7 +50,8 @@ void action (player *button , double &poolsize ,int playernum )
 				{
 					current -> allin = true;
 					current -> chipsput += current -> chips;
-					current -> chips = 0; // allin if chips remaining is not enough 
+					current -> chips = 0; // allin if chips remaining is not enough
+					playerleft-=1; 
 				}
 				else{
 					current -> chipsput += diff;
@@ -62,28 +63,34 @@ void action (player *button , double &poolsize ,int playernum )
 				max = betsize;
 				current -> chips = current -> chips - (betsize- current->chipsput);
 				current -> chipsput = betsize;
+				if (current->chips==0){
+					current->allin=true;
+					playerleft-=1;
+				}
 			}
-			else 
+			else{
 				current->ingame =false;
+				playerleft-=1;
+			}
 			player * check = button;
 			endturn == true;
 			for (int i = 0 ; i < playernum ; i++) // check if all players have put same amount of chips (max) , or have all in 
 			{ 
-				if (current -> ingame == true && current-> allin == false && current -> chipsput< max )
-				{
+				if (check -> ingame== true && check -> allin==false && check ->chipsput<max){
 					endturn=false;
 					break;
 				}
+				check=check->next;
 			}		
 	}
 	player * current=button;
-	for (int i = 0 ; i < playernum ; i++)
+	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
 	{
 		poolsize += current->chipsput;
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
-
-		}
-	}
+	if (playerleft==1)
+		terminate=true;
 }
+	

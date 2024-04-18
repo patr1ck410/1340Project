@@ -56,6 +56,7 @@ int main()
 		double poolsize=0;
 		int playerinpool=playernum;
 		int cardsremianing =5;
+		bool terminate=false;
 		bool deck[4][13];
 		gamestart(deck, button); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards

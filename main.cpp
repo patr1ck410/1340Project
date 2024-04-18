@@ -57,7 +57,7 @@ int main()
 		int playerinpool=playernum;
 		int cardsremianing =5;
 		bool deck[4][13];
-		gamestart(deck); // deck is ready 
+		gamestart(deck, button); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
 		action(button, poolsize, playernum);// for player action
 		int publiccard[5][2];

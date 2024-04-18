@@ -1,4 +1,5 @@
 #include <iostream>
+#include "action.h"
 #include "initialization.h"
 #include "insert.h"
 #include "structures.h"
@@ -58,7 +59,7 @@ int main()
 		bool deck[4][13];
 		gamestart(deck); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
-		action();// for player action
+		action(button, poolsize, playernum);// for player action
 		for (int i =0 ;i<3 ; i++)
 			flop();// for flop cards
 		

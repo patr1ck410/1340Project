@@ -2,7 +2,7 @@
 #include "action.h"
 #include "structures.h"
 using namespace std;
-void action (player *button , double *poolsize ,int playernum )
+void action (player *button , double &poolsize ,int playernum )
 {
 	bool endturn=false;
 	player * current= button;
@@ -43,43 +43,47 @@ void action (player *button , double *poolsize ,int playernum )
 				}
 			check = true; 
 			}
-		if (opt==1)
-		{
-			int diff = max - current-> chipsput;
-			if (diff >= max)
+			if (opt==1)
 			{
-				current -> allin = true;
-				current -> chipsput += current -> chips;
-				current -> chips = 0; // allin if chips remaining is not enough 
+				int diff = max - current-> chipsput;
+				if (diff >= max)
+				{
+					current -> allin = true;
+					current -> chipsput += current -> chips;
+					current -> chips = 0; // allin if chips remaining is not enough 
+				}
+				else{
+					current -> chipsput += diff;
+					current -> chips-=diff;
+				}
 			}
-			else{
-				current -> chipsput += diff;
-				current -> chips-=diff;
+			else if (opt==2)
+			{
+				max = betsize;
+				current -> chips = current -> chips - (betsize- current->chipsput);
+				current -> chipsput = betsize;
 			}
-		}
-		else if (opt==2)
-		{
-			max = betsize;
-			current -> chips = current -> chips - (betsize- current->chipsput);
-			current -> chipsput = betsize;
-		}
-		else 
-			current->ingame =false;
-		player * check = button;
-		endturn== true;
-		for (int i = 0 ; i < playernum ; i++){ // check if all players have put same amount of chips (max) , or have all in 
-			if (current -> ingame == true && current-> allin == false && current -> chipsput< max ){
-				endturn=false;
-				break;
+			else 
+				current->ingame =false;
+			player * check = button;
+			endturn == true;
+			for (int i = 0 ; i < playernum ; i++) // check if all players have put same amount of chips (max) , or have all in 
+			{ 
+				if (current -> ingame == true && current-> allin == false && current -> chipsput< max )
+				{
+					endturn=false;
+					break;
+				}
 			}		
 	}
 	player * current=button;
-	for (int i = 0 ; i < playernum ; i++){
+	for (int i = 0 ; i < playernum ; i++)
+	{
 		poolsize += current->chipsput;
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
 
-}
+		}
 	}
 }

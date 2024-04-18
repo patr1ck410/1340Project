@@ -39,3 +39,25 @@ void distribute(bool (&deck)[4][13], player *button, int playernum)
    }
 }
 
+void flop(bool &deck[4][13], int &card[]){
+   srand(time(NULL));
+   bool flag = false;
+   for(int i = 0; i < 3; i++)
+   {
+      while(!flag)
+      {
+         int randomsuit = rand() % 4;
+         inr randomrank = rand() % 13;
+         if(deck[randomsuit][randomrank])
+         {
+            flag = true;
+            card[0] = randomsuit;
+            card[1] = randomrank;
+            deck[randomsuit][randomrank] = false;
+            i++
+            return;
+         }
+      }
+   }
+}
+

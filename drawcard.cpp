@@ -38,8 +38,8 @@ void distribute(bool &deck[4][13], player *button, int playernum)
    }
 }
 
-void flop(bool &deck[4][13], int &publiccard[5][2])   //publicard define in main function
-                                                      //2d array like hands[2][2]
+void flop(bool (&deck)[4][13], int (&publiccard)[5][2])   //publicard define in main function
+                                                          //2d array like hands[2][2]
 {
    for(int i = 0; i < 3; i++)
    {
@@ -51,7 +51,8 @@ void flop(bool &deck[4][13], int &publiccard[5][2])   //publicard define in main
    }
 }
 
-void turn(bool &deck[4][13], int &publiccard[5][2])
+void turn(bool (&deck)[4][13], int (&publiccard)[2][2])
+
 {
    int card[2];
    cardDraw(deck, card);
@@ -60,7 +61,7 @@ void turn(bool &deck[4][13], int &publiccard[5][2])
    printcard();
 }
 
-void river(bool &deck[4][13], int &publiccard[5][2])
+void river(bool (&deck)[4][13], int (&publiccard)[5][2])
 {
    int card[2];
    cardDraw(deck, card);

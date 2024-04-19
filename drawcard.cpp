@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "initialization.h"
 #include "structures.h"
+#include <string>
 using namespace std;
 
 void cardDraw(bool (&deck)[4][13], int card[])
@@ -69,5 +70,13 @@ void river(bool (&deck)[4][13], int (&publiccard)[5][2])
    printcard();
 }
 
+void printcard(int card[2])
+{   
+   string suits[] = {"Diamond", "Club", "Heart", "Spade"};
+   string ranks[] = {"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+   int suit = card[0];
+   int rank = card[1];
+   cout << suits[suit] << " " << ranks[rank] << endl;
 
+}
    

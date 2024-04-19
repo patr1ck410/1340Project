@@ -38,52 +38,7 @@ void distribute(bool (&deck)[4][13], player *button, int playernum)
       }
    }
 }
-<<<<<<< HEAD
 
-void flop(bool (&deck)[4][13], int (&publiccard)[5][2]) 
-{
-   for(int i = 0; i < 3; i++)
-   {
-      int card[2];
-      cardDraw(deck, card);
-      publiccard[i][0] = card[0];
-      publiccard[i][1] = card[1];
-      printcard(card);      
-   }
-}
-
-void turnAndRiver(bool (&deck)[4][13], int(&publiccard)[5][2], int cardsremaining, bool terminate)
-{
-   if(terminate == true)
-   {
-      for(int i = 3; i < 5; i++)
-      {
-         int card[2];
-         cardDraw(deck, card);
-         publiccard[i][0] = card[0];
-         publiccard[i][1] = card[1];
-         printcard(card);}
-   }
-   else if(cardsremaining == 2)
-   {
-      int card[2];
-      cardDraw(deck, card);
-      publiccard[3][0] = card[0];
-      publiccard[3][1] = card[1];
-      printcard(card);
-   }
-   else if(cardsremaining == 1)
-   {
-      int card[2];
-      cardDraw(deck, card);
-      publiccard[4][0] = card[0];
-      publiccard[4][1] = card[1];
-      printcard(card);
-   }
-}
-
-=======
->>>>>>> 90d33bb66fec2e4ac32e36978c82adf348d4174c
 void printcard(int card[2])
 {   
    string suits[] = {"Diamond", "Club", "Heart", "Spade"};

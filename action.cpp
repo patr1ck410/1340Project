@@ -92,12 +92,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
-<<<<<<< HEAD
 	if (playerleft==1)
 		terminate=true;
 }
 	
-=======
-
-}
->>>>>>> c5620ab1003856faf78b11727970eb2622c59443

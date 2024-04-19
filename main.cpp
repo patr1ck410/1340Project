@@ -53,10 +53,11 @@ int main()
 		}
 	bool ongoing=true;
 	int seq[3]=[3,1,1];
+	int card[2];
 	while (ongoing){
 		double poolsize=0;
 		int playerinpool=playernum;
-		int cardsremianing =5;
+		int cardsremaining =5;
 		bool terminate=false;
 		bool deck[4][13];
 		gamestart(deck, button); // deck is ready 
@@ -66,10 +67,19 @@ int main()
 		action(button,poolsize,playernum,playerleft,terminate);
 		for (int i=0;i<3;i++){
 			if (terminate){
+				for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
+      					cardDraw(deck, card);
+     	 				publiccard[j][0] = card[0];
+      					publiccard[j][1] = card[1];
+				}
 				break;
 			}
-		
-		
-		
+			for (int j=0 ;j < seq[i];j++){
+				cardDraw(deck, card);
+				publiccard[5-cardsremaining][0] = card[0];
+                                publiccard[5-cardsremaining][1] = card[1];
+				cardsremaining-=1;
+			}
+		}
 	}
 }

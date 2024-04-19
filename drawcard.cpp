@@ -61,8 +61,7 @@ void turnAndRiver(bool (&deck)[4][13], int(&publiccard)[5][2], int cardsremainin
          cardDraw(deck, card);
          publiccard[i][0] = card[0];
          publiccard[i][1] = card[1];
-         printcard(card);
-      }
+         printcard(card);}
    }
    else if(cardsremaining == 2)
    {

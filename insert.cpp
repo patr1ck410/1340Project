@@ -9,12 +9,19 @@ void appendplayer( player * &button ,string pname, bool lastplayer){
 	p -> ingame = true;
 	p -> chipsput = 0;
 	p -> allin = false;
-	if (lastplayer==true)
-		p -> next =button;
-	else
-		p -> next = NULL;
-	if (button= NULL)
-		button = p;
-	
-
+	if (button=NULL){
+		button=p;
+		tail=p;
+		p-> next = NULL;
+	}
+	else {
+		tail->next=p;
+		if (lastplayer==true){
+			p->next = button;
+		}
+		else {
+			tail=p;
+			p->next =NULL;
+		}
+	}
 }

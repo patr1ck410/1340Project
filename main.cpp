@@ -71,7 +71,7 @@ int main()
      	 			publiccard[j][0] = card[0];
       				publiccard[j][1] = card[1];
 			}
-			showpublic(publiccard,cardsremaining);
+			showpublic(publiccard,5);
 		}
 		else{
 			for (int i=0;i<3;i++){
@@ -88,10 +88,10 @@ int main()
      	 					publiccard[j][0] = card[0];
       						publiccard[j][1] = card[1];
 					}
-					showpublic(publiccard,cardsremaining);
+					showpublic(publiccard,5);
 					break;
 				}
-				showpublic(publiccard,cardsremaining);
+				showpublic(publiccard,5-cardsremaining);
 			}
 		}
 		checkwin();

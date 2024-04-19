@@ -65,21 +65,34 @@ int main()
 		int publiccard[5][2];
 		int playerleft=playernum;
 		action(button,poolsize,playernum,playerleft,terminate);
-		for (int i=0;i<3;i++){
-			if (terminate){
-				for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
-      					cardDraw(deck, card);
-     	 				publiccard[j][0] = card[0];
-      					publiccard[j][1] = card[1];
+		if (terminate){
+			for (int j=0 ; j < 5 ; j++){ // draw all the public cards if terminate = true	
+      				cardDraw(deck, card);
+     	 			publiccard[j][0] = card[0];
+      				publiccard[j][1] = card[1];
+			}
+			continue;
+		}
+		else{
+			for (int i=0;i<3;i++){
+				for (int j=0 ;j < seq[i];j++){
+					cardDraw(deck, card);
+					publiccard[5-cardsremaining][0] = card[0];
+                                	publiccard[5-cardsremaining][1] = card[1];
+					cardsremaining-=1;
 				}
+				action(button,poolsize,playernum,playerleft,terminate);
+				if (terminate){
+					for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
+      						cardDraw(deck, card);
+     	 					publiccard[j][0] = card[0];
+      						publiccard[j][1] = card[1];
+					}
 				break;
 			}
-			for (int j=0 ;j < seq[i];j++){
-				cardDraw(deck, card);
-				publiccard[5-cardsremaining][0] = card[0];
-                                publiccard[5-cardsremaining][1] = card[1];
-				cardsremaining-=1;
-			}
 		}
+		checkwin();
+		button=button->next;
+		
 	}
 }

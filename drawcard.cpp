@@ -38,6 +38,7 @@ void distribute(bool (&deck)[4][13], player *button, int playernum)
       }
    }
 }
+<<<<<<< HEAD
 
 void flop(bool (&deck)[4][13], int (&publiccard)[5][2]) 
 {
@@ -81,6 +82,8 @@ void turnAndRiver(bool (&deck)[4][13], int(&publiccard)[5][2], int cardsremainin
    }
 }
 
+=======
+>>>>>>> 90d33bb66fec2e4ac32e36978c82adf348d4174c
 void printcard(int card[2])
 {   
    string suits[] = {"Diamond", "Club", "Heart", "Spade"};

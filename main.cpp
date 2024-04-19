@@ -62,10 +62,12 @@ int main()
 		gamestart(deck, button); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
 		int publiccard[5][2];
-		action(
+		int playerleft=playernum;
+		action(button,poolsize,playernum,playerleft,terminate);
 		for (int i=0;i<3;i++){
-			
-		flop(deck,publiccard);// for flop cards
+			if (terminate){
+				break;
+			}
 		
 		
 		

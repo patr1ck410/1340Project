@@ -52,6 +52,7 @@ int main()
 			}
 		}
 	bool ongoing=true;
+	int seq[3]=[3,1,1];
 	while (ongoing){
 		double poolsize=0;
 		int playerinpool=playernum;
@@ -60,8 +61,10 @@ int main()
 		bool deck[4][13];
 		gamestart(deck, button); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
-		action(button, poolsize, playernum);// for player action
 		int publiccard[5][2];
+		action(
+		for (int i=0;i<3;i++){
+			
 		flop(deck,publiccard);// for flop cards
 		
 		

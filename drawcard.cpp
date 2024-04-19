@@ -76,6 +76,5 @@ void printcard(int card[2])
    int suit = card[0];
    int rank = card[1];
    cout << suits[suit] << " " << ranks[rank] << endl;
-
 }
    

@@ -51,8 +51,7 @@ void flop(bool (&deck)[4][13], int (&publiccard)[5][2])   //publicard define in 
    }
 }
 
-void turn(bool (&deck)[4][13], int (&publiccard)[2][2])
-
+void turn(bool (&deck)[4][13], int (&publiccard)[5][2])
 {
    int card[2];
    cardDraw(deck, card);

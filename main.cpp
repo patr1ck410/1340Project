@@ -81,6 +81,7 @@ int main()
                                 	publiccard[5-cardsremaining][1] = card[1];
 					cardsremaining-=1;
 				}
+				showpublic(publiccard,5-cardsremaining);
 				action(button,poolsize,playernum,playerleft,terminate);
 				if (terminate){
 					for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
@@ -91,7 +92,6 @@ int main()
 					showpublic(publiccard,5);
 					break;
 				}
-				showpublic(publiccard,5-cardsremaining);
 			}
 		}
 		checkwin();

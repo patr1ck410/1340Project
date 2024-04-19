@@ -51,22 +51,35 @@ void flop(bool (&deck)[4][13], int (&publiccard)[5][2])
    }
 }
 
-void turn(bool (&deck)[4][13], int (&publiccard)[5][2])
+void turnAndRiver(bool (&deck)[4][13], int(&publiccard)[5][2], int cardsremaining, bool terminate)
 {
-   int card[2];
-   cardDraw(deck, card);
-   publiccard[3][0] = card[0];
-   publiccard[3][1] = card[1];
-   printcard(card);
-}
-
-void river(bool (&deck)[4][13], int (&publiccard)[5][2])
-{
-   int card[2];
-   cardDraw(deck, card);
-   publiccard[4][0] = card[0];
-   publiccard[4][1] = card[1];
-   printcard(card);
+   if(terminate == true)
+   {
+      for(int i = 3; i < 5; i++)
+      {
+         int card[2];
+         cardDraw(deck, card);
+         publiccard[i][0] = card[0];
+         publiccard[i][1] = card[1];
+         printcard(card);
+      }
+   }
+   else if(cardsremaining == 2)
+   {
+      int card[2];
+      cardDraw(deck, card);
+      publiccard[3][0] = card[0];
+      publiccard[3][1] = card[1];
+      printcard(card);
+   }
+   else if(cardsremaining == 1)
+   {
+      int card[2];
+      cardDraw(deck, card);
+      publiccard[4][0] = card[0];
+      publiccard[4][1] = card[1];
+      printcard(card);
+   }
 }
 
 void printcard(int card[2])
@@ -77,4 +90,13 @@ void printcard(int card[2])
    int rank = card[1];
    cout << suits[suit] << " " << ranks[rank] << endl;
 }
-   
+
+void showhand(player *button)
+{
+   for(int i = 0; i < 2; i++)
+   {
+      printcard(button->hand[i]);
+   }      
+}
+
+

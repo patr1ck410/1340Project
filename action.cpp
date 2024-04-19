@@ -4,7 +4,7 @@
 using namespace std;
 void action (player *button , double &poolsize ,int playernum,int &playerleft )
 {
-	bool endturn=false;
+	bool endturn = false;
 	player * current= button;
 	double max=0;
 	while (!endturn )
@@ -43,48 +43,49 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 				}
 				check = true; 
 			}
-			if (opt==1)
+		}
+		if (opt==1)
+		{
+			int diff = max - current-> chipsput;
+			if (diff >= max)
 			{
-				int diff = max - current-> chipsput;
-				if (diff >= max)
-				{
-					current -> allin = true;
-					current -> chipsput += current -> chips;
-					current -> chips = 0; // allin if chips remaining is not enough
-					playerleft-=1; 
-				}
-				else
-				{
-					current -> chipsput += diff;
-					current -> chips-=diff;
-				}
+				current -> allin = true;
+				current -> chipsput += current -> chips;
+				current -> chips = 0; // allin if chips remaining is not enough
+				playerleft-=1; 
 			}
-			else if (opt==2)
+			else
 			{
-				max = betsize;
-				current -> chips = current -> chips - (betsize- current->chipsput);
-				current -> chipsput = betsize;
-				if (current->chips==0){
-					current->allin=true;
-					playerleft-=1;
-				}
+				current -> chipsput += diff;
+				current -> chips-=diff;
 			}
-			else{
-				current->ingame =false;
+		}
+		else if (opt==2)
+		{
+			max = betsize;
+			current -> chips = current -> chips - (betsize- current->chipsput);
+			current -> chipsput = betsize;
+			if (current->chips==0){
+				current->allin=true;
 				playerleft-=1;
 			}
-			player * check = button;
-			endturn == true;
-			for (int i = 0 ; i < playernum ; i++) // check if all players have put same amount of chips (max) , or have all in 
-			{ 
-				if (check -> ingame== true && check -> allin==false && check ->chipsput<max){
-					endturn=false;
-					break;
-				}
-				check=check->next;
-			}		
 		}
+		else{
+			current->ingame =false;
+			playerleft-=1;
+		}
+		endturn == true;
+		player * checking = button;
+		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
+		{
+			if (checking->ingame == true && checking -> allin==false && checking ->chipsput < max){
+				endturn=false;
+				break;
+			}
+			checking=checking->next;
+		}		
 	}
+
 	player * current=button;
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
 	{
@@ -92,12 +93,8 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
-<<<<<<< HEAD
 	if (playerleft==1)
+	{
 		terminate=true;
+	}
 }
-	
-=======
-
-}
->>>>>>> c5620ab1003856faf78b11727970eb2622c59443

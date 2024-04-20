@@ -24,3 +24,9 @@ void checkwin(player * button,publiccard) { //check which type of poker hand pla
 int assignvalue(combine[7][2]){
 	int suit[4]=[0,0,0,0];
 	int rank [13]=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+	int value;
+	for (int i =0;i<7;i++)
+		suit[combine[i][0]]+=1;
+	for (int i =0; i<7;i+)
+		rank[combine[i][1]]+=1;
+	

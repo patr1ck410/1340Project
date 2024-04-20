@@ -21,4 +21,6 @@ void checkwin(player * button,publiccard) { //check which type of poker hand pla
 		current = curent -> next;
 	}while(current!= button);
 }
-int assignvalue(
+int assignvalue(combine[7][2]){
+	int suit[4]=[0,0,0,0];
+	int rank [13]=[0,0,0,0,0,0,0,0,0,0,0,0,0];

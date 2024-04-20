@@ -1,4 +1,6 @@
 #include<iostream>
+#include<time.h>
+#include<stdlib.h>
 using namespce std;
 void printcard(int card[2])
 {   

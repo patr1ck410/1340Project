@@ -2,10 +2,15 @@
 #include "action.h"
 #include "structures.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum,int &playerleft )
+void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool first)
 {
 	bool endturn = false;
-	player * current= button;
+	if (first){
+		player * current= button->next->next->next ; // the one next to big blind start first
+		max = 1;
+		button->next
+	else
+		player * current = button -> next;
 	double max=0;
 	while (!endturn )
 	{
@@ -18,7 +23,9 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 		cout << " 1. Check or call"  << endl;
 		cout << " 2. Bet " << endl;
 		cout << " 3. Fold " << endl;
-		cout <<  " Dead chips : " << current-> chipsput << "chips remaining : " << current -> chips <<endl;
+		cout << " Current pool size: " << poolsize << endl;
+		cout <<  "Your  Dead chips : " << current-> chipsput << "chips remaining : " << current -> chips <<endl;
+		cout << showhand(current) ;// user-menu
 		int opt;
 		cin >> opt;
 		bool check = false;
@@ -33,7 +40,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft )
 			}
 			if (opt == 2)
 			{
-				cout << "input bet size" <<endl;
+				cout << "input bet size: " <<endl;
 				cin >> betsize ;
 				if (betsize < max *2 || betsize > current ->chips)
 				{

@@ -7,11 +7,15 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 	bool endturn = false;
 	if (first){
 		player * current= button->next->next->next ; // the one next to big blind start first
-		max = 1;
-		button->next
-	else
+		double max = 1;
+		button->next->chipsput=0.5;//antecedent
+		button->next->chips-=0.5;
+		button->next->next->chipsput=1;
+		button->next->next->chips-=1;
+	else{
 		player * current = button -> next;
-	double max=0;
+		double max=0;
+`	}
 	while (!endturn )
 	{
 		if (current -> ingame == false || current -> allin == true)
@@ -83,14 +87,16 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		}
 		endturn == true;
 		player * checking = button;
+		current = current -> next;
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
-			if (checking->ingame == true && checking -> allin==false && checking ->chipsput < max){
+			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current=button->next->next && current->chipsput==1 ){// consider the start turn that big blind still have actions 
 				endturn=false;
 				break;
 			}
 			checking=checking->next;
-		}		
+		}
+				
 	}
 
 	player * current=button;

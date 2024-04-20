@@ -64,7 +64,7 @@ int main()
 		distribute(deck, button, playernum); // for distributing two cards
 		int publiccard[5][2];
 		int playerleft=playernum;
-		action(button,poolsize,playernum,playerleft,terminate);
+		action(button,poolsize,playernum,playerleft,terminate,true);
 		if (terminate){
 			for (int j=0 ; j < 5 ; j++){ // draw all the public cards if terminate = true	
       				cardDraw(deck, card);
@@ -82,7 +82,7 @@ int main()
 					cardsremaining-=1;
 				}
 				showpublic(publiccard,5-cardsremaining);
-				action(button,poolsize,playernum,playerleft,terminate);
+				action(button,poolsize,playernum,playerleft,terminate,false);
 				if (terminate){
 					for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
       						cardDraw(deck, card);

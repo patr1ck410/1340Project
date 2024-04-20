@@ -20,7 +20,7 @@ int main()
 	double poolsize;
 	int playernum = 0;
 	bool newgame=false;
-	if (data.fail()==false){    // lastgame.txt exists
+	if (!data.fail(){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
@@ -36,7 +36,7 @@ int main()
 		}
 	}
 	player *button = NULL ,*tail =NULL;
-		if (newgame==true)
+		if (newgame)
 		{
 			cout << "Number of players?" << endl;
 			cin >> playernum;

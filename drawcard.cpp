@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "initialization.h"
 #include "structures.h"
+#include <string>
 using namespace std;
 
 void cardDraw(bool (&deck)[4][13], int card[])
@@ -38,37 +39,4 @@ void distribute(bool (&deck)[4][13], player *button, int playernum)
    }
 }
 
-void flop(bool (&deck)[4][13], int (&publiccard)[5][2])   //publicard define in main function
-                                                          //2d array like hands[2][2]
-{
-   for(int i = 0; i < 3; i++)
-   {
-      int card[2];
-      cardDraw(deck, card);
-      publiccard[i][0] = card[0];
-      publiccard[i][1] = card[1];
-      printcard();      //haven't desgin function
-   }
-}
 
-void turn(bool (&deck)[4][13], int (&publiccard)[2][2])
-
-{
-   int card[2];
-   cardDraw(deck, card);
-   publiccard[3][0] = card[0];
-   publiccard[3][1] = card[1];
-   printcard();
-}
-
-void river(bool (&deck)[4][13], int (&publiccard)[5][2])
-{
-   int card[2];
-   cardDraw(deck, card);
-   publiccard[4][0] = card[0];
-   publiccard[4][1] = card[1];
-   printcard();
-}
-
-
-   

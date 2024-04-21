@@ -2,16 +2,31 @@
 #include <string>
 using namespace std;
 
-void checktype() { //check which type of poker hand player have
-	check = 1;
-	suited();//check player have flush 
-		straightflush();//checl if straight flush
-	if check = 0 { //if it is straight flush, check = 0, no need to check for other type
-		break;
-	}
-	quads();
-	if check = 0 {//if it is quads, check = 0, no need to check for other type
-		break;
-	}
-	
+void checkwin(player * button,publiccard) { //check which type of poker hand player have
+	player * current = button;
+	do {
+		if (current ->ingame){
+			int combine[7][2];
+			for (int i=0;i<5;i++){
+				for (int j=0 ;j<2;j++){
+					combine[i][j]=publiccard[i][j];
+				}
+			}
+			for (int i=5;i<7;i++){
+				for (int j-0;j<2;j++){
+					combine[i][j]=current->hand[i-5][j];
+				}
+			}
+			current->value=assignvalue(combine));		
+		current = curent -> next;
+	}while(current!= button);
 }
+int assignvalue(combine[7][2]){
+	int suit[4]=[0,0,0,0];
+	int rank [13]=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+	int value;
+	for (int i =0;i<7;i++)
+		suit[combine[i][0]]+=1;
+	for (int i =0; i<7;i+)
+		rank[combine[i][1]]+=1;
+	

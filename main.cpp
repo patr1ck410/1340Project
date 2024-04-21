@@ -20,7 +20,7 @@ int main()
 	double poolsize;
 	int playernum = 0;
 	bool newgame=false;
-	if (data.fail()==false){    // lastgame.txt exists
+	if (!data.fail(){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
@@ -35,8 +35,8 @@ int main()
 			newgame = true;
 		}
 	}
-	player *button = NULL ;
-		if (newgame==true)
+	player *button = NULL ,*tail =NULL;
+		if (newgame)
 		{
 			cout << "Number of players?" << endl;
 			cin >> playernum;
@@ -48,23 +48,54 @@ int main()
 				string name;
 				cin >> name;
 				bool lastplayer = ( i == (playernum-1));
-				appendplayer(button,name,lastplayer); // for input player info in struct 
+				appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 			}
 		}
 	bool ongoing=true;
+	int seq[3]=[3,1,1];
+	int card[2];
 	while (ongoing){
 		double poolsize=0;
 		int playerinpool=playernum;
-		int cardsremianing =5;
+		int cardsremaining =5;
 		bool terminate=false;
 		bool deck[4][13];
 		gamestart(deck, button); // deck is ready 
 		distribute(deck, button, playernum); // for distributing two cards
-		action(button, poolsize, playernum);// for player action
 		int publiccard[5][2];
-		flop(deck,publiccard);// for flop cards
-		
-		
+		int playerleft=playernum;
+		action(button,poolsize,playernum,playerleft,terminate,true);
+		if (terminate){
+			for (int j=0 ; j < 5 ; j++){ // draw all the public cards if terminate = true	
+      				cardDraw(deck, card);
+     	 			publiccard[j][0] = card[0];
+      				publiccard[j][1] = card[1];
+			}
+			showpublic(publiccard,5);
+		}
+		else{
+			for (int i=0;i<3;i++){
+				for (int j=0 ;j < seq[i];j++){
+					cardDraw(deck, card);
+					publiccard[5-cardsremaining][0] = card[0];
+                                	publiccard[5-cardsremaining][1] = card[1];
+					cardsremaining-=1;
+				}
+				showpublic(publiccard,5-cardsremaining);
+				action(button,poolsize,playernum,playerleft,terminate,false);
+				if (terminate){
+					for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
+      						cardDraw(deck, card);
+     	 					publiccard[j][0] = card[0];
+      						publiccard[j][1] = card[1];
+					}
+					showpublic(publiccard,5);
+					break;
+				}
+			}
+		}
+		checkwin();
+		button=button->next;
 		
 	}
 }

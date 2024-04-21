@@ -23,7 +23,7 @@ int main()
 	int playernum = 0;
 	bool newgame=false;
 	if (!data.fail()) // lastgame.txt exists
-	{   
+	{ 
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
@@ -56,6 +56,7 @@ int main()
 		}
 	}
 	bool ongoing=true;
+
 	int seq[3]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
 	while (ongoing){
@@ -107,7 +108,6 @@ int main()
 		{
 			ongoing = false;
 		}
-
 	}
 	savegame(button, tail);
 	cout << "Game saved suscessfully, BYE" << endl;

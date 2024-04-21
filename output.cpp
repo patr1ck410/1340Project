@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include "structures.h"
 using namespace std;
+
 void printcard(int card[2])
 {   
 	string suits[] = {"Diamond", "Club", "Heart", "Spade"};

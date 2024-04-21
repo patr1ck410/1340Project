@@ -8,11 +8,14 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 { 
 	player * current = button;
 	do {
-		if (current ->ingame){
+		if (current ->ingame)
+    {
 			int combine[7][2];
 			for (int i=0;i<5;i++)
 			{
-				for (int j=0 ;j<2;j++){
+
+				for (int j=0 ;j<2;j++)
+        {
 					combine[i][j]=publiccard[i][j];
 				}
 			}

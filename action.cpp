@@ -5,6 +5,7 @@ using namespace std;
 void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool first)
 {
 	bool endturn = false;
+
 	if (first){
 		player * current= button->next->next->next ; // the one next to big blind start first
 		double max = 1;
@@ -87,16 +88,20 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		}
 		endturn == true;
 		player * checking = button;
+
 		current = current -> next;
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
 			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current=button->next->next && current->chipsput==1 ){// consider the start turn that big blind still have actions 
-				endturn=false;
-				break;
+		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
+		{
+			if (checking->ingame == true && checking -> allin==false && checking ->chipsput < max){
+
 			}
 			checking=checking->next;
 		}
 				
+
 	}
 
 	player * current=button;

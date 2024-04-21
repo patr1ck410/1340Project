@@ -2,7 +2,7 @@
 #include "insert.h"
 #include "structures.h"
 using namespace std;
-void appendplayer( player * &button ,string pname, bool lastplayer){
+void appendplayer( player * &button, player *tail, string pname, bool lastplayer){
 	player * p = new player;
 	p -> name = pname;
 	p -> chips = 100;

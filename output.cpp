@@ -1,7 +1,8 @@
 #include<iostream>
 #include<time.h>
 #include<stdlib.h>
-using namespce std;
+#include "structures.h"
+using namespace std;
 void printcard(int card[2])
 {   
 	string suits[] = {"Diamond", "Club", "Heart", "Spade"};

@@ -1,22 +1,26 @@
 #include<iostream>
 #include "action.h"
 #include "structures.h"
+#include "output.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool first)
+void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool &terminate,bool first)
 {
 	bool endturn = false;
-
-	if (first){
-		player * current= button->next->next->next ; // the one next to big blind start first
-		double max = 1;
+	player * current;
+	double max;
+	if (first)
+	{
+		current= button->next->next->next ; // the one next to big blind start first
+		max = 1;
 		button->next->chipsput=0.5;//antecedent
 		button->next->chips-=0.5;
 		button->next->next->chipsput=1;
 		button->next->next->chips-=1;
+	}
 	else{
-		player * current = button -> next;
-		double max=0;
-`	}
+		current = button -> next;
+		max=0;
+	}
 	while (!endturn )
 	{
 		if (current -> ingame == false || current -> allin == true)
@@ -30,7 +34,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		cout << " 3. Fold " << endl;
 		cout << " Current pool size: " << poolsize << endl;
 		cout <<  "Your  Dead chips : " << current-> chipsput << "chips remaining : " << current -> chips <<endl;
-		cout << showhand(current) ;// user-menu
+		showhand(current) ;// user-menu
 		int opt;
 		cin >> opt;
 		bool check = false;
@@ -92,7 +96,11 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		current = current -> next;
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
-			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current=button->next->next && current->chipsput==1 ){// consider the start turn that big blind still have actions 
+			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current==button->next->next && current->chipsput==1 ))// consider the start turn that big blind still have actions 
+			{
+
+			}
+		}
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
 			if (checking->ingame == true && checking -> allin==false && checking ->chipsput < max){

@@ -100,6 +100,16 @@ int main()
 		}
 		checkwin(button, publiccard);
 		button=button->next;
-		
+		cout <<"Contiune playing? (1:Yes, 0: No)"; //ask quit game or not
+		int quitoption;
+		cin >> quitoption;		//if quit, set ongoing = false
+		if (quitoption == 1)
+		{
+			ongoing = false;
+		}
+
 	}
+	savegame(button, tail);
+	cout << "Game saved suscessfully, BYE" << endl;
+	return 0;
 }

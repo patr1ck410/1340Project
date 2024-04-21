@@ -7,7 +7,7 @@
 #include "structures.h"
 using namespace std;
 
-void cardDraw(bool (&deck)[4][13], int (& card)[]);
+void cardDraw(bool (&deck)[4][13], int (& card)[2]);
 
 void distribute(bool (&deck)[4][13], player *button, int playernum);
 

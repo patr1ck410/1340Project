@@ -6,7 +6,7 @@
 #include <string>
 using namespace std;
 
-void cardDraw(bool (&deck)[4][13], int (&card)[])
+void cardDraw(bool (&deck)[4][13], int (&card)[2])
 {
    srand(time(NULL));
    bool flag = false;

@@ -37,8 +37,10 @@ int main()
 		else
 		{
 			newgame = true;
+			cout <<"Yo";
 		}
 	}
+	cout << "Hello";
 	player *button = NULL ,*tail =NULL;
 	if (newgame)
 	{
@@ -60,6 +62,7 @@ int main()
 	int seq[3]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
 	while (ongoing){
+		cout << "Game start";
 		double poolsize=0;
 		int playerinpool = playernum;
 		int cardsremaining = 5;

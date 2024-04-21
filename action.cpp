@@ -91,7 +91,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			current->ingame =false;
 			playerleft-=1;
 		}
-		endturn == true;
+		endturn = true;
 		player * checking = button;
 
 		current = current -> next;
@@ -112,7 +112,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 	
 	}
 
-	player * current=button;
+	current=button;
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
 	{
 		poolsize += current->chipsput;

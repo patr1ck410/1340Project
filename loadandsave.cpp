@@ -3,6 +3,7 @@
 #include "insert.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 using namespace std;
 void retrievegame(player  *& head, player *& tail, int & playernum)
 {
@@ -22,16 +23,18 @@ void retrievegame(player  *& head, player *& tail, int & playernum)
         p -> chipsput = 0;
         p -> allin = false;
         p -> next = NULL;
-        if (head= NULL){
+        if (head == NULL){
             head = p;
             tail = p;
         }
         else {
             tail -> next = p;
             tail = p ;
-    }
+        }
     p->next = head;
     }
+    lastgame.close();
+    std::cout << "finished";
 }
 
 void savegame(player *& head, player *& tail)

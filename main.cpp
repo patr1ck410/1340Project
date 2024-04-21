@@ -100,7 +100,7 @@ int main()
 			}
 		}
 		checkwin(button, publiccard);
-		minigame();
+		minigame(); //when player do not have enough chips to continue
 		button=button->next;
 		cout <<"Continue playing? (1:Yes, 0: No)"; //ask quit game or not
 		int quitoption;

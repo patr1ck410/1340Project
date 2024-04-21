@@ -4,7 +4,7 @@
 using namespace std;
 struct player;
 
-void appendplayer(player * & head ,string pname, bool lastplayer);
+void appendplayer(player * & head , player * tail,string pname, bool lastplayer);
 
 
 #endif

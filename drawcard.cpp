@@ -1,12 +1,12 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include "initialization.h"
 #include "structures.h"
+#include "drawcard.h"
 #include <string>
 using namespace std;
 
-void cardDraw(bool (&deck)[4][13], int card[])
+void cardDraw(bool (&deck)[4][13], int (&card)[])
 {
    srand(time(NULL));
    bool flag = false;

@@ -1,12 +1,12 @@
 #include <iostream>
 #include "action.h"
+#include "checkwin.h"
+#include "drawcard.h"
 #include "initialization.h"
 #include "insert.h"
-#include "structures.h"
 #include "loadandsave.h"
-#include "drawcard.h"
 #include "output.h"
-#include "checkwin.h"
+#include "structures.h"
 #include <random>
 #include <cstdlib>
 #include <string>

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <vector>
 using namespace std;
 #include "checkwin.h"
 # include "structures.h"
@@ -25,7 +25,7 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 					combine[i][j]=current->hand[i-5][j];
 				}
 			}
-			current->value = assignvalue(combine);
+			current->value = assignvalue(combine); //the approach here  
 		}		
 		current = current -> next;
 	} while(current!= button);
@@ -54,6 +54,11 @@ int assignvalue(int combine[7][2]){
 		if (count==5)
 			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
 	}
+	
+	if (suited !=4 && stright !=14)
+		vector <int> suitstraight;
+		
+		
 	
 
 	return value;

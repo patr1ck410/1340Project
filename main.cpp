@@ -32,7 +32,6 @@ void print_list(player * head, player * tail)
 
 int main()
 {
-	cout << "hi";
 	ifstream data;
 	data.open("lastgame.txt"); // lastgame.txt saves last game details
 	double poolsize;
@@ -69,15 +68,11 @@ int main()
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 		}
-		print_list(button, tail);
 	}
 	bool ongoing=true;
 	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
-
-	
 	while (ongoing){
-		cout << "Game start";
 		double poolsize=0;
 		int playerinpool = playernum;
 		int cardsremaining = 5;

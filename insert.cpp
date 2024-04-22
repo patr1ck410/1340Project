@@ -27,5 +27,4 @@ void appendplayer( player *& button, player *&tail, string pname, bool lastplaye
 			p->next =NULL;
 		}
 	}
-	cout << "appended" << pname << endl;
 }

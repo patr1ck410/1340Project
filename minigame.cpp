@@ -2,61 +2,57 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
-int minigame() {
-    // Define the ranks of a card
-    const vector<string> ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
-
-    // Create a deck of cards
-    vector<string> deck;
-    for (const auto& rank : ranks) {
-        deck.push_back(rank);
-    }
-
-    // Shuffle the deck
-    random_device rd;
-    mt19937 gen(rd());
-    shuffle(deck.begin(), deck.end(), gen);
-
-    // Draw the first card
-    if (deck.empty()) {
-        cout << "The deck is empty." << std::endl;
-        return 0;
-    }
-    string prevCard = deck.back();
-    deck.pop_back();
-    cout << "The first card is: " << prevCard << endl;
-
-    // Play the game
-    while (!deck.empty()) {
-        string nextCard = deck.back();
-        deck.pop_back();
-        cout << "The next card is: " << nextCard << endl;
-
-        string guess;
-        cout << "Guess whether the next card is larger (L), smaller (S), or the same (E): ";
-        cin >> guess;
-
-        int prevRank = find(ranks.begin(), ranks.end(), prevCard) - ranks.begin();
-        int nextRank = find(ranks.begin(), ranks.end(), nextCard) - ranks.begin();
-
-        if (guess == "L" && nextRank > prevRank) {
-            cout << "Correct! The next card is larger." << endl;
-        } else if (guess == "S" && nextRank < prevRank) {
-            cout << "Correct! The next card is smaller." << endl;
-        } else if (guess == "E" && nextRank == prevRank) {
-            cout << "Correct! The next card is the same." << endl;
-        } else {
-            cout << "Incorrect. The next card is " << nextCard << "." << endl;
-            break;
-        }
-
-        prevCard = nextCard;
-    }
-
-    if (deck.empty()) {
-        cout << "You made it through the entire deck!" << endl;
-    }
-
-    return 0;
+int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
+   char choice;
+   int card[2];
+   int sto[1];
+   bool result = true;
+   cardDraw(deck, card);
+   sto[0] = card[1];
+   printcard(int card[2]);    // Display the selected card
+   cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
+   cin << choice
+   cardDraw(deck, card);
+   if (card[1] > sto[0])  {
+      if (choice == 'S') {
+         current -> chips = 100;
+      }
+      else {
+         current -> chips = 50;
+      }
+   }
+   if (card[1] == sto[0])  {
+      if (choice == 'D') {
+         current -> chips = 200;
+      }
+      else {
+         current -> chips = 100;
+   }
+   }
+   else {
+      if (choice == 'L') {
+         current -> chips = 100;
+      }
+      else {
+         current -> chips = 50;
+   }
+   }
 }
+   }
+}
+void checkchips(player * button, int playernum) {
+    current = button;
+    while (current != tail) {
+       for ((int i = 0) ; i < playernum ; i++){
+         if (button->next==current && current ->chips <0.5 && current ->chips != 0):
+            minigame(deck, card, current);
+         if (current->chips == 0):
+            minigame(deck, card, current);
+         current = current->next;
+       }
+    }
+}
+

@@ -5,49 +5,49 @@
 using namespace std;
 int minigame() {
     // Define the ranks of a card
-    const std::vector<std::string> ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    const vector<string> ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
     // Create a deck of cards
-    std::vector<std::string> deck;
+    vector<string> deck;
     for (const auto& rank : ranks) {
         deck.push_back(rank);
     }
 
     // Shuffle the deck
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::shuffle(deck.begin(), deck.end(), gen);
+    random_device rd;
+    mt19937 gen(rd());
+    shuffle(deck.begin(), deck.end(), gen);
 
     // Draw the first card
     if (deck.empty()) {
-        std::cout << "The deck is empty." << std::endl;
+        cout << "The deck is empty." << std::endl;
         return 0;
     }
-    std::string prevCard = deck.back();
+    string prevCard = deck.back();
     deck.pop_back();
-    std::cout << "The first card is: " << prevCard << std::endl;
+    cout << "The first card is: " << prevCard << endl;
 
     // Play the game
     while (!deck.empty()) {
-        std::string nextCard = deck.back();
+        string nextCard = deck.back();
         deck.pop_back();
-        std::cout << "The next card is: " << nextCard << std::endl;
+        cout << "The next card is: " << nextCard << endl;
 
-        std::string guess;
-        std::cout << "Guess whether the next card is larger (L), smaller (S), or the same (E): ";
-        std::cin >> guess;
+        string guess;
+        cout << "Guess whether the next card is larger (L), smaller (S), or the same (E): ";
+        cin >> guess;
 
-        int prevRank = std::find(ranks.begin(), ranks.end(), prevCard) - ranks.begin();
-        int nextRank = std::find(ranks.begin(), ranks.end(), nextCard) - ranks.begin();
+        int prevRank = find(ranks.begin(), ranks.end(), prevCard) - ranks.begin();
+        int nextRank = find(ranks.begin(), ranks.end(), nextCard) - ranks.begin();
 
         if (guess == "L" && nextRank > prevRank) {
-            std::cout << "Correct! The next card is larger." << std::endl;
+            cout << "Correct! The next card is larger." << endl;
         } else if (guess == "S" && nextRank < prevRank) {
-            std::cout << "Correct! The next card is smaller." << std::endl;
+            cout << "Correct! The next card is smaller." << endl;
         } else if (guess == "E" && nextRank == prevRank) {
-            std::cout << "Correct! The next card is the same." << std::endl;
+            cout << "Correct! The next card is the same." << endl;
         } else {
-            std::cout << "Incorrect. The next card is " << nextCard << "." << std::endl;
+            cout << "Incorrect. The next card is " << nextCard << "." << endl;
             break;
         }
 
@@ -55,7 +55,7 @@ int minigame() {
     }
 
     if (deck.empty()) {
-        std::cout << "You made it through the entire deck!" << std::endl;
+        cout << "You made it through the entire deck!" << endl;
     }
 
     return 0;

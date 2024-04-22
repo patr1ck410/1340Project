@@ -64,7 +64,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		if (opt==1)
 		{
 			int diff = max - current-> chipsput;
-			if (diff >= max)
+			if (diff >= current->chips)
 			{
 				current -> allin = true;
 				current -> chipsput += current -> chips;
@@ -95,7 +95,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		player * checking = button;
 
 		current = current -> next;
-
+		
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
 			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current==button->next->next && current->chipsput==1))

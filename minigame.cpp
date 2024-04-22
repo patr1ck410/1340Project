@@ -2,61 +2,52 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
-int minigame() {
-    // Define the ranks of a card
-    const vector<string> ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
-    // Create a deck of cards
-    vector<string> deck;
-    for (const auto& rank : ranks) {
-        deck.push_back(rank);
+int minigame(bool (&deck)[4][13], int (&gamecard)[2]) {
+   srand(time(NULL));
+   char choice;
+   bool result;
+   bool flag = false;
+   while(!flag)
+   {
+      int randomsuit = rand() % 4;
+      int randomrank = rand() % 13;
+      if(deck[randomsuit][randomrank])
+      {
+         flag = true;
+         card[0] = randomsuit;
+         card[1] = randomrank;
+         deck[randomsuit][randomrank] = false;
+      }
+   }
+   // Translate the suit and rank indices to card names and symbols
+    string suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    string ranks[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    string cardName = ranks[card[1]] + " of " + suits[card[0]];
+    string cardSymbol;
+    switch (card[0]) {
+        case 0: cardSymbol = "♣"; break;
+        case 1: cardSymbol = "♦"; break;
+        case 2: cardSymbol = "♥"; break;
+        case 3: cardSymbol = "♠"; break;
     }
 
-    // Shuffle the deck
-    random_device rd;
-    mt19937 gen(rd());
-    shuffle(deck.begin(), deck.end(), gen);
-
-    // Draw the first card
-    if (deck.empty()) {
-        cout << "The deck is empty." << std::endl;
-        return 0;
+    // Display the selected card
+    cout << "The card drawn is: " << cardName << " (" << cardSymbol << ")" << endl;
+    cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
+    cin << choice
+    
+    
+    
+}
+void checkchips(head) {
+    current = head;
+    while current != tail {
+        if current.chips == 0:
+            minigame();
+        current = current.next
     }
-    string prevCard = deck.back();
-    deck.pop_back();
-    cout << "The first card is: " << prevCard << endl;
-
-    // Play the game
-    while (!deck.empty()) {
-        string nextCard = deck.back();
-        deck.pop_back();
-        cout << "The next card is: " << nextCard << endl;
-
-        string guess;
-        cout << "Guess whether the next card is larger (L), smaller (S), or the same (E): ";
-        cin >> guess;
-
-        int prevRank = find(ranks.begin(), ranks.end(), prevCard) - ranks.begin();
-        int nextRank = find(ranks.begin(), ranks.end(), nextCard) - ranks.begin();
-
-        if (guess == "L" && nextRank > prevRank) {
-            cout << "Correct! The next card is larger." << endl;
-        } else if (guess == "S" && nextRank < prevRank) {
-            cout << "Correct! The next card is smaller." << endl;
-        } else if (guess == "E" && nextRank == prevRank) {
-            cout << "Correct! The next card is the same." << endl;
-        } else {
-            cout << "Incorrect. The next card is " << nextCard << "." << endl;
-            break;
-        }
-
-        prevCard = nextCard;
-    }
-
-    if (deck.empty()) {
-        cout << "You made it through the entire deck!" << endl;
-    }
-
-    return 0;
 }

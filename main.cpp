@@ -33,15 +33,12 @@ int main()
 			player * button = NULL, * tail= NULL;
 			retrievegame(button, tail, playernum); //load lastgame's data into current game
 			newgame=false;
-			cout << "Lastgame retrived" << endl;
 		}
 		else
 		{
 			newgame = true;
-			cout <<"Yo";
 		}
 	}
-	cout << "Hello";
 	player *button = NULL ,*tail =NULL;
 	if (newgame)
 	{
@@ -59,12 +56,10 @@ int main()
 		}
 		cout << "finished append" << endl;
 	}
-	cout <<"finished if"<< endl;
 	bool ongoing=true;
 
 	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
-	cout << "finished init"<<ongoing<< endl;
 
 	
 	while (ongoing){

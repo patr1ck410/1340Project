@@ -15,8 +15,24 @@
 #include <time.h>
 using namespace std;
 // the definition of player is now defined in "structures.h"
+void print_list(player * head, player * tail)
+{
+	tail = tail->next;
+    player * current = head;
+	while (current != tail)
+	{
+		// process the current node, e.g., print the content
+		cout << current->name << ": " <<current->chips << " -> ";
+		current = current->next;
+	}
+	cout << current->name << ": " <<current->chips << " -> ";
+	cout << "NULL\n";
+	return;
+}
+
 int main()
 {
+	cout << "hi";
 	ifstream data;
 	data.open("lastgame.txt"); // lastgame.txt saves last game details
 	double poolsize;
@@ -53,6 +69,7 @@ int main()
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 		}
+		print_list(button, tail);
 	}
 	bool ongoing=true;
 	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)

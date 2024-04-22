@@ -43,8 +43,10 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		cin >> opt;
 		bool check = false;
 		double betsize;
-		while (!check) {// validate the action, incorrect then input again
-			while (opt > 3 || opt < 1){
+		while (!check) // validate the action, incorrect then input again
+		{ 
+			while (opt > 3 || opt < 1)
+			{
 				cout <<"Invalid choice . Please choose again. " << endl;
 				cin >> opt;
 				continue;

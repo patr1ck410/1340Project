@@ -15,21 +15,6 @@
 #include <time.h>
 using namespace std;
 // the definition of player is now defined in "structures.h"
-void print_list(player * head, player * tail)
-{
-	tail = tail->next;
-    player * current = head;
-	while (current != tail)
-	{
-		// process the current node, e.g., print the content
-		cout << current->name << ": " <<current->chips << " -> ";
-		current = current->next;
-	}
-	cout << current->name << ": " <<current->chips << " -> ";
-	cout << "NULL\n";
-	return;
-}
-
 int main()
 {
 	ifstream data;

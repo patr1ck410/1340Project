@@ -1,5 +1,6 @@
-#ifndef DRAWCARD_H
-#define DDRAWCARD_H
+#ifndef CHECKWIN_H 
+#define CHECKWIN_H 
+
 
 #include "structures.h"
 

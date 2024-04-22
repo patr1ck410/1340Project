@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+#include "checkwin.h"
 # include "structures.h"
 
 void checkwin(player * button, int publiccard[5][2]) //check which type of poker hand player have
@@ -40,4 +40,7 @@ int assignvalue(int combine[7][2]){
 		suit[combine[i][0]]+=1;
 	for (int i =0; i<7;i++)
 		rank[combine[i][1]]+=1;
+
+	return 0;
+
 }

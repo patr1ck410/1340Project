@@ -1,2 +1,3 @@
 player1 400
 player2 500
+player3 600

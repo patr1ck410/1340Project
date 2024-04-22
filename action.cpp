@@ -98,7 +98,8 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 
 		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
 		{
-			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current=button->next->next && current->chipsput==1 ){// consider the start turn that big blind still have actions 
+			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current==button->next->next && current->chipsput==1))
+			{// consider the start turn that big blind still have actions 
 		 		endturn=false;
 				break;
 			}

@@ -5,49 +5,54 @@
 #include <ctime>
 #include <cstdlib>
 using namespace std;
-
-int minigame(bool (&deck)[4][13], int (&gamecard)[2]) {
-   srand(time(NULL));
+int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
    char choice;
-   bool result;
-   bool flag = false;
-   while(!flag)
-   {
-      int randomsuit = rand() % 4;
-      int randomrank = rand() % 13;
-      if(deck[randomsuit][randomrank])
-      {
-         flag = true;
-         card[0] = randomsuit;
-         card[1] = randomrank;
-         deck[randomsuit][randomrank] = false;
+   int card[2];
+   int sto[1];
+   bool result = true;
+   cardDraw(deck, card);
+   sto[0] = card[1];
+   printcard(int card[2]);    // Display the selected card
+   cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
+   cin << choice
+   cardDraw(deck, card);
+   if (card[1] > sto[0])  {
+      if (choice == 'S') {
+         current -> chips = 100;
+      }
+      else {
+         current -> chips = 50;
       }
    }
-   // Translate the suit and rank indices to card names and symbols
-    string suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
-    string ranks[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
-    string cardName = ranks[card[1]] + " of " + suits[card[0]];
-    string cardSymbol;
-    switch (card[0]) {
-        case 0: cardSymbol = "♣"; break;
-        case 1: cardSymbol = "♦"; break;
-        case 2: cardSymbol = "♥"; break;
-        case 3: cardSymbol = "♠"; break;
+   if (card[1] == sto[0])  {
+      if (choice == 'D') {
+         current -> chips = 200;
+      }
+      else {
+         current -> chips = 100;
+   }
+   }
+   else {
+      if (choice == 'L') {
+         current -> chips = 100;
+      }
+      else {
+         current -> chips = 50;
+   }
+   }
+}
+   }
+}
+void checkchips(player * button, int playernum) {
+    current = button;
+    while (current != tail) {
+       for ((int i = 0) ; i < playernum ; i++){
+         if (button->next==current && current ->chips <0.5 && current ->chips != 0):
+            minigame(deck, card, current);
+         if (current->chips == 0):
+            minigame(deck, card, current);
+         current = current->next;
+       }
     }
+}
 
-    // Display the selected card
-    cout << "The card drawn is: " << cardName << " (" << cardSymbol << ")" << endl;
-    cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
-    cin << choice
-    
-    
-    
-}
-void checkchips(head) {
-    current = head;
-    while current != tail {
-        if current.chips == 0:
-            minigame();
-        current = current.next
-    }
-}

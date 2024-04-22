@@ -9,7 +9,7 @@ int minigame() {
 void checkchips(head) {
     current = head;
     while current != tail {
-        if current.value == 0:
+        if current.chips == 0:
             minigame();
         current = current.next
     }

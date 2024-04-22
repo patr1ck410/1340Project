@@ -7,4 +7,5 @@ struct player;
 void appendplayer(player * & head , player * &tail,string pname, bool lastplayer);
 
 
+
 #endif

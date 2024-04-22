@@ -41,6 +41,6 @@ int assignvalue(int combine[7][2]){
 	for (int i =0; i<7;i++)
 		rank[combine[i][1]]+=1;
 
-
 	return 0;
+
 }

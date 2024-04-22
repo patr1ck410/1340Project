@@ -3,7 +3,14 @@
 #include <random>
 #include <algorithm>
 using namespace std;
-bool checkchips(head) {
+int minigame() {
+    
+}
+void checkchips(head) {
     current = head;
-    for 
+    while current != tail {
+        if current.value == 0:
+            minigame();
+        current = current.next
+    }
 }

@@ -51,17 +51,22 @@ int main()
 		need to set playernumber limit
 		*/
 		for (int i=0;i<playernum;i++){
-			cout << "Input Player " << i << "name: " ;
+			cout << "Input Player " << i+1 << " name: " ;
 			string name;
 			cin >> name;
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 		}
+		cout << "finished append" << endl;
 	}
+	cout <<"finished if"<< endl;
 	bool ongoing=true;
 
-	int seq[3]={3,1,1}; // for flop(3), river(1) and turn(1)
+	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
+	cout << "finished init"<<ongoing<< endl;
+
+	
 	while (ongoing){
 		cout << "Game start";
 		double poolsize=0;
@@ -104,9 +109,10 @@ int main()
 			}
 		}
 		checkwin(button, publiccard);
-		minigame(); //when player do not have enough chips to continue
+		int temp;
+		// temp = minigame(); //when player do not have enough chips to continue
 		button=button->next;
-		cout <<"Continue playing? (1:Yes, 0: No)"; //ask quit game or not
+		cout <<"Continue playing? (1: Yes, 0: No)"; //ask quit game or not
 		int quitoption;
 		cin >> quitoption;		//if quit, set ongoing = false
 		if (quitoption == 1)

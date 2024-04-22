@@ -40,7 +40,22 @@ int assignvalue(int combine[7][2]){
 		suit[combine[i][0]]+=1;
 	for (int i =0; i<7;i++)
 		rank[combine[i][1]]+=1;
+	int suited =4;
+	int straight = 14;
+	for (int i =0;i<4;i++)
+		if (suit[i]>=5)
+			suited=i; // check if 0-3 is suited, 4 represetning not suited
+	int count=0;
+	for (int i=0;i<14;i++){
+		if (rank[i%13]!=0)
+			count+=1;
+		else 
+			count=0;
+		if (count==5)
+			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
+	}
+	
 
-	return 0;
+	return value;
 
 }

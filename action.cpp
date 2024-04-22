@@ -36,7 +36,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		cout << " Current pool size: " << poolsize << endl;
 		cout <<  "Your  Dead chips : " << current-> chipsput <<endl;
 		cout << "chips remaining : " << current -> chips <<endl;
-		int diff = max - current-> chipsput;
+		double  diff = max - current-> chipsput;
 		cout << "Chips to call :" << diff << endl; 
 		showhand(current) ;// user-menu
 		int opt;
@@ -104,7 +104,6 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			checking=checking->next;
 		}
 	}
-
 	current=button;
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
 	{

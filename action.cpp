@@ -101,6 +101,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current==button->next->next && current->chipsput==1))
 			{// consider the start turn that big blind still have actions 
 		 		endturn=false;
+				cout << i;
 				break;
 			}
 			checking=checking->next;

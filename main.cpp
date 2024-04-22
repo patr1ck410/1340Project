@@ -5,6 +5,7 @@
 #include "initialization.h"
 #include "insert.h"
 #include "loadandsave.h"
+#include "minigame.h"
 #include "output.h"
 #include "structures.h"
 #include <random>

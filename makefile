@@ -20,6 +20,9 @@ insert.o : insert.cpp insert.h structures.h
 loadandsave.o : loadandsave.cpp loadandsave.h structures.h insert.h
 	g++ -c $<
 
+minigame.o : minigame.cpp minigame.h
+	g++ -c $<
+
 output.o : output.cpp output.h structures.h
 	g++ -c $<
 

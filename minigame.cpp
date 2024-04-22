@@ -3,7 +3,7 @@
 #include <random>
 #include <algorithm>
 using namespace std;
-int main() {
+int minigame() {
     // Define the ranks of a card
     const std::vector<std::string> ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 

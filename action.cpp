@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "action.h"
 #include "structures.h"
 #include "output.h"
@@ -34,16 +34,17 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		cout << " 2. Bet " << endl;
 		cout << " 3. Fold " << endl;
 		cout << " Current pool size: " << poolsize << endl;
-		cout <<  "Your  Dead chips : " << current-> chipsput << "chips remaining : " << current -> chips <<endl;
+		cout <<  "Your  Dead chips : " << current-> chipsput <<endl;
+		cout << "chips remaining : " << current -> chips <<endl;
+		int diff = max - current-> chipsput;
+		cout << "Chips to call :" << diff << endl; 
 		showhand(current) ;// user-menu
 		int opt;
 		cin >> opt;
 		bool check = false;
 		double betsize;
-		while (!check) // validate the action, incorrect then input again
-		{ 
-			while (opt > 3 || opt < 1)
-			{
+		while (!check) {// validate the action, incorrect then input again
+			while (opt > 3 || opt < 1){
 				cout <<"Invalid choice . Please choose again. " << endl;
 				cin >> opt;
 				continue;
@@ -58,12 +59,11 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 					cin >> opt;
 					continue;
 				}
-				check = true; 
 			}
+			check = true ;
 		}
 		if (opt==1)
 		{
-			int diff = max - current-> chipsput;
 			if (diff >= current->chips)
 			{
 				current -> allin = true;

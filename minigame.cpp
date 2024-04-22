@@ -5,6 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 using namespace std;
+
 int minigame(bool (&deck)[4][13], int (&gamecard)[2]) {
    srand(time(NULL));
    char choice;

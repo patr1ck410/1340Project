@@ -15,6 +15,20 @@
 #include <time.h>
 using namespace std;
 // the definition of player is now defined in "structures.h"
+void print_list(player * head, player * tail)
+{
+	tail = tail->next;
+    player * current = head;
+	while (current != tail)
+	{
+		// process the current node, e.g., print the content
+		cout << current->name << ": " <<current->chips << " -> ";
+		current = current->next;
+	}
+	cout << current->name << ": " <<current->chips << " -> ";
+	cout << "NULL\n";
+	return;
+}
 
 int main()
 {
@@ -54,22 +68,17 @@ int main()
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 		}
-		cout << "finished append" << endl;
 	}
 	bool ongoing=true;
-
 	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)
 	int card[2]; // for temporary storage for the card draw from the deck
-
-	
 	while (ongoing){
-		cout << "Game start";
 		double poolsize=0;
 		int playerinpool = playernum;
 		int cardsremaining = 5;
 		bool terminate = false;
 		bool deck[4][13]; // set up the deck
-		gamestart(deck, button); // reset the deck 
+		gamestart(deck, button, tail); // reset the deck 
 		distribute(deck, button, playernum); // for distributing two cards to each player
 		int publiccard[5][2];
 		int playerleft = playernum;

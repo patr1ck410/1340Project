@@ -56,7 +56,7 @@ int assignvalue(int combine[7][2]){
 		if (suit[i]>=5)
 			suited=i; // check if 0-3 is suited, 4 represetning not suited
 	int count=0;
-	for (int i=13,i>=0;i++){
+	for (int i=13; i>=0 ;i++){
 		if (rank[i%13]!=0)
 			count+=1;
 		else 
@@ -66,7 +66,7 @@ int assignvalue(int combine[7][2]){
 	}
 	vector <int> suits;
 	if (suited!=4){
-		for (i=0;i<7;i++){
+		for (int i=0 ; i<7 ; i++){
 			if(combine[i][0]==suited){
 				suits.push_back(combine[i][1]);
 			}
@@ -105,15 +105,16 @@ int assignvalue(int combine[7][2]){
 		if (value!=0)
 			return value;
 	}
-	else if (four !=NULL){
+	else if (four !=NULL)
+	{
 		int highcard=0;
 		for (const auto &pair : trank){
 			if (pair .second !=4 && ((pair.first+12)%13)> highcard) 
 				highcard=(pair.first+12)%13;
 		}
-		return (10+((four+12)%13)*13+highcard)
+		return (10+((four+12)%13)*13+highcard);
 	}// checking for four of a kind
-	else if (three!= NULL && 
+	else if (three!= NULL && )
 	
 		
 	

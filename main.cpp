@@ -30,31 +30,29 @@ void print_list(player * head, player * tail)
 	return;
 }
 
+
 int main()
 {
 	cout << "hi";
-	ifstream data;
-	data.open("lastgame.txt"); // lastgame.txt saves last game details
+	ifstream data ; // lastgame.txt saves last game details
 	double poolsize;
 	int playernum = 0;
 	bool newgame=false;
-	if (!data.fail()) // lastgame.txt exists
-	{ 
+	player * button = NULL, * tail= NULL;
+	if (!data.fail()){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
 		if (ans==true){
-			data.close();
-			player * button = NULL, * tail= NULL;
-			retrievegame(button, tail, playernum); //load lastgame's data into current game
-			newgame=false;
+			retrievegame(button, tail, playernum);//not done
+			newgame=true;
 		}
 		else
 		{
-			newgame = true;
+			cout << "new game" << endl;
 		}
 	}
-	player *button = NULL ,*tail =NULL;
+
 	if (newgame)
 	{
 		cout << "Number of players?" << endl;

@@ -35,6 +35,7 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 }
 
 int assignvalue(int combine[7][2]){
+	int value=NULL;
 	int suit[4]={0,0,0,0};
 	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
 	map <int, int> trank; // key is the rank , and the value is the occurreence
@@ -88,7 +89,7 @@ int assignvalue(int combine[7][2]){
 		else if (pair.second==2)
 			two.push_back(pair.second);
 	}
-	
+	sort(two.begin(),two.end());
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
 		int prev=suits[suits.size()-1]; // checking from the back 
@@ -105,16 +106,23 @@ int assignvalue(int combine[7][2]){
 		if (value!=0)
 			return value;
 	}
-	else if (four !=NULL)
+	if (four !=NULL)
 	{
 		int highcard=0;
 		for (const auto &pair : trank){
 			if (pair .second !=4 && ((pair.first+12)%13)> highcard) 
 				highcard=(pair.first+12)%13;
 		}
-		return (10+((four+12)%13)*13+highcard);
+		value =10+((four+12)%13)*13+highcard;
+		return value ;
 	}// checking for four of a kind
-	else if (three!= NULL && )
+	else if (three!= NULL && two.size()!=0)
+		value = 179+((three+12)%13)*13+((two.back()+12)%13);
+		return value;
+	else if (suited!=4){
+		value = 
+	else if (straight!=14)
+	
 	
 		
 	

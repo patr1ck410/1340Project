@@ -55,7 +55,7 @@ int assignvalue(int combine[7][2]){
 			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
 	}
 	
-	if (suited !=4 && stright !=14)
+	if (suited !=4 && straight !=14)
 		vector <int> suitstraight;
 		
 		

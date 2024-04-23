@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 #include "checkwin.h"
 # include "structures.h"
@@ -34,7 +35,7 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 
 int assignvalue(int combine[7][2]){
 	int suit[4]={0,0,0,0};
-	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
 	int value;
 	for (int i =0;i<7;i++)
 		suit[combine[i][0]]+=1;
@@ -54,10 +55,25 @@ int assignvalue(int combine[7][2]){
 		if (count==5)
 			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
 	}
-	
-	if (suited !=4 && straight !=14)
-		vector <int> suitstraight;
-		
+	vector <int> suits;
+	if (suited!=4){
+		for (i=0;i<7;i++){
+			if(combine[i][0]==suited){
+				suits.push_back(combine[i][1]);
+			}
+		}
+		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush
+	}
+	if (suited !=4 && straight !=14) //possibility in striaght flush
+		int count=1;
+		int prev=suits[0];
+		for (int i=1;i<suits.size();i++){
+			if (suits[i]==(prev+1)){
+				count+=1;
+				prev=suits[i];
+			else
+				count=0;
+		}
 		
 	
 

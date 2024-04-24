@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
-
+#include <cmath>
 using namespace std;
 #include "checkwin.h"
 # include "structures.h"
@@ -33,18 +33,22 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 		current = current -> next;
 	} while(current!= button);
 }
-vector <int> gethcard (  map<int,int> rank , int n , int used ){ // finding n highcards
+long localvalue (  map<int,int> rank , int n , int used ){ // finding n highcards
+	long value=0;
 	vector<int> cardrank;
     	for (const auto &pair : rank) {
-        	if (pair.second == 1) {
+        	if (pair.second != used) {
             		cardrank.push_back(pair.first);
         	}
     	}
 	sort(cardrank.rbegin() , cardrank.rend());
-	return cardrank(cardrank.begin(), cardrank.begin()+n);
+	for (i=0;i < n ;i++)
+		value = pow (13,n-i-1) * cardrank[i];
+	return value;
+		
 }
-int assignvalue(int combine[7][2]){
-	int value=NULL;
+long assignvalue(int combine[7][2]){
+	long value;
 	int suit[4]={0,0,0,0};
 	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
 	map <int, int> trank; // key is the rank , and the value is the occurreence
@@ -83,14 +87,14 @@ int assignvalue(int combine[7][2]){
 		}
 		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush
 	}
-	int four=NULL;
-	int three=NULL; // only have one value of the highest rank 
+	int four=13;
+	int three=13; // only have one value of the highest rank 
 	vector <int> two;
 	for (const auto &pair : trank) {
 		if (pair.second==4)
 			four=pair.first;
 		else if (pair.second==3)
-			if (three==NULL)
+			if (three==13)
 				three=pair.first;
 			else if (pair.first >three) // A is 12 , K is 11, 2 is 0 
 				three=pair.first;
@@ -114,40 +118,45 @@ int assignvalue(int combine[7][2]){
 		if (value!=0)
 			return value;
 	}
-	if (four !=NULL)
+	if (four !=13)
 	{
-		int highcard=0;
-		vector <int>
-		value =10+four*13+highcard;
+		long local = localvalue(trank , 1 ,4)
+		value =10+local;
 		return value ;
-	}// checking for four of a kind
-	else if (three!= NULL && two.size()!=0){
+	}  // checking for four of a kind
+	else if (three!=13 && two.size()!=0){
 		value = 179+three*13+two[0];
 		return value;
 	}
 	else if (suited!=4){
-		vector<int> highcard = ( 
-		value = 
+		long local = localvalue(trank , 5 , 0 )
+		value = 348 + local;
+		return value;
 	}
 	else if (straight!=14){
-		value = c+ straight ;
-	else if (three!=NULL){
-		value
+		value = 371641+ straight ;
+		return value;
+	}
+	else if (three!=13){
+		long local = localvalue(trank , 2 , 3)
+		value = 371651+local;
+		return value;
 	}
 	else if (two.size()>=2){
-
+		long local = localvalue(trank , 1 , 2)
+		value = 373848+local;
+		return value;
 	}
 	else if (two.size()==1){
-
+		long local = localvalue(trank , 3 , 2)
+		value = 376045+local;
+		return value;
 	}
 	else {
-		
-
-	
-
-	
-
+		long local = localvalue(trank , 1 ,4)
+		value = 404606+local;
+		return value;
+	}
 	return value;
-
 }
 

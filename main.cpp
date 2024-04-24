@@ -76,7 +76,7 @@ int main()
 		int publiccard[5][2];
 		int playerleft = playernum;
 		int playerallin = playernum;
-		action(button, poolsize, playernum, playerleft, terminate, true,allfold,playerallin);
+		action(button, poolsize, playernum, playerleft, terminate, true, allfold, playerallin);
 		if (allfold)
 			continue;
 		if (terminate){
@@ -96,7 +96,7 @@ int main()
 					cardsremaining-=1;
 				}
 				showpublic(publiccard,5-cardsremaining);
-				action(button,poolsize,playernum,playerleft,terminate,false,allfold,playerallin);
+				action(button,  poolsize, playernum, playerleft, terminate, false, allfold, playerallin);
 				if (allfold)
 					break;
 				if (terminate){

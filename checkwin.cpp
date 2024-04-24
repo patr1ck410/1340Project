@@ -13,13 +13,12 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 	player * current = button;
 	do {
 		if (current ->ingame)
-    {
+    	{
 			int combine[7][2];// combining the community cards and hand cards of individuals 
 			for (int i=0;i<5;i++)
 			{
-
 				for (int j=0 ;j<2;j++)
-        {
+        		{
 					combine[i][j]=publiccard[i][j];
 				}
 			}
@@ -33,20 +32,24 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 		}		
 		current = current -> next;
 	} while(current!= button);
-	givewinner(poolsize,player * button);
+	givewinner(poolsize, button);
 }
 
-void givewinner(int poolsize){
+void givewinner(int poolsize, player * button)
+{
 	long min = 780000;
 	player * winner = NULL, * current=button;
-	do {
-		if (current -> ingame==true ){
-			if (current->value < min){
+	do 
+	{
+		if (current -> ingame==true )
+		{
+			if (current->value < min)
+			{
 				min = current->value;
 				winner = current;
 			}
 		}
-	}while (cuurent!=button)
+	} while (current != button);
 	cout << "Winner is: " << winner->name << endl;
 	if (winner-> allin==false){
 		winner->chips+=poolsize;
@@ -59,23 +62,31 @@ void givewinner(int poolsize){
 		cout << "Chips won: " << winner->sidepool << endl;
 		cout << "Current chips: " << winner->chips <<endl;
 		winner->ingame=false;
-		poolsize-=sidepool;
+		poolsize-=sidepool; // idk what's going on
 	}
 	if (poolsize>0)
 		givewinner(poolsize);
-long localvalue (  map<int,int> rank , int n , int used ){ // the local n highcards values 
+}
+
+
+long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
+{ 
 	long value=0;
 	vector<int> cardrank;
-    	for (const auto &pair : rank) {
-        	if (pair.second != used) {
-            		cardrank.push_back(pair.first);
-        	}
-    	}
+	for (const auto &pair : rank) 
+	{
+		if (pair.second != used) 
+		{
+			cardrank.push_back(pair.first);
+		}
+	}
 	sort(cardrank.rbegin() , cardrank.rend());
-	for (i=0;i < n ;i++)
+	for (int i = 0;i < n ;i++)
 		value = pow (13,n-i-1) * cardrank[i];
 	return value;
 }
+
+
 long assignvalue(int combine[7][2]){
 	long value;
 	int suit[4]={0,0,0,0};
@@ -149,7 +160,7 @@ long assignvalue(int combine[7][2]){
 	}
 	if (four !=13)
 	{
-		long local = localvalue(trank , 1 ,4)
+		long local = localvalue(trank , 1 ,4);
 		value =10+local;
 		return value ;
 	}  // checking for four of a kind
@@ -158,7 +169,7 @@ long assignvalue(int combine[7][2]){
 		return value;
 	}
 	else if (suited!=4){
-		long local = localvalue(trank , 5 , 0 )
+		long local = localvalue(trank , 5 , 0 );
 		value = 348 + local;
 		return value;
 	}
@@ -167,22 +178,22 @@ long assignvalue(int combine[7][2]){
 		return value;
 	}
 	else if (three!=13){
-		long local = localvalue(trank , 2 , 3)
+		long local = localvalue(trank , 2 , 3);
 		value = 371651+local;
 		return value;
 	}
 	else if (two.size()>=2){
-		long local = localvalue(trank , 1 , 2)
+		long local = localvalue(trank , 1 , 2);
 		value = 373848+local;
 		return value;
 	}
 	else if (two.size()==1){
-		long local = localvalue(trank , 3 , 2)
+		long local = localvalue(trank , 3 , 2);
 		value = 376045+local;
 		return value;
 	}
 	else {
-		long local = localvalue(trank , 1 ,4)
+		long local = localvalue(trank , 1 ,4);
 		value = 404606+local;
 		return value;
 	}

@@ -68,13 +68,17 @@ int main()
 		double poolsize=0;
 		int playerinpool = playernum;
 		int cardsremaining = 5;
+		bool allflod=false;
 		bool terminate = false;
 		bool deck[4][13]; // set up the deck
 		gamestart(deck, button, tail); // reset the deck 
 		distribute(deck, button, playernum); // for distributing two cards to each player
 		int publiccard[5][2];
 		int playerleft = playernum;
-		action(button, poolsize, playernum, playerleft, terminate, true);
+		int playerallin = playernum;
+		action(button, poolsize, playernum, playerleft, terminate, true,allfold,playerallin);
+		if (allfold)
+			continue;
 		if (terminate){
 			for (int j=0 ; j < 5 ; j++){ // draw all the public cards if terminate = true	
       				cardDraw(deck, card);
@@ -92,7 +96,9 @@ int main()
 					cardsremaining-=1;
 				}
 				showpublic(publiccard,5-cardsremaining);
-				action(button,poolsize,playernum,playerleft,terminate,false);
+				action(button,poolsize,playernum,playerleft,terminate,false,allfold,playerallin);
+				if (allfold)
+					break;
 				if (terminate){
 					for (int j=(5-cardsremaining) ; j < 5 ; j++){ // draw all the public cards if terminate = true	
       						cardDraw(deck, card);
@@ -104,6 +110,8 @@ int main()
 				}
 			}
 		}
+		if (allfold)
+			continue;
 		checkwin(button, publiccard);
 		int temp;
 		// temp = minigame(); //when player do not have enough chips to continue

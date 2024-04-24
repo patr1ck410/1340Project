@@ -32,9 +32,17 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 		}		
 		current = current -> next;
 	} while(current!= button);
-	
 }
-
+vector <int> gethcard (  map<int,int> rank , int n , int used ){ // finding n highcards
+	vector<int> cardrank;
+    	for (const auto &pair : rank) {
+        	if (pair.second == 1) {
+            		cardrank.push_back(pair.first);
+        	}
+    	}
+	sort(cardrank.rbegin() , cardrank.rend());
+	return cardrank(cardrank.begin(), cardrank.begin()+n);
+}
 int assignvalue(int combine[7][2]){
 	int value=NULL;
 	int suit[4]={0,0,0,0};
@@ -89,7 +97,7 @@ int assignvalue(int combine[7][2]){
 		else if (pair.second==2)
 			two.push_back(pair.second);
 	}
-	sort(two.begin(),two.end(),greater<int>());
+	sort(two.rbegin(),two.rend());
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
 		int prev=suits[suits.size()-1]; // checking from the back 
@@ -109,10 +117,7 @@ int assignvalue(int combine[7][2]){
 	if (four !=NULL)
 	{
 		int highcard=0;
-		for (const auto &pair : trank){
-			if (pair .second !=4 && pair.first> highcard) 
-				highcard=pair.first;
-		}
+		vector <int>
 		value =10+four*13+highcard;
 		return value ;
 	}// checking for four of a kind
@@ -121,10 +126,23 @@ int assignvalue(int combine[7][2]){
 		return value;
 	}
 	else if (suited!=4){
+		vector<int> highcard = ( 
 		value = 
+	}
 	else if (straight!=14){
 		value = c+ straight ;
-	else if 
+	else if (three!=NULL){
+		value
+	}
+	else if (two.size()>=2){
+
+	}
+	else if (two.size()==1){
+
+	}
+	else {
+		
+
 	
 
 	
@@ -132,3 +150,4 @@ int assignvalue(int combine[7][2]){
 	return value;
 
 }
+

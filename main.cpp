@@ -48,7 +48,7 @@ int main()
 				cout << "Invalid input , please input again."<<endl;
 			else 
 				flag=true;
-		}while (!flag)// restricting playernum has to >4		
+		}while (!flag);// restricting playernum has to >4		
 			
 		/*
 		need to set playernumber limit

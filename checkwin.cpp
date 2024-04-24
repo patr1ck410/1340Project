@@ -4,9 +4,9 @@
 #include <map>
 #include <cmath>
 
-using namespace std;
 #include "checkwin.h"
 #include "structures.h"
+using namespace std;
 
 void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
 { 

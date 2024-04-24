@@ -25,7 +25,7 @@ bool checkempty(string filename)
     }
     return true;
 };
-void retrievegame(player  *& head, player *& tail, int & playernum)
+void retrievegame(player  *& button, player *& tail, int & playernum)
 {
     ifstream lastgame;
     lastgame.open("lastgame.txt");
@@ -33,6 +33,7 @@ void retrievegame(player  *& head, player *& tail, int & playernum)
     int i =0;
     while (getline(lastgame, line))
     {
+        playernum++;
         istringstream iss(line);
         string name, chips;
         iss >> name >> chips;
@@ -43,15 +44,15 @@ void retrievegame(player  *& head, player *& tail, int & playernum)
         p -> chipsput = 0;
         p -> allin = false;
         p -> next = NULL;
-        if (head == NULL){
-            head = p;
+        if (button == NULL){
+            button = p;
             tail = p;
         }
         else {
             tail -> next = p;
             tail = p ;
         }
-    p->next = head;
+    p->next = button;
     }
     lastgame.close();
 }

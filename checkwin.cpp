@@ -13,7 +13,7 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 	do {
 		if (current ->ingame)
     {
-			int combine[7][2];
+			int combine[7][2];// combining the community cards and hand cards of individuals 
 			for (int i=0;i<5;i++)
 			{
 
@@ -28,12 +28,13 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 					combine[i][j]=current->hand[i-5][j];
 				}
 			}
-			current->value = assignvalue(combine); //the approach here  
+			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
 		}		
 		current = current -> next;
 	} while(current!= button);
+	
 }
-long localvalue (  map<int,int> rank , int n , int used ){ // finding n highcards
+long localvalue (  map<int,int> rank , int n , int used ){ // the local n highcards values 
 	long value=0;
 	vector<int> cardrank;
     	for (const auto &pair : rank) {

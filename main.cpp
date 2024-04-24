@@ -39,9 +39,17 @@ int main()
 	}
 
 	if (newgame)
-	{
-		cout << "Number of players?" << endl;
-		cin >> playernum;
+	{	
+		bool flag=false;
+		do{
+			cout << "Number of players?(>=4)" << endl;
+			cin >> playernum;
+			if (playernum < 4 )
+				cout << "Invalid input , please input again."<<endl;
+			else 
+				flag=true;
+		}while (!flag)// restricting playernum has to >4		
+			
 		/*
 		need to set playernumber limit
 		*/

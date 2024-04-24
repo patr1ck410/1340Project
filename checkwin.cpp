@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <map>
 #include <cmath>
+
 using namespace std;
 #include "checkwin.h"
 #include "structures.h"
@@ -34,6 +35,7 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 	} while(current!= button);
 	givewinner(poolsize,player * button);
 }
+
 void givewinner(int poolsize){
 	long min = 780000;
 	player * winner = NULL, * current=button;
@@ -102,7 +104,7 @@ long assignvalue(int combine[7][2]){
 			count+=1;
 		else 
 			count=0;
-		if (count==5)
+		if (count>=5)
 			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
 	}
 	vector <int> suits;

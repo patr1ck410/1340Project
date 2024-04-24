@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+
 using namespace std;
 #include "checkwin.h"
 # include "structures.h"
@@ -57,6 +58,7 @@ int assignvalue(int combine[7][2]){
 		if (suit[i]>=5)
 			suited=i; // check if 0-3 is suited, 4 represetning not suited
 	int count=0;
+  
 	for (int i=13; i>=0 ;i++){
 		if (rank[i%13]!=0)
 			count+=1;
@@ -124,7 +126,7 @@ int assignvalue(int combine[7][2]){
 	else if (straight!=14)
 	
 	
-		
+
 	
 
 	return value;

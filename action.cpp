@@ -6,11 +6,12 @@ using namespace std;
 void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool &terminate,bool first)
 {
 	bool endturn = false;
-	player * current;
+	player * current , *last;
 	double max;
 	if (first)
 	{
 		current= button->next->next->next ; // the one next to big blind start first
+		last = current;
 		max = 1;
 		button->next->chipsput=0.5;//antecedent
 		button->next->chips-=0.5;
@@ -20,6 +21,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 	else{
 		current = button -> next;
 		max=0;
+		last = current;
 	}
 
 	while (!endturn )
@@ -81,6 +83,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		}
 		else if (opt==2)
 		{
+			last = current;
 			max = betsize;
 			current -> chips = current -> chips - (betsize- current->chipsput);
 			current -> chipsput = betsize;
@@ -93,18 +96,9 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			current->ingame =false;
 			playerleft-=1;
 		}
-		endturn = true;
-		player * checking = button;
 		current = current -> next;
-		for (int i = 0 ; i < playernum ; i++) // checking if all players have put same amount of chips (max) , or have all in 
-		{
-			if ((checking->ingame == true && checking -> allin==false && checking ->chipsput < max)|| (current==button->next->next && current->chipsput==1)){// consider the start turn that big blind still have actions 
-		 		endturn=false;
-				cout << i;
-				break;
-			}
-			checking=checking->next;
-		}
+		if (last== current)
+			endturn=true;
 	}
 	current=button;
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool

@@ -1,0 +1,3 @@
+player1 96
+player2 95
+player3 96

@@ -14,6 +14,7 @@ void cardDraw(bool (&deck)[4][13], int (&card)[2])
    {
       int randomsuit = rand() % 4;
       int randomrank = rand() % 13;
+      cout << randomsuit <<" " << randomrank << endl;
       if(deck[randomsuit][randomrank])
       {
          flag = true;

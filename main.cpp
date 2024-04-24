@@ -15,37 +15,22 @@
 #include <time.h>
 using namespace std;
 // the definition of player is now defined in "structures.h"
-void print_list(player * head, player * tail)
-{
-	tail = tail->next;
-    player * current = head;
-	while (current != tail)
-	{
-		// process the current node, e.g., print the content
-		cout << current->name << ": " <<current->chips << " -> ";
-		current = current->next;
-	}
-	cout << current->name << ": " <<current->chips << " -> ";
-	cout << "NULL\n";
-	return;
-}
-
 
 int main()
 {
-	cout << "hi";
+
 	ifstream data ; // lastgame.txt saves last game details
 	double poolsize;
 	int playernum = 0;
-	bool newgame=false;
+	bool newgame=true;
 	player * button = NULL, * tail= NULL;
-	if (!data.fail()){    // lastgame.txt exists
+	if (checkempty("lastgame.txt")){    // lastgame.txt exists
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		bool ans;
 		cin >> ans;
 		if (ans==true){
 			retrievegame(button, tail, playernum);//not done
-			newgame=true;
+			newgame=false;
 		}
 		else
 		{
@@ -67,7 +52,6 @@ int main()
 			bool lastplayer = ( i == (playernum-1));
 			appendplayer(button,tail ,name,lastplayer); // for input player info in struct 
 		}
-		print_list(button, tail);
 	}
 	bool ongoing=true;
 	int seq[]={3,1,1}; // for flop(3), river(1) and turn(1)
@@ -119,12 +103,18 @@ int main()
 		cout <<"Continue playing? (1: Yes, 0: No)"; //ask quit game or not
 		int quitoption;
 		cin >> quitoption;		//if quit, set ongoing = false
-		if (quitoption == 1)
+		while (quitoption > 1 || quitoption <0 )
+		{
+			cout << "Invalid choice . Please choose again." << endl;
+			cin >> quitoption;
+			
+		}
+		if (quitoption == 0)
 		{
 			ongoing = false;
 		}
 	}
-	savegame(button, tail);
+	savegame(button);
 	cout << "Game saved successfully, BYE" << endl;
 	return 0;
 }

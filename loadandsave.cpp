@@ -5,6 +5,26 @@
 #include <sstream>
 #include <iostream>
 using namespace std;
+
+bool checkempty(string filename)
+{
+    ifstream data(filename);
+    if (!data.is_open()) 
+    {
+        cerr << "Failed to open the data." << endl;
+        return true;
+    }
+    if (data.eof()) 
+    {
+        return false;
+    }
+    data.seekg(0, ios::end);
+    if (data.tellg() == 0) 
+    {
+        return false;
+    }
+    return true;
+};
 void retrievegame(player  *& head, player *& tail, int & playernum)
 {
     ifstream lastgame;
@@ -34,21 +54,21 @@ void retrievegame(player  *& head, player *& tail, int & playernum)
     p->next = head;
     }
     lastgame.close();
-    std::cout << "finished";
 }
 
-void savegame(player *& head, player *& tail)
+void savegame(player *& button)
 {
     ofstream lastgame ;
     lastgame.open("lastgame.txt");
 
-    player * current = head;
-	while (current != tail)
-	{
+    player * current = button;
+    lastgame << current->name << " " << current->chips <<"\n";
+    current = current->next;
+	while (current != button)
+    {
 		lastgame << current->name << " " << current->chips <<"\n";
 		current = current->next;
 	}
-    lastgame << current->name << " " << current->chips;
     lastgame.close();
 
 };

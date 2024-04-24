@@ -5,9 +5,9 @@
 #include <cmath>
 using namespace std;
 #include "checkwin.h"
-# include "structures.h"
+#include "structures.h"
 
-void checkwin(player * button, int publiccard[5][2]) //check which type of poker hand player have
+void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
 { 
 	player * current = button;
 	do {
@@ -32,8 +32,35 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 		}		
 		current = current -> next;
 	} while(current!= button);
-		
+	givewinner(poolsize,player * button);
 }
+void givewinner(int poolsize){
+	long min = 780000;
+	player * winner = NULL, * current=button;
+	do {
+		if (current -> ingame==true ){
+			if (current->value < min){
+				min = current->value;
+				winner = current;
+			}
+		}
+	}while (cuurent!=button)
+	cout << "Winner is: " << winner->name << endl;
+	if (winner-> allin==false){
+		winner->chips+=poolsize;
+		cout << "Chips won: " << poolsize << endl;
+		cout << "Current chips: " << winner->chips <<endl;
+		poolsize=0;
+	}
+	else{
+		winner->chips+=winner->sidepool;
+		cout << "Chips won: " << winner->sidepool << endl;
+		cout << "Current chips: " << winner->chips <<endl;
+		winner->ingame=false;
+		poolsize-=sidepool;
+	}
+	if (poolsize>0)
+		givewinner(poolsize);
 long localvalue (  map<int,int> rank , int n , int used ){ // the local n highcards values 
 	long value=0;
 	vector<int> cardrank;
@@ -46,7 +73,6 @@ long localvalue (  map<int,int> rank , int n , int used ){ // the local n highca
 	for (i=0;i < n ;i++)
 		value = pow (13,n-i-1) * cardrank[i];
 	return value;
-		
 }
 long assignvalue(int combine[7][2]){
 	long value;

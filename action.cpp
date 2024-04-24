@@ -3,7 +3,7 @@
 #include "structures.h"
 #include "output.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool &terminate,bool first)
+void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool &terminate,bool first,bool &allfold, int &playerallin)
 {
 	bool endturn = false;
 	player * current , *last;
@@ -73,7 +73,8 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 				current -> allin = true;
 				current -> chipsput += current -> chips;
 				current -> chips = 0; // allin if chips remaining is not enough
-				playerleft-=1; 
+				playerleft-=1;
+				plaayerallin+=1;
 			}
 			else
 			{
@@ -90,6 +91,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			if (current->chips==0){
 				current->allin=true;
 				playerleft-=1;
+				playerallin+=1;
 			}
 		}
 		else{
@@ -99,6 +101,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		current = current -> next;
 		if (last== current)
 			endturn=true;
+	}
 	}
 	current=button;
 	for (int i= 0 ; i < playernum ; i++){ // storing sidepool size for player who has all in
@@ -122,8 +125,24 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
-	if (playerleft==1)
+	if (playerallin==0 && playerleft==1){ // detects if everyone fold;
+		giverewards(button,poolsize);
+		allfold=true;
+	else if (playerleft==1)
 	{
 		terminate=true;
 	}
 }
+void giverewards(player *button){
+	player *current=button
+	do {
+		if (current->ingame==true){
+			current->chips+=poolsize;
+			cout << "Player " << current->name << " wins " << poolsize << endl;
+			cout << "Current chips of the player: " << currrent -> chips << endl;
+			break;
+		}
+		current =current -> next;
+	while (current != button);
+			
+		

@@ -101,6 +101,21 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			endturn=true;
 	}
 	current=button;
+	for (int i= 0 ; i < playernum ; i++){ // storing sidepool size for player who has all in
+		if (current ->allin ==true ){
+			double size=current->chipsput ;
+			double reward=poolsize;
+			player * individual= button;
+			for (int i =0 ;i <playernum ; i++){
+				if (indiviudal -> chipsput >= size)
+					reward+=size;
+				else
+					reward+=individual->chipsput;
+				indiviudal = individual->next;
+			}
+			current -> sidepool=reward;
+		}
+	} 
 	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
 	{
 		poolsize += current->chipsput;

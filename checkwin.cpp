@@ -32,7 +32,7 @@ void checkwin(player * button, int publiccard[5][2]) //check which type of poker
 		}		
 		current = current -> next;
 	} while(current!= button);
-	
+		
 }
 long localvalue (  map<int,int> rank , int n , int used ){ // the local n highcards values 
 	long value=0;

@@ -46,10 +46,10 @@ int assignvalue(int combine[7][2]){
 	for (int i =0; i<7;i++){
 		rank[combine[i][1]]+=1;
 		if (trank.find(combine[i][1])!=trank.end()){
-			trank[combine[i][1]]++;
+			trank[(combine[i][1]+12)%13]++;
 		}
 		else{
-			trank[combine[i][1]]=1;
+			trank[(combine[i][1]+12)%13]=1;
 		}
 	}
 	int suited =4;
@@ -58,13 +58,12 @@ int assignvalue(int combine[7][2]){
 		if (suit[i]>=5)
 			suited=i; // check if 0-3 is suited, 4 represetning not suited
 	int count=0;
-  
-	for (int i=13; i>=0 ;i++){
+	for (int i=13; i>0 ;i++){
 		if (rank[i%13]!=0)
 			count+=1;
 		else 
 			count=0;
-		if (count>=5)
+		if (count==5)
 			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
 	}
 	vector <int> suits;
@@ -76,7 +75,6 @@ int assignvalue(int combine[7][2]){
 		}
 		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush
 	}
-	
 	int four=NULL;
 	int three=NULL; // only have one value of the highest rank 
 	vector <int> two;
@@ -86,12 +84,12 @@ int assignvalue(int combine[7][2]){
 		else if (pair.second==3)
 			if (three==NULL)
 				three=pair.first;
-			else if ((pair.first+12)%13 > (three+12)%13) // A is 12 , K is 11, 2 is 0 
+			else if (pair.first >three) // A is 12 , K is 11, 2 is 0 
 				three=pair.first;
 		else if (pair.second==2)
 			two.push_back(pair.second);
 	}
-	sort(two.begin(),two.end());
+	sort(two.begin(),two.end(),greater<int>());
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
 		int prev=suits[suits.size()-1]; // checking from the back 
@@ -112,19 +110,21 @@ int assignvalue(int combine[7][2]){
 	{
 		int highcard=0;
 		for (const auto &pair : trank){
-			if (pair .second !=4 && ((pair.first+12)%13)> highcard) 
-				highcard=(pair.first+12)%13;
+			if (pair .second !=4 && pair.first> highcard) 
+				highcard=pair.first;
 		}
-		value =10+((four+12)%13)*13+highcard;
+		value =10+four*13+highcard;
 		return value ;
 	}// checking for four of a kind
-	else if (three!= NULL && two.size()!=0)
-		value = 179+((three+12)%13)*13+((two.back()+12)%13);
+	else if (three!= NULL && two.size()!=0){
+		value = 179+three*13+two[0];
 		return value;
+	}
 	else if (suited!=4){
 		value = 
-	else if (straight!=14)
-	
+	else if (straight!=14){
+		value = c+ straight ;
+	else if 
 	
 
 	

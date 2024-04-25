@@ -6,11 +6,11 @@ using namespace std;
 
 void printcard(int card[2])
 {   
-	string suits[] = {"Diamond", "Club", "Heart", "Spade"};
+	string suits[] = {"\u2666", "\u2663", "\u2665", "\u2660"};
 	string ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	int suit = card[0];
 	int rank = card[1];
-	cout << suits[suit] << " " << ranks[rank] ;
+	cout << suits[suit] << " " << ranks[rank] << endl;
 }
 
 void showhand(player *individual)

@@ -4,8 +4,10 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
+#include "minigame.h"
+
 using namespace std;
-int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
+int minigame(ç {
    char choice;
    int card[2];
    int sto[1];

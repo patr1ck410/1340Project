@@ -20,14 +20,13 @@ void cardDraw(bool (&deck)[4][13], int (&card)[2])
          card[0] = randomsuit;
          card[1] = randomrank;
          deck[randomsuit][randomrank] = false;
-         cout << randomsuit << " " << randomrank << endl;
       }
    }
 }
 
-void distribute(bool (&deck)[4][13], int playernum)
+void distribute(bool (&deck)[4][13], player * button, int playernum)
 {
-   current = player.button;
+   player * current = button;
    for(int i = 0; i < playernum; i++)
    {
       for(int j = 0; j < 2; j++)

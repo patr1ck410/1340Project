@@ -12,7 +12,7 @@ void gamestart(bool (&deck)[4][13], player *button, player *tail){
 		current-> chipsput=0;
 		current -> ingame = true;
 		current = current -> next;
-	} while (current!=button)  // refreshing game stats of player 
+	} while (current!=button);  // refreshing game stats of player 
 	
 
 }

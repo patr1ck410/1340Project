@@ -68,7 +68,7 @@ int main()
 		double poolsize=0;
 		int playerinpool = playernum;
 		int cardsremaining = 5;
-		bool allflod=false;
+		bool allfold=false;
 		bool terminate = false;
 		bool deck[4][13]; // set up the deck
 		gamestart(deck, button, tail); // reset the deck 

@@ -8,91 +8,13 @@
 #include "structures.h"
 using namespace std;
 
-void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
-{ 
-	player * current = button;
-	do {
-		if (current ->ingame)
-    	{
-			int combine[7][2];// combining the community cards and hand cards of individuals 
-			for (int i=0;i<5;i++)
-			{
-				for (int j=0 ;j<2;j++)
-        		{
-					combine[i][j]=publiccard[i][j];
-				}
-			}
-			for (int i=5;i<7;i++)
-			{
-				for (int j=0;j<2;j++){
-					combine[i][j]=current->hand[i-5][j];
-				}
-			}
-			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
-		}		
-		current = current -> next;
-	} while(current!= button);
-	givewinner(poolsize, button);
-}
-
-void givewinner(int poolsize, player * button)
-{
-	long min = 780000;
-	player * winner = NULL, * current=button;
-	do 
-	{
-		if (current -> ingame==true )
-		{
-			if (current->value < min)
-			{
-				min = current->value;
-				winner = current;
-			}
-		}
-	} while (current != button);
-	cout << "Winner is: " << winner->name << endl;
-	if (winner-> allin==false){
-		winner->chips+=poolsize;
-		cout << "Chips won: " << poolsize << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		poolsize=0;
-	}
-	else{
-		winner->chips+=winner->sidepool;
-		cout << "Chips won: " << winner->sidepool << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		winner->ingame=false;
-		poolsize-=sidepool; // idk what's going on
-	}
-	if (poolsize>0)
-		givewinner(poolsize);
-}
-
-
-long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
-{ 
-	long value=0;
-	vector<int> cardrank;
-	for (const auto &pair : rank) 
-	{
-		if (pair.second != used) 
-		{
-			cardrank.push_back(pair.first);
-		}
-	}
-	sort(cardrank.rbegin() , cardrank.rend());
-	for (int i = 0;i < n ;i++)
-		value = pow (13,n-i-1) * cardrank[i];
-	return value;
-}
 
 
 long assignvalue(int combine[7][2]){
-	long value;
+	long value = 0; // default 0 first
 	int suit[4]={0,0,0,0};
 	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
 	map <int, int> trank; // key is the rank , and the value is the occurreence
-	int value=0; // default 0 first
 	for (int i =0;i<7;i++)
 		suit[combine[i][0]]+=1;
 	for (int i =0; i<7;i++){
@@ -200,3 +122,81 @@ long assignvalue(int combine[7][2]){
 	return value;
 }
 
+void givewinner(int poolsize, player * button)
+{
+	long min = 780000;
+	player * winner = NULL, * current=button;
+	do 
+	{
+		if (current -> ingame==true )
+		{
+			if (current->value < min)
+			{
+				min = current->value;
+				winner = current;
+			}
+		}
+	} while (current != button);
+	cout << "Winner is: " << winner->name << endl;
+	if (winner-> allin==false){
+		winner->chips+=poolsize;
+		cout << "Chips won: " << poolsize << endl;
+		cout << "Current chips: " << winner->chips <<endl;
+		poolsize=0;
+	}
+	else{
+		winner->chips+=winner->sidepool;
+		cout << "Chips won: " << winner->sidepool << endl;
+		cout << "Current chips: " << winner->chips <<endl;
+		winner->ingame=false;
+		poolsize-=winner->sidepool; // idk what's going on
+	}
+	if (poolsize>0)
+		givewinner(poolsize, button);
+}
+
+
+long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
+{ 
+	long value=0;
+	vector<int> cardrank;
+	for (const auto &pair : rank) 
+	{
+		if (pair.second != used) 
+		{
+			cardrank.push_back(pair.first);
+		}
+	}
+	sort(cardrank.rbegin() , cardrank.rend());
+	for (int i = 0;i < n ;i++)
+		value = pow (13,n-i-1) * cardrank[i];
+	return value;
+}
+
+
+void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
+{ 
+	player * current = button;
+	do {
+		if (current ->ingame)
+    	{
+			int combine[7][2];// combining the community cards and hand cards of individuals 
+			for (int i=0;i<5;i++)
+			{
+				for (int j=0 ;j<2;j++)
+        		{
+					combine[i][j]=publiccard[i][j];
+				}
+			}
+			for (int i=5;i<7;i++)
+			{
+				for (int j=0;j<2;j++){
+					combine[i][j]=current->hand[i-5][j];
+				}
+			}
+			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
+		}		
+		current = current -> next;
+	} while(current!= button);
+	givewinner(poolsize, button);
+}

@@ -112,7 +112,7 @@ int main()
 		}
 		if (allfold)
 			continue;
-		checkwin(button, publiccard);
+		checkwin(button, publiccard, poolsize);
 		int temp;
 		// temp = minigame(); //when player do not have enough chips to continue
 		button=button->next;

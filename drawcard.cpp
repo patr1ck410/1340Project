@@ -20,7 +20,6 @@ void cardDraw(bool (&deck)[4][13], int (&card)[2])
          card[0] = randomsuit;
          card[1] = randomrank;
          deck[randomsuit][randomrank] = false;
-         cout << randomsuit << " " << randomrank << endl;
       }
    }
 }

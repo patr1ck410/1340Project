@@ -149,7 +149,7 @@ void givewinner(int poolsize, player * button)
 		cout << "Chips won: " << winner->sidepool << endl;
 		cout << "Current chips: " << winner->chips <<endl;
 		winner->ingame=false;
-		poolsize-=winner->sidepool; // idk what's going on
+		poolsize-=winner->sidepool; 
 	}
 	if (poolsize>0)
 		givewinner(poolsize, button);

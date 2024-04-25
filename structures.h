@@ -10,7 +10,7 @@ struct player{
 	double chipsput; // stroing deadn chips in front
 	bool allin; // true indicates the player has all in
 	double sidepool; // only have value when a player all in and determine the pot he can get if he wins
-	int value; // assigning a value of the rank of player after check win 
+	long value; // assigning a value of the rank of player after check win 
 	player *next;   //circular linked list
 };
 

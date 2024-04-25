@@ -32,7 +32,6 @@ void cardDraw(bool (&deck)[4][13], int (&card)[2])
 
 void distribute(bool (&deck)[4][13], player * button, int playernum)
 {
-   player * current = button;
    for(int i = 0; i < playernum; i++)
    {
       for(int j = 0; j < 2; j++)
@@ -41,7 +40,7 @@ void distribute(bool (&deck)[4][13], player * button, int playernum)
          cardDraw(deck, card);
          button->hand[j][0] = card[0];
          button->hand[j][1] = card[1];
-         current = current->next;
+         button = button->next;
       }
    }
 }

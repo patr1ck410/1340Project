@@ -4,12 +4,18 @@
 #include "structures.h"
 #include "drawcard.h"
 #include <string>
+#include <map>
 using namespace std;
 
 void cardDraw(bool (&deck)[4][13], int (&card)[2])
 {
    srand(time(NULL));
    bool flag = false;
+   map<int, string> suitsymbol;
+   suitsymbol[0] = "\u2660";   //Spade
+   suitsymbol[1] = "\u2665";   //Heart
+   suitsymbol[2] = "\u2666";   //Diamond
+   suitsymbol[3] = "\u2663";   //Club
    while(!flag)
    {
       int randomsuit = rand() % 4;

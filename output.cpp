@@ -10,7 +10,7 @@ void printcard(int card[2])
 	string ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	int suit = card[0];
 	int rank = card[1];
-	cout << suits[suit] << " " << ranks[rank] << endl;
+	cout << suits[suit] << " " << ranks[rank] ;
 }
 
 void showhand(player *individual)

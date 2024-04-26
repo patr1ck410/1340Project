@@ -32,12 +32,7 @@ int main()
 			retrievegame(button, tail, playernum);//not done
 			newgame=false;
 		}
-		else
-		{
-			cout << "new game" << endl;
-		}
 	}
-
 	if (newgame)
 	{	
 		bool flag=false;

@@ -80,6 +80,7 @@ int main()
 		bool allfold = false;
 		bool terminate = false;				 // boolean value for
 		bool deck[4][13];					 // set up the deck
+		checkchips(deck, button, playernum);
 		gamestart(deck, button, tail);		 // reset the deck
 		distribute(deck, button, playernum); // for distributing two cards to each player
 		int publiccard[5][2];

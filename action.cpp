@@ -90,7 +90,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			{
 				cout << "Input bet size: " << endl;
 				cin >> betsize;
-				if ((betsize < max * 2 && betsize!=current->chips || betsize > current->chips ) // wrong betsize
+				if ((betsize < max * 2 && betsize!=current->chips) || betsize > current->chips ) // wrong betsize
 				{
 					cout << "Invalid betsize! Please choose your action again:" << endl;
 					cin >> opt;

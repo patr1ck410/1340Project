@@ -25,29 +25,41 @@ int main()
 	bool newgame=true;
 	player * button = NULL, * tail= NULL;
 	if (checkempty("lastgame.txt")){    // lastgame.txt exists
+		string ans;
+		bool flag= false;
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
-		bool ans;
+		do{
 		cin >> ans;
-		if (ans==true){
+		if (ans == "1" ){
 			retrievegame(button, tail, playernum);//not done
 			newgame=false;
+			flag = true;
+		}else if (ans == "0")
+		{
+			flag = true;
+		}else
+		{
+			cout << "Invalid input, please input again." << endl;
 		}
+		} while (!flag);
 	}
 	if (newgame)
 	{	
-		bool flag=false; // for input playeernum , re-input if <4 
+		bool flag=false; // for input playeernum , re-input if input is invalid (num<4 or num is an char)
 		do{
+			string input;
 			cout << "Number of players?(>=4)" << endl;
 			cin >> playernum;
-			if (playernum < 4 )
+			if (playernum < 4 || cin.fail() )
+			{
 				cout << "Invalid input , please input again."<<endl;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // use to discard the invalid input and prevent errors
+			}
 			else 
 				flag=true;
 		}while (!flag);// restricting playernum has to >4		
-			
-		/*
-		need to set playernumber limit
-		*/
+		
 		for (int i=0;i<playernum;i++){
 			cout << "Input Player " << i+1 << " name: " ;
 			string name;

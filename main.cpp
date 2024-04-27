@@ -45,16 +45,20 @@ int main()
 	}
 	if (newgame)
 	{
-		bool flag = false; // for input playeernum , re-input if <4
-		do
-		{
-			cout << "Number of players? (>=4)" << endl;
+		bool flag=false; // for input playeernum , re-input if input is invalid (num<4 or num is an char)
+		do{
+			string input;
+			cout << "Number of players?(>=4)" << endl;
 			cin >> playernum;
-			if (playernum < 4)
-				cout << "Invalid input! Please input the number of players again. " << endl;
-			else
-				flag = true;
-		} while (!flag); // restricting playernum has to >4
+			if (playernum < 4 || cin.fail() )
+			{
+				cout << "Invalid input , please input again."<<endl;
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // use to discard the invalid input and prevent errors
+			}
+			else 
+				flag=true;
+		}while (!flag);// restricting playernum has to >4
 
 		/*
 		need to set playernumber limit
@@ -87,8 +91,8 @@ int main()
 		action(button, poolsize, playernum, playerinpool, terminate, true, allfold, playerleft, publiccard, turn);
 		if (allfold)
 		{
-			continue;
 			button = button->next;
+			break;
 		}
 		if (terminate)
 		{

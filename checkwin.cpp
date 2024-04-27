@@ -89,36 +89,36 @@ long assignvalue(int combine[7][2]){
 	else if (three!=13 && two.size()!=0){
 		value = 179+three*13+two[0];
 		return value;
-	}
+	}// checking of full house 
 	else if (suited!=4){
 		long local = localvalue(trank , 5 , 0 );
 		value = 348 + local;
 		return value;
-	}
+	}// checking of flush
 	else if (straight!=14){
 		value = 371641+ straight ;
 		return value;
-	}
+	}// checking of straight 
 	else if (three!=13){
 		long local = localvalue(trank , 2 , 3);
 		value = 371651+local;
 		return value;
-	}
+	}// checking for three of a kind
 	else if (two.size()>=2){
 		long local = localvalue(trank , 1 , 2);
 		value = 373848+local;
 		return value;
-	}
+	}// checking for two pairs
 	else if (two.size()==1){
 		long local = localvalue(trank , 3 , 2);
 		value = 376045+local;
 		return value;
-	}
+	}// checking for pair
 	else {
 		long local = localvalue(trank , 1 ,4);
 		value = 404606+local;
 		return value;
-	}
+	}// checking for highcard
 	return value;
 }
 
@@ -169,7 +169,7 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 	}
 	sort(cardrank.rbegin() , cardrank.rend());
 	for (int i = 0;i < n ;i++)
-		value = pow (13,n-i-1) * cardrank[i];
+		value = pow (13,n-i-1) * cardrank[i]; 
 	return value;
 }
 

@@ -3,155 +3,158 @@
 #include "structures.h"
 #include "output.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum,int &playerinpool ,bool &terminate,bool first,bool &allfold, int &playerleft)
+void action(player *button, double &poolsize, int playernum, int &playerinpool, bool &terminate, bool first, bool &allfold, int &playerleft)
 {
 	bool endturn = false;
-	player * current , *last;
+	player *current, *last;
 	double max;
 	if (first)
 	{
-		current= button->next->next->next ; // the one next to big blind start first
-		last = current; // for stroing the last player for endturn
+		current = button->next->next->next; // the one next to big blind start first
+		last = current;						// for stroing the last player for endturn
 		max = 1;
-		button->next->chipsput=0.5;//antecedent
-		button->next->chips-=0.5;
-		button->next->next->chipsput=1;
-		button->next->next->chips-=1;
+		button->next->chipsput = 0.5; // antecedent
+		button->next->chips -= 0.5;
+		button->next->next->chipsput = 1;
+		button->next->next->chips -= 1;
 	}
 	else
 	{
-		current = button -> next; // small blind action first
-		max=0;
+		current = button->next; // small blind action first
+		max = 0;
 		last = current;
 	}
 
 	while (!endturn)
 	{
-		if (current -> ingame == false || current -> allin == true)
+		if (current->ingame == false || current->allin == true)
 		{
-			current = current -> next ;
+			current = current->next;
 			continue; // pass to next player if the player has all in or fold
-		} 
+		}
 		cout << "It's " << current->name << "'s turn. Choose an action below:" << endl;
-		cout << " 1. Check or call"  << endl;
+		cout << " 1. Check or call" << endl;
 		cout << " 2. Bet " << endl;
 		cout << " 3. Fold " << endl;
-		cout << "\n" ;
+		cout << "\n";
 		cout << "Current pool size: " << poolsize << endl;
-		cout << "Your Dead chips: " << current-> chipsput <<endl;
-		cout << "chips remaining: " << current -> chips <<endl;
-		double  diff = max - current-> chipsput;
-		cout << "Chips to call :" << diff << endl; 
-		showhand(current) ;// user-menu
+		cout << endl;
+		cout << "Your Dead chips: " << current->chipsput << endl;
+		cout << endl;
+		cout << "chips remaining: " << current->chips << endl;
+		cout << endl;
+		double diff = max - current->chipsput;
+		cout << "Chips to call :" << diff << endl;
+		showhand(current); // user-menu
 		int opt;
 		cin >> opt;
 		bool check = false;
 		double betsize;
 		while (!check) // validate the action, incorrect then input again
-		{ 
+		{
 			while (opt > 3 || opt < 1)
 			{
-				cout <<"Invalid choice . Please choose again. " << endl;
+				cout << "Invalid choice! Please choose your action again:" << endl;
 				cin >> opt;
 				continue;
 			}
 			if (opt == 2)
 			{
-				cout << "input bet size: " <<endl;
-				cin >> betsize ;
-				if (betsize < max *2 || betsize > current ->chips)
+				cout << "Input bet size: " << endl;
+				cin >> betsize;
+				if (betsize < max * 2 || betsize > current->chips)
 				{
-					cout << " Invalid betsize , please input your choice again :" <<endl;
+					cout << "Invalid betsize! Please choose your action again:" << endl;
 					cin >> opt;
 					continue;
 				}
 			}
-			check = true ;
+			check = true;
 		}
-		if (opt==1)
+		if (opt == 1)
 		{
 			if (diff >= current->chips)
 			{
-				current -> allin = true;
-				current -> chipsput += current -> chips;
-				current -> chips = 0; // allin if chips remaining is not enough
-				playerinpool-=1;
+				current->allin = true;
+				current->chipsput += current->chips;
+				current->chips = 0; // allin if chips remaining is not enough
+				playerinpool -= 1;
 			}
 			else
 			{
-				current -> chipsput += diff;
-				current -> chips-=diff;
+				current->chipsput += diff;
+				current->chips -= diff;
 			}
 		}
-		else if (opt==2)
+		else if (opt == 2)
 		{
 			last = current;
 			max = betsize;
-			current -> chips = current -> chips - (betsize- current->chipsput);
-			current -> chipsput = betsize;
-			if (current->chips==0)
+			current->chips = current->chips - (betsize - current->chipsput);
+			current->chipsput = betsize;
+			if (current->chips == 0)
 			{
-				current->allin=true;
-				playerinpool-=1;
+				current->allin = true;
+				playerinpool -= 1;
 			}
 		}
 		else
 		{
-			current->ingame =false;
-			playerleft-=1;
-			playerinpool-=1;
+			current->ingame = false;
+			playerleft -= 1;
+			playerinpool -= 1;
 		}
-		current = current -> next;
-		if (last== current)
-			endturn=true;
+		current = current->next;
+		if (last == current)
+			endturn = true;
 	}
 	current = button;
-	for (int i= 0 ; i < playernum ; i++) // storing sidepool size for player who has all in
-	{ 
-		if (current ->allin ==true ){
-			double size=current->chipsput ;
-			double reward=poolsize;
-			player * individual= button;
-			for (int i =0 ;i <playernum ; i++){
-				if (individual -> chipsput >= size)
-					reward+=size;
+	for (int i = 0; i < playernum; i++) // storing sidepool size for player who has all in
+	{
+		if (current->allin == true)
+		{
+			double size = current->chipsput;
+			double reward = poolsize;
+			player *individual = button;
+			for (int i = 0; i < playernum; i++)
+			{
+				if (individual->chipsput >= size)
+					reward += size;
 				else
-					reward+=individual->chipsput;
+					reward += individual->chipsput;
 				individual = individual->next;
 			}
-			current -> sidepool=reward;
+			current->sidepool = reward;
 		}
-	} 
-	for (int i= 0 ; i < playernum ; i++) // adding dead chips to the pool
+	}
+	for (int i = 0; i < playernum; i++) // adding dead chips to the pool
 	{
 		poolsize += current->chipsput;
-		current->chipsput=0; // initilize chipsput
-		current= current -> next;
+		current->chipsput = 0; // initilize chipsput
+		current = current->next;
 	}
-	if (playerleft==1)
+	if (playerleft == 1)
 	{ // detects if everyone fold;
-		giverewards(button,poolsize);
-		allfold=true;
+		giverewards(button, poolsize);
+		allfold = true;
 	}
-	else if (playerinpool==1) // one one has not fold and all in
+	else if (playerinpool == 1) // one one has not fold and all in
 	{
-		terminate=true;
+		terminate = true;
 	}
 }
-void giverewards(player *button, double poolsize){
-	player *current=button;
-	do 
+void giverewards(player *button, double poolsize)
+{
+	player *current = button;
+	do
 	{
-		if (current->ingame==true)
+		if (current->ingame == true)
 		{
 			current->chips += poolsize;
 			cout << "Player " << current->name << " wins " << poolsize << endl;
-			cout << "Current chips of the player: " << current -> chips << endl;
+			cout << "Current chips of the player: " << current->chips << endl;
 			break;
 		}
-		current =current -> next;
-	}
-	while (current != button);
-	
+		current = current->next;
+	} while (current != button);
 }
-		

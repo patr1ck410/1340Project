@@ -24,17 +24,24 @@ int main()
 	int playernum = 0;
 	bool newgame = true;
 	player *button = NULL, *tail = NULL;
-	if (checkempty("lastgame.txt"))
-	{ // lastgame.txt exists
-		cout << "Did you save the game last time?" << endl;
-		cout << "Retrieve? (1 = Yes / 0 = No)" << endl;
-		bool ans;
+	if (checkempty("lastgame.txt")){    // lastgame.txt exists
+		string ans;
+		bool flag= false;
+		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
+		do{
 		cin >> ans;
-		if (ans == true)
+		if (ans == "1" ){
+			retrievegame(button, tail, playernum);//not done
+			newgame=false;
+			flag = true;
+		}else if (ans == "0")
 		{
-			retrievegame(button, tail, playernum); // not done
-			newgame = false;
+			flag = true;
+		}else
+		{
+			cout << "Invalid input, please input again." << endl;
 		}
+		} while (!flag);
 	}
 	if (newgame)
 	{

@@ -86,7 +86,6 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 					continue;
 				}
 			}
-			check = true;
 			if (opt == 2)
 			{
 				cout << "Input bet size: " << endl;
@@ -98,6 +97,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 					continue;
 				}
 			}
+			check = true;
 		}
 		if (opt == 1)
 		{
@@ -135,8 +135,6 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		else if (opt == 4) // show community card
 		{	
 			turn--;
-			cout <<"turn " ;
-			cout << turn/playernum << endl;
 			showpublic(publiccard, 2 + turn/playernum); // turn/playernum will get which round in the match, then can know how many card should be shown
 			continue;
 		}

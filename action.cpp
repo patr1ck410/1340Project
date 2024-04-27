@@ -34,23 +34,23 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		}
 		cout << "\n";
 		cout << "\n";
-		cout << "It's " << current->name << "'s turn." << endl;
+		cout << "Now, it is " << current->name << "'s turn!!!" << endl;
 		cout << "Current pool size: " << poolsize << endl;
 		cout << "\n";
 		cout << "Your Dead chips: " << current->chipsput << endl;
 		cout << "\n";
-		cout << "chips remaining: " << current->chips << endl;
+		cout << "Chips remaining: " << current->chips << endl;
 		cout << "\n";
 		double diff = max - current->chipsput;
 		cout << "Chips to call :" << diff << endl;
 		cout << "\n";
+		showhand(current); // user-menu
 		cout << "Choose an action below:" << endl;
 		cout << "\n";
 		cout << " 1. Check or call" << endl;
 		cout << " 2. Bet " << endl;
 		cout << " 3. Fold " << endl;
 		cout << "\n";
-		showhand(current); // user-menu
 		int opt;
 		cin >> opt;
 		bool check = false;

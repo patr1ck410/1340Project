@@ -3,7 +3,7 @@
 #include "structures.h"
 #include "output.h"
 using namespace std;
-void action (player *button , double &poolsize ,int playernum,int &playerleft ,bool &terminate,bool first,bool &allfold, int &playerallin)
+void action (player *button , double &poolsize ,int playernum,int &playerinpool ,bool &terminate,bool first,bool &allfold, int &playerleft)
 {
 	bool endturn = false;
 	player * current , *last;
@@ -11,7 +11,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 	if (first)
 	{
 		current= button->next->next->next ; // the one next to big blind start first
-		last = current;
+		last = current; // for stroing the last player for endturn
 		max = 1;
 		button->next->chipsput=0.5;//antecedent
 		button->next->chips-=0.5;
@@ -20,12 +20,12 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 	}
 	else
 	{
-		current = button -> next;
+		current = button -> next; // small blind action first
 		max=0;
 		last = current;
 	}
 
-	while (!endturn )
+	while (!endturn)
 	{
 		if (current -> ingame == false || current -> allin == true)
 		{
@@ -75,8 +75,7 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 				current -> allin = true;
 				current -> chipsput += current -> chips;
 				current -> chips = 0; // allin if chips remaining is not enough
-				playerleft-=1;
-				playerallin += 1;
+				playerinpool-=1;
 			}
 			else
 			{
@@ -93,14 +92,14 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 			if (current->chips==0)
 			{
 				current->allin=true;
-				playerleft-=1;
-				playerallin+=1;
+				playerinpool-=1;
 			}
 		}
 		else
 		{
 			current->ingame =false;
 			playerleft-=1;
+			playerinpool-=1;
 		}
 		current = current -> next;
 		if (last== current)
@@ -129,12 +128,12 @@ void action (player *button , double &poolsize ,int playernum,int &playerleft ,b
 		current->chipsput=0; // initilize chipsput
 		current= current -> next;
 	}
-	if (playerallin==0 && playerleft==1)
+	if (playerleft==1)
 	{ // detects if everyone fold;
 		giverewards(button,poolsize);
 		allfold=true;
 	}
-	else if (playerleft==1)
+	else if (playerinpool==1) // one one has not fold and all in
 	{
 		terminate=true;
 	}

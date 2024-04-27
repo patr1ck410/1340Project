@@ -3,7 +3,7 @@
 #include "structures.h"
 #include "output.h"
 using namespace std;
-void action(player *button, double &poolsize, int playernum, int &playerinpool, bool &terminate, bool first, bool &allfold, int &playerleft)
+void action(player *button, double &poolsize, int playernum, int &playerinpool, bool &terminate, bool first, bool &allfold, int &playerleft, int publiccard[5][2], int& turn)
 {
 	bool endturn = false;
 	player *current, *last;
@@ -24,7 +24,6 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		max = 0;
 		last = current;
 	}
-	int turn = 0;
 	while (!endturn)
 	{
 		if (current->ingame == false || current->allin == true)
@@ -45,6 +44,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		showhand(current); // user-menu
 		cout << "Please choose an action below:" << endl;
 		cout << "\n";
+		cout << "turn" << turn << endl;
 		if (turn < playernum)
 		{
 			cout << "\t1. Check or call" << endl;
@@ -53,13 +53,14 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			cout << "\n";
 			turn += 1;
 		}
-		if (turn >= playernum)
+		else
 		{
 			cout << "\t1. Check or call" << endl;
 			cout << "\t2. Bet" << endl;
 			cout << "\t3. Fold" << endl;
 			cout << "\t4. Show community card" << endl;
 			cout << "\n";
+			turn ++;
 		}
 		bool check = false;
 		double betsize;
@@ -68,31 +69,24 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		while (!check) // validate the action, incorrect then input again
 		{
 			if (turn < playernum)
+			{
 				while (opt > 3 || opt < 1)
 				{
 					cout << "Invalid choice! Please choose your action again:" << endl;
 					cin >> opt;
 					continue;
 				}
-			if (opt == 2)
-			{
-				cout << "Input bet size: " << endl;
-				cin >> betsize;
-				if (betsize < max * 2 || betsize > current->chips || !(betsize == max)) // wrong betsize
-				{
-					cout << "Invalid betsize! Please choose your action again:" << endl;
-					cin >> opt;
-					continue;
-				}
 			}
-			check = true;
-			if (turn >= playernum)
+			else if (turn >= playernum)
+			{
 				while (opt > 4 || opt < 1)
 				{
 					cout << "Invalid choice! Please choose your action again:" << endl;
 					cin >> opt;
 					continue;
 				}
+			}
+			check = true;
 			if (opt == 2)
 			{
 				cout << "Input bet size: " << endl;
@@ -104,7 +98,6 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 					continue;
 				}
 			}
-			check = true;
 		}
 		if (opt == 1)
 		{
@@ -140,8 +133,12 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			playerinpool -= 1;
 		}
 		else if (opt == 4) // show community card
-		{
-			showpublic(publiccard, 5);
+		{	
+			turn--;
+			cout <<"turn " ;
+			cout << turn/playernum << endl;
+			showpublic(publiccard, 2 + turn/playernum); // turn/playernum will get which round in the match, then can know how many card should be shown
+			continue;
 		}
 		current = current->next;
 		if (last == current)

@@ -76,7 +76,8 @@ int main()
 		int publiccard[5][2];
 		int playerinpool = playernum; // player that still  have actions , i.e. not fold or have not all in
 		int playerleft = playernum;	  // onlyfor not have fold
-		action(button, poolsize, playernum, playerinpool, terminate, true, allfold, playerleft);
+		int turn = 0;
+		action(button, poolsize, playernum, playerinpool, terminate, true, allfold, playerleft, publiccard, turn);
 		if (allfold)
 		{
 			continue;
@@ -104,7 +105,7 @@ int main()
 					cardsremaining -= 1;
 				}
 				showpublic(publiccard, 5 - cardsremaining);
-				action(button, poolsize, playernum, playerinpool, terminate, false, allfold, playerleft);
+				action(button, poolsize, playernum, playerinpool, terminate, false, allfold, playerleft, publiccard, turn);
 				if (allfold)
 					break;
 				if (terminate)

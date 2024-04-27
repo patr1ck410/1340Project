@@ -126,12 +126,12 @@ int main()
 		checkwin(button, publiccard, poolsize);
 		int temp;
 		// temp = minigame(); //when player do not have enough chips to continue
-		cout << "Continue playing? (1: Yes, 0: No)"; // ask quit game or not
+		cout << "Continue playing? (1: Yes / 0: No)"; // ask quit game or not
 		int quitoption;
 		cin >> quitoption; // if quit, set ongoing = false
 		while (quitoption > 1 || quitoption < 0)
 		{
-			cout << "Invalid choice . Please choose again." << endl;
+			cout << "Invalid choice! Please choose again." << endl;
 			cin >> quitoption;
 		}
 		if (quitoption == 0)
@@ -140,6 +140,6 @@ int main()
 		}
 	}
 	savegame(button);
-	cout << "Game saved successfully, BYE" << endl;
+	cout << "Game saved successfully, BYE!!" << endl;
 	return 0;
 }

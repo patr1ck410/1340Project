@@ -46,6 +46,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		cout << "\n";
 		double diff = max - current->chipsput;
 		cout << "Chips to call :" << diff << endl;
+		cout << "\n";
 		showhand(current); // user-menu
 		int opt;
 		cin >> opt;

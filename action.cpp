@@ -24,7 +24,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		max = 0;
 		last = current;
 	}
-
+	int turn = 0;
 	while (!endturn)
 	{
 		if (current->ingame == false || current->allin == true)
@@ -45,22 +45,54 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		showhand(current); // user-menu
 		cout << "Please choose an action below:" << endl;
 		cout << "\n";
-		cout << "\t1. Check or call" << endl;
-		cout << "\t2. Bet " << endl;
-		cout << "\t3. Fold " << endl;
-		cout << "\n";
-		int opt;
-		cin >> opt;
+		if (turn < playernum)
+		{
+			cout << "\t1. Check or call" << endl;
+			cout << "\t2. Bet" << endl;
+			cout << "\t3. Fold" << endl;
+			cout << "\n";
+			turn += 1;
+		}
+		if (turn >= playernum)
+		{
+			cout << "\t1. Check or call" << endl;
+			cout << "\t2. Bet" << endl;
+			cout << "\t3. Fold" << endl;
+			cout << "\t4. Show community card" << endl;
+			cout << "\n";
+		}
 		bool check = false;
 		double betsize;
+		int opt;
+		cin >> opt;
 		while (!check) // validate the action, incorrect then input again
 		{
-			while (opt > 3 || opt < 1)
+			if (turn < playernum)
+				while (opt > 3 || opt < 1)
+				{
+					cout << "Invalid choice! Please choose your action again:" << endl;
+					cin >> opt;
+					continue;
+				}
+			if (opt == 2)
 			{
-				cout << "Invalid choice! Please choose your action again:" << endl;
-				cin >> opt;
-				continue;
+				cout << "Input bet size: " << endl;
+				cin >> betsize;
+				if (betsize < max * 2 || betsize > current->chips || !(betsize == max)) // wrong betsize
+				{
+					cout << "Invalid betsize! Please choose your action again:" << endl;
+					cin >> opt;
+					continue;
+				}
 			}
+			check = true;
+			if (turn >= playernum)
+				while (opt > 4 || opt < 1)
+				{
+					cout << "Invalid choice! Please choose your action again:" << endl;
+					cin >> opt;
+					continue;
+				}
 			if (opt == 2)
 			{
 				cout << "Input bet size: " << endl;
@@ -101,11 +133,15 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 				playerinpool -= 1;
 			}
 		}
-		else // fold
+		else if (opt == 3) // fold
 		{
 			current->ingame = false;
 			playerleft -= 1;
 			playerinpool -= 1;
+		}
+		else if (opt == 4) // show community card
+		{
+			showpublic(publiccard, 5);
 		}
 		current = current->next;
 		if (last == current)

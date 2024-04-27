@@ -64,7 +64,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			{
 				cout << "Input bet size: " << endl;
 				cin >> betsize;
-				if (betsize < max * 2 || betsize > current->chips || !(betsize==max)) // wrong betsize
+				if (betsize < max * 2 || betsize > current->chips || !(betsize == max)) // wrong betsize
 				{
 					cout << "Invalid betsize! Please choose your action again:" << endl;
 					cin >> opt;
@@ -75,7 +75,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		}
 		if (opt == 1)
 		{
-			if (diff >= current->chips) /
+			if (diff >= current->chips)
 			{
 				current->allin = true;
 				current->chipsput += current->chips;
@@ -88,7 +88,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 				current->chips -= diff;
 			}
 		}
-		else if (opt == 2) // raise 
+		else if (opt == 2) // raise
 		{
 			last = current;
 			max = betsize;
@@ -96,7 +96,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			current->chipsput = betsize;
 			if (current->chips == 0) // allin
 			{
-				current->allin = true; 
+				current->allin = true;
 				playerinpool -= 1;
 			}
 		}
@@ -113,7 +113,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 	current = button;
 	for (int i = 0; i < playernum; i++) // storing sidepool size for player who has all in
 	{
-		if (current->allin == true) 
+		if (current->allin == true)
 		{
 			double size = current->chipsput;
 			double reward = poolsize;

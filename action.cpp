@@ -172,7 +172,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		giverewards(button, poolsize);
 		allfold = true;
 	}
-	else if (playerinpool == 1) // one one has not fold and all in
+	else if (playerinpool <= 1) // one one has not fold and all in
 	{
 		terminate = true;
 	}

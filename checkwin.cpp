@@ -3,14 +3,14 @@
 #include <algorithm>
 #include <map>
 #include <cmath>
-
+#include <stirng>
 #include "checkwin.h"
 #include "structures.h"
 using namespace std;
 
 
 
-long assignvalue(int combine[7][2]){
+long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest , comment in combination.pdf
 	long value = 0; // default 0 first
 	int suit[4]={0,0,0,0};
 	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
@@ -125,18 +125,38 @@ long assignvalue(int combine[7][2]){
 void givewinner(int poolsize, player * button)
 {
 	long min = 780000;
-	player * winner = NULL, * current=button;
-	do 
+	player * current=button;
+	int winner=1;// defult 1 , check if there are co-winner 
+	bool playerallin=false; // check if any of co-winner are all in , have to distribute to them first
+	do // finding the smallest value , which their hand is largest 
 	{
 		if (current -> ingame==true )
 		{
 			if (current->value < min)
 			{
 				min = current->value;
-				winner = current;
+				winner=1;
+				allin=false; //initilize if someone has bigger hands
+				if (current -> allin)
+					playerallin+=1;
+			}
+			else if (current -> value ==min){
+				winner++;
+				if (current -> allin)
+					playerallin+=1;
 			}
 		}
-	} while (current != button);
+	} while (current != button); // run through the linked-list
+	double split=poolsize/winner;
+	current = button;
+	bool second = false; // 
+	do{
+		double split=poolsize/winner;
+		if (current->ingame && current -> value== min){
+			if (player->allin){
+				
+			
+	}while(winner!=0);
 	cout << "Winner is: " << winner->name << endl;
 	if (winner-> allin==false){
 		winner->chips+=poolsize; // without allin can get the whole pool
@@ -154,8 +174,6 @@ void givewinner(int poolsize, player * button)
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }
-
-
 long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
 { 
 	long value=0;
@@ -172,8 +190,6 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 		value = pow (13,n-i-1) * cardrank[i]; 
 	return value;
 }
-
-
 void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
 { 
 	player * current = button;

@@ -32,6 +32,8 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			current = current->next;
 			continue; // pass to next player if the player has all in or fold
 		}
+		cout << "\n";
+		cout << "\n";
 		cout << "It's " << current->name << "'s turn." << endl;
 		cout << "Current pool size: " << poolsize << endl;
 		cout << "\n";
@@ -47,6 +49,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		cout << " 1. Check or call" << endl;
 		cout << " 2. Bet " << endl;
 		cout << " 3. Fold " << endl;
+		cout << "\n";
 		showhand(current); // user-menu
 		int opt;
 		cin >> opt;

@@ -8,7 +8,7 @@
 #include "structures.h"
 using namespace std;
 
-void printcard(int card[2]);
+void printcard(int suit, int rank);
 
 void showhand(player *individual);
 

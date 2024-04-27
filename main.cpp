@@ -8,6 +8,7 @@
 #include "minigame.h"
 #include "output.h"
 #include "structures.h"
+#include "terminate.h"
 #include <random>
 #include <cstdlib>
 #include <string>
@@ -48,9 +49,9 @@ int main()
 		bool flag=false; // for input playeernum , re-input if input is invalid (num<4 or num is an char)
 		do{
 			string input;
-			cout << "Number of players?(>=4)" << endl;
+			cout << "Number of players?(4-10)" << endl;
 			cin >> playernum;
-			if (playernum < 4 || cin.fail() )
+			if (playernum < 4 || cin.fail() || playernum >10 )
 			{
 				cout << "Invalid input , please input again."<<endl;
 				cin.clear();
@@ -60,9 +61,6 @@ int main()
 				flag=true;
 		}while (!flag);// restricting playernum has to >4
 
-		/*
-		need to set playernumber limit
-		*/
 		for (int i = 0; i < playernum; i++)
 		{
 			cout << "Input Player " << i + 1 << " name: ";
@@ -96,13 +94,7 @@ int main()
 		}
 		if (terminate)
 		{
-			for (int j = 0; j < 5; j++)
-			{ // draw all the public cards if terminate = true
-				cardDraw(deck, card);
-				publiccard[j][0] = card[0];
-				publiccard[j][1] = card[1];
-			}
-			showpublic(publiccard, 5); // show all public card
+			terminateactions(cardsremaining, deck, publiccard);
 		}
 		else
 		{
@@ -121,13 +113,7 @@ int main()
 					break;
 				if (terminate)
 				{
-					for (int j = (5 - cardsremaining); j < 5; j++)
-					{ // draw all the public cards if terminate = true
-						cardDraw(deck, card);
-						publiccard[j][0] = card[0];
-						publiccard[j][1] = card[1];
-					}
-					showpublic(publiccard, 5);
+					terminateactions(cardsremaining, deck, publiccard);
 					break;
 				}
 			}
@@ -135,7 +121,7 @@ int main()
 		button = button->next;
 		if (allfold)
 			continue;
-		checkwin(button, publiccard, poolsize);
+		// checkwin(button, publiccard, poolsize);
 		int temp;
 		// temp = minigame(); //when player do not have enough chips to continue
 		cout << "Continue playing? (1: Yes / 0: No)"; // ask quit game or not

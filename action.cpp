@@ -32,12 +32,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			current = current->next;
 			continue; // pass to next player if the player has all in or fold
 		}
-		cout << "It's " << current->name << "'s turn. Choose an action below:" << endl;
-		cout << "\n";
-		cout << " 1. Check or call" << endl;
-		cout << " 2. Bet " << endl;
-		cout << " 3. Fold " << endl;
-		cout << "\n";
+		cout << "It's " << current->name << "'s turn." << endl;
 		cout << "Current pool size: " << poolsize << endl;
 		cout << "\n";
 		cout << "Your Dead chips: " << current->chipsput << endl;
@@ -47,6 +42,11 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		double diff = max - current->chipsput;
 		cout << "Chips to call :" << diff << endl;
 		cout << "\n";
+		cout << "Choose an action below:" << endl;
+		cout << "\n";
+		cout << " 1. Check or call" << endl;
+		cout << " 2. Bet " << endl;
+		cout << " 3. Fold " << endl;
 		showhand(current); // user-menu
 		int opt;
 		cin >> opt;

@@ -44,7 +44,7 @@ int main()
 			cout << "Number of players? (>=4)" << endl;
 			cin >> playernum;
 			if (playernum < 4)
-				cout << "Invalid input! Please input the number of players again: " << endl;
+				cout << "Invalid input! Please input the number of players again. " << endl;
 			else
 				flag = true;
 		} while (!flag); // restricting playernum has to >4

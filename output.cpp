@@ -24,6 +24,8 @@ void showhand(player *individual)
 }
 void showpublic(int cards[5][2], int num)
 {
+	cout << "\n";
+	cout << "\n";
 	cout << "Community " << num << " cards are    ";
 	for (int i = 0; i < num; i++)
 	{
@@ -31,5 +33,6 @@ void showpublic(int cards[5][2], int num)
 		if (i != num - 1)
 			cout << "\t";
 	}
-	cout << endl;
+	cout << "\n";
+	cout << "\n";
 }

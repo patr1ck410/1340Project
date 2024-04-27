@@ -92,7 +92,7 @@ int main()
 					cardsremaining-=1;
 				}
 				showpublic(publiccard,5-cardsremaining);
-				action(button,  poolsize, playernum, playerleft, terminate, false, allfold, playerallin);
+				action(button,  poolsize, playernum, playerinpool, terminate, false, allfold, playerleft);
 				if (allfold)
 					break;
 				if (terminate){

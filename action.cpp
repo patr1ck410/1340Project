@@ -34,7 +34,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		}
 		cout << "\n";
 		cout << "\n";
-		cout << "Now, it is " << current->name << "'s turn!!!" << endl;
+		cout << "Now, it is " << current->name << "'s turn!!!" << endl; // user-menu
 		cout << "Current pool size: " << poolsize << endl;
 		cout << "Your Dead chips: " << current->chipsput << endl;
 		cout << "Chips remaining: " << current->chips << endl;
@@ -64,7 +64,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			{
 				cout << "Input bet size: " << endl;
 				cin >> betsize;
-				if (betsize < max * 2 || betsize > current->chips)
+				if (betsize < max * 2 || betsize > current->chips || !(betsize==max)) // wrong betsize
 				{
 					cout << "Invalid betsize! Please choose your action again:" << endl;
 					cin >> opt;
@@ -75,7 +75,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		}
 		if (opt == 1)
 		{
-			if (diff >= current->chips)
+			if (diff >= current->chips) /
 			{
 				current->allin = true;
 				current->chipsput += current->chips;
@@ -88,19 +88,19 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 				current->chips -= diff;
 			}
 		}
-		else if (opt == 2)
+		else if (opt == 2) // raise 
 		{
 			last = current;
 			max = betsize;
 			current->chips = current->chips - (betsize - current->chipsput);
 			current->chipsput = betsize;
-			if (current->chips == 0)
+			if (current->chips == 0) // allin
 			{
-				current->allin = true;
+				current->allin = true; 
 				playerinpool -= 1;
 			}
 		}
-		else
+		else // fold
 		{
 			current->ingame = false;
 			playerleft -= 1;
@@ -113,7 +113,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 	current = button;
 	for (int i = 0; i < playernum; i++) // storing sidepool size for player who has all in
 	{
-		if (current->allin == true)
+		if (current->allin == true) 
 		{
 			double size = current->chipsput;
 			double reward = poolsize;
@@ -152,7 +152,7 @@ void giverewards(player *button, double poolsize)
 	{
 		if (current->ingame == true)
 		{
-			current->chips += poolsize;
+			current->chips += poolsize; // give rewards to the player not flod if anyone else has fold
 			cout << "Player " << current->name << " wins " << poolsize << endl;
 			cout << "Current chips of the player: " << current->chips << endl;
 			break;

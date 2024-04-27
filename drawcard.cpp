@@ -4,7 +4,6 @@
 #include "structures.h"
 #include "drawcard.h"
 #include <string>
-#include <map>
 using namespace std;
 
 void cardDraw(bool (&deck)[4][13], int (&card)[2])

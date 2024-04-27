@@ -44,9 +44,9 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		showhand(current); // user-menu
 		cout << "Please choose an action below:" << endl;
 		cout << "\n";
-		cout << " 1. Check or call" << endl;
-		cout << " 2. Bet " << endl;
-		cout << " 3. Fold " << endl;
+		cout << "\t1. Check or call" << endl;
+		cout << "\t2. Bet " << endl;
+		cout << "\t3. Fold " << endl;
 		cout << "\n";
 		int opt;
 		cin >> opt;

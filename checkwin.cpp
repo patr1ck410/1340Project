@@ -17,13 +17,13 @@ long assignvalue(int combine[7][2]){
 	map <int, int> trank; // key is the rank , and the value is the occurreence
 	for (int i =0;i<7;i++)
 		suit[combine[i][0]]+=1;
-	for (int i =0; i<7;i++){
+	for (int i =0; i<7;i++){// trank is map with keys are the rank , and the value is the occurenece , with A is smallest , 2 is largest
 		rank[combine[i][1]]+=1;
 		if (trank.find(combine[i][1])!=trank.end()){
-			trank[(combine[i][1]+12)%13]++;
+			trank[12-(combine[i][1]+12)%13]++; // add if exist
 		}
 		else{
-			trank[(combine[i][1]+12)%13]=1;
+			trank[12-(combine[i][1]+12)%13]=1; // create if not
 		}
 	}
 	int suited =4;
@@ -47,18 +47,18 @@ long assignvalue(int combine[7][2]){
 				suits.push_back(combine[i][1]);
 			}
 		}
-		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush
+		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush in acsedning order
 	}
 	int four=13;
 	int three=13; // only have one value of the highest rank 
 	vector <int> two;
 	for (const auto &pair : trank) {
 		if (pair.second==4)
-			four=pair.first;
+			four=pair.first; 
 		else if (pair.second==3)
 			if (three==13)
 				three=pair.first;
-			else if (pair.first >three) // A is 12 , K is 11, 2 is 0 
+			else if (pair.first >three)
 				three=pair.first;
 		else if (pair.second==2)
 			two.push_back(pair.second);
@@ -75,7 +75,7 @@ long assignvalue(int combine[7][2]){
 			else
 				count=0;
 			if (count>=5)
-				value=suits[i]; // so only 0-9 will be returned 
+				value=(9-suits[i]); // so only 0-9 will be returned 
 		}
 		if (value!=0)
 			return value;
@@ -83,7 +83,7 @@ long assignvalue(int combine[7][2]){
 	if (four !=13)
 	{
 		long local = localvalue(trank , 1 ,4);
-		value =10+local;
+		value =10+four*13+local;
 		return value ;
 	}  // checking for four of a kind
 	else if (three!=13 && two.size()!=0){
@@ -139,20 +139,20 @@ void givewinner(int poolsize, player * button)
 	} while (current != button);
 	cout << "Winner is: " << winner->name << endl;
 	if (winner-> allin==false){
-		winner->chips+=poolsize;
+		winner->chips+=poolsize; // without allin can get the whole pool
 		cout << "Chips won: " << poolsize << endl;
 		cout << "Current chips: " << winner->chips <<endl;
 		poolsize=0;
 	}
 	else{
-		winner->chips+=winner->sidepool;
+		winner->chips+=winner->sidepool; // for player all in 
 		cout << "Chips won: " << winner->sidepool << endl;
 		cout << "Current chips: " << winner->chips <<endl;
 		winner->ingame=false;
 		poolsize-=winner->sidepool; 
 	}
 	if (poolsize>0)
-		givewinner(poolsize, button);
+		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }
 
 
@@ -162,12 +162,12 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 	vector<int> cardrank;
 	for (const auto &pair : rank) 
 	{
-		if (pair.second != used) 
+		if (pair.second != used)
 		{
 			cardrank.push_back(pair.first);
 		}
 	}
-	sort(cardrank.rbegin() , cardrank.rend());
+	sort(cardrank.begin() , cardrank.end()); // sort in asceding order
 	for (int i = 0;i < n ;i++)
 		value = pow (13,n-i-1) * cardrank[i]; 
 	return value;
@@ -185,18 +185,18 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 			{
 				for (int j=0 ;j<2;j++)
         		{
-					combine[i][j]=publiccard[i][j];
+					combine[i][j]=publiccard[i][j]; // add community cards
 				}
 			}
 			for (int i=5;i<7;i++)
 			{
 				for (int j=0;j<2;j++){
-					combine[i][j]=current->hand[i-5][j];
+					combine[i][j]=current->hand[i-5][j]; // add player's handd cards
 				}
 			}
 			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
 		}		
 		current = current -> next;
 	} while(current!= button);
-	givewinner(poolsize, button);
+	givewinner(poolsize, button); // for giving chips
 }

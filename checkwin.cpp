@@ -149,17 +149,19 @@ void givewinner(int poolsize, player * button)
 	} while (current != button); // run through the linked-list
 	double split=poolsize/winner;
 	current = button;
+	bool second;
 	if (playerallin)
-		bool second = false; // have to disttibute to player allin first for easy distribution
+		second = false; // have to disttibute to player allin first for easy distribution
 	else
-		bool second=true; // no need second round checking if no player allin win the game
+		second = true; // no need second round checking if no player allin win the game
 	do{
-		if (current->ingame && current -> value== min && (second || current -> allin==true){
+		if (current->ingame && current -> value== min && (second || current -> allin==true)){
 			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
+				double rewards;
 				if (split > current -> sidepool)
-					double rewards=sidepool;
+					rewards= current->sidepool;
 				else
-					double rewards=split;
+					rewards=split;
 				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
 				current->chips+=rewards;
 				outputwinner(current,rewards);
@@ -183,7 +185,7 @@ void givewinner(int poolsize, player * button)
 }
 void outputwinner(player * current,double reward){ // for output winner
 	cout << current-> name <<  " won chips : " << reward<< endl;
-	cout << his hand is ;
+	cout << "his hand is" ;
 	showhand (current);
 	cout << "Current chips: " << current->chips <<endl;
 }

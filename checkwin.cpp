@@ -122,6 +122,14 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	}// checking for highcard
 	return value;
 }
+
+void outputwinner(player * current,double reward){ // for output winner
+	cout << current-> name <<  " won chips : " << reward<< endl;
+	cout << "his hand is" ;
+	showhand (current);
+	cout << "Current chips: " << current->chips <<endl;
+}
+
 void givewinner(int poolsize, player * button)
 {
 	long min = 780000; // explanation in combination.pdf
@@ -183,12 +191,7 @@ void givewinner(int poolsize, player * button)
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }
-void outputwinner(player * current,double reward){ // for output winner
-	cout << current-> name <<  " won chips : " << reward<< endl;
-	cout << "his hand is" ;
-	showhand (current);
-	cout << "Current chips: " << current->chips <<endl;
-}
+
 long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
 { 
 	long value=0;

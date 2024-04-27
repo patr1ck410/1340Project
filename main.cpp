@@ -121,7 +121,7 @@ int main()
 		button = button->next;
 		if (allfold)
 			continue;
-		// checkwin(button, publiccard, poolsize);
+		checkwin(button, publiccard, poolsize);
 		int temp;
 		// temp = minigame(); //when player do not have enough chips to continue
 		cout << "Continue playing? (1: Yes / 0: No)"; // ask quit game or not

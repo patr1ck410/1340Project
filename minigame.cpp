@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
+#include "drawcard.h"
+#include "structure.h"
 using namespace std;
 void calodds(double (&odds)[3], int (&card)[2], int (&sto)[1]) {
    int count;
@@ -49,12 +51,12 @@ int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
    sto[0] = card[1]; //storing the first card drawn
    printcard(int card[2]);    // Display the selected card
    cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
-   cin << choice;
+   cin >> choice;
    cardDraw(deck, card);
    calodds(odds, card, sto);
    if (card[1] > sto[0]) {
       if (choice == 'S') {
-         current -> int (chips = 50 * odds[0]);
+         current -> double (chips = 100 * odds[0]);
       }
       else {
          current -> chips = 30;
@@ -62,7 +64,7 @@ int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
    }
    if (card[1] == sto[0])  {
       if (choice == 'D') {
-         current -> int (chips = 50 * odds[1]);
+         current -> int (chips = 100* odds[1]);
       }
       else {
          current -> chips = 30;
@@ -70,7 +72,7 @@ int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
    }
    else {
       if (choice == 'L') {
-         current -> int (chips = 50 * odds[2]);
+         current -> int (chips = 100* odds[2]);
       }
       else {
          current -> chips = 30;
@@ -78,7 +80,7 @@ int minigame(bool (&deck)[4][13], int (&gamecard)[2],player * current) {
    }
 }
 void checkchips(bool deck[4][13], player * button, int playernum) {
-   current = button;
+   player *current = button;
    for (int i = 0 ; i < playernum ; i++){
       if (button->next->next==current && current ->chips <=1) // big blind chips cannot smaller than 1
          minigame(deck ,card , current);

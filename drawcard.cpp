@@ -22,7 +22,6 @@ void cardDraw(bool (&deck)[4][13], int (&card)[2])
          card[0] = randomsuit;
          card[1] = randomrank;
          deck[randomsuit][randomrank] = false;
-         cout << suits[randomsuit] << " " << randomrank << endl; 
       }
    }
 }
@@ -35,6 +34,7 @@ void distribute(bool (&deck)[4][13], player * button, int playernum)
       {
          int card[2];
          cardDraw(deck, card);
+         cout << card[0] << "  " << card[1] << endl;
          button->hand[j][0] = card[0];
          button->hand[j][1] = card[1];
          button = button->next;

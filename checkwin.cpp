@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <map>
 #include <cmath>
-#include <stirng>
+#include <string>
+#include "output.h"
 #include "checkwin.h"
 #include "structures.h"
 using namespace std;
@@ -121,10 +122,9 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	}// checking for highcard
 	return value;
 }
-
 void givewinner(int poolsize, player * button)
 {
-	long min = 780000;
+	long min = 780000; // explanation in combination.pdf
 	player * current=button;
 	int winner=1;// defult 1 , check if there are co-winner 
 	bool playerallin=false; // check if any of co-winner are all in , have to distribute to them first
@@ -136,43 +136,56 @@ void givewinner(int poolsize, player * button)
 			{
 				min = current->value;
 				winner=1;
-				allin=false; //initilize if someone has bigger hands
+				playerallin=false; //initilize if someone has bigger hands
 				if (current -> allin)
-					playerallin+=1;
+					playerallin=true;
 			}
 			else if (current -> value ==min){
 				winner++;
 				if (current -> allin)
-					playerallin+=1;
+					playerallin=true;
 			}
 		}
 	} while (current != button); // run through the linked-list
 	double split=poolsize/winner;
 	current = button;
-	bool second = false; // 
+	if (playerallin)
+		bool second = false; // have to disttibute to player allin first for easy distribution
+	else
+		bool second=true; // no need second round checking if no player allin win the game
 	do{
-		double split=poolsize/winner;
-		if (current->ingame && current -> value== min){
-			if (player->allin){
-				
-			
+		if (current->ingame && current -> value== min && (second || current -> allin==true){
+			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
+				if (split > current -> sidepool)
+					double rewards=sidepool;
+				else
+					double rewards=split;
+				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
+				current->chips+=rewards;
+				outputwinner(current,rewards);
+			}
+			else{
+				current -> chips += split;
+				poolsize-=split;
+				outputwinner(current,split);
+			}
+			current->ingame=false;
+			winner--;
+		}
+		current=current->next;
+		if (current==button){
+			second =true;// second round checking
+			double split=poolsize/winner; // initilizing the splited pool
+		}
 	}while(winner!=0);
-	cout << "Winner is: " << winner->name << endl;
-	if (winner-> allin==false){
-		winner->chips+=poolsize; // without allin can get the whole pool
-		cout << "Chips won: " << poolsize << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		poolsize=0;
-	}
-	else{
-		winner->chips+=winner->sidepool; // for player all in 
-		cout << "Chips won: " << winner->sidepool << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		winner->ingame=false;
-		poolsize-=winner->sidepool; 
-	}
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
+}
+void outputwinner(player * current,double reward){ // for output winner
+	cout << current-> name <<  " won chips : " << reward<< endl;
+	cout << his hand is ;
+	showhand (current);
+	cout << "Current chips: " << current->chips <<endl;
 }
 long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
 { 

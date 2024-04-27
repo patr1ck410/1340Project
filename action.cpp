@@ -35,6 +35,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		cout << "\n";
 		cout << "\n";
 		cout << "Now, it is " << current->name << "'s turn!!!" << endl; // user-menu
+		cout << "\n";
 		cout << "Current pool size: " << poolsize << endl;
 		cout << "Your Dead chips: " << current->chipsput << endl;
 		cout << "Chips remaining: " << current->chips << endl;

@@ -1,8 +1,8 @@
 ************  POKER  ************
 
 This project creates a classical poker game,
-where players gamble and try to win by 
-1. Having a best hand   OR
+where players try to win by 
+1. Having the best hand among all in-game players  OR
 2. Convincing all other players to fold (quit).
 
 RANKING RULES OF POKER
@@ -39,8 +39,9 @@ GAME FLOW
    and five cards are randomly distributed to the community cards.
    
 2. There are 4 betting rounds, separated by 3 rounds of community cards revelation.
-   
-3. In each betting round, the first player has 3 option:
+3. The first betting round will be the pre-flop bet, which players action base on the cards in hand but not any     
+   community card. In the first betting round, two players are required to pay for the small blind (0.5)
+4. In each betting round, the first player has 3 option:
    Check: Not making any bet and pass the turn to the next player
    Bet: Make a bet
    Fold: Quit the bet
@@ -57,9 +58,9 @@ GAME FLOW
    If there are more than one player who didn't fold, the game will continue.
    Otherwise, the only remaining player will win.
    
-4. Three community cards are revealed in the first round, another one in the second round, and the      last one in the third round.
+5. Three community cards are revealed in the first round, another one in the second round, and the last one in the third round which is the final round.
    
-5. At the end, all remaining players will show their two hidden cards to determine the winner.
+6. At the end, all remaining players will show their two hidden cards to determine the winner.
    
    
 Calculating Winnings: 

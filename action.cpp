@@ -89,7 +89,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			{
 				cout << "Input bet size: " << endl;
 				cin >> betsize;
-				if ((betsize < max * 2 && betsize!=current->chips) || betsize > current->chips ) // wrong betsize
+				if ((betsize < max * 2 && betsize!=current->chips ) || betsize > current->chips || betsize==max) // wrong betsize
 				{
 					cout << "Invalid betsize! Please choose your action again:" << endl;
 					cin >> opt;
@@ -171,7 +171,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		giverewards(button, poolsize);
 		allfold = true;
 	}
-	else if (playerinpool <= 1) // one one has not fold and all in
+	else if (playerinpool == 1) // one one has not fold and all in
 	{
 		terminate = true;
 	}

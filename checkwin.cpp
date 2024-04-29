@@ -147,24 +147,22 @@ void givewinner(int poolsize, player * button)
 				allinsize.clear();//initilize if someone has bigger hands
 				if (current -> allin){
 					allinsize.push_back(min);
-					playerallin=true;
 				}
 			}
 			else if (current -> value ==min){
 				winner++;
 				if (current -> allin){
 					allinsize.push_back(min);
-					playerallin=true;
 				}
 			}
 		}
 		current=current->next;
 	} while (current != button); // run through the linked-list
-	sort(allinsize.rbeign(),allinsize.rend()); // descending order so can pop the smallest sidepoolsize first
+	sort(allinsize.rbegin(),allinsize.rend()); // descending order so can pop the smallest sidepoolsize first
 	current = button;
 	do{
 		double split=poolsize/winner; // initilizing the splited pool
-		if (current->ingame && current -> value== min && (allinsize.size()==0 || (current -> allin==true && current->sidepool==allinsize.back())){ // have to distribute to allin player first
+		if (current->ingame && current -> value== min && (allinsize.size()==0) || (current -> allin==true && current->sidepool==allinsize.back())){ // have to distribute to allin player first
 			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
 				double rewards;
 				if (split >= (current -> sidepool)/winner)
@@ -180,7 +178,7 @@ void givewinner(int poolsize, player * button)
 					do {
 						if( deduct -> allin==true)
 							deduct->sidepool-=rewards;
-						deduct=decut->next;
+						deduct=deduct->next;
 					}while (deduct!=button);
 				}		
 			}

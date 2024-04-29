@@ -26,7 +26,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 	}
 	while (!endturn)
 	{
-		if (!(current->ingame == false || current->allin == true))
+		if (!(current->ingame == false || current->allin == true)) // not passing to player has all in or fold to have a turn
 		{
 			cout << "\n";
 			cout << "\n";
@@ -75,7 +75,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 				}
 				else if (turn >= playernum)
 				{
-					while (opt > 4 || opt < 1 || (opt==2 && current->chips=diff))
+					while (opt > 4 || opt < 1 || (opt==2 && current->chips==diff))
 					{
 						cout << "Invalid choice! Please choose your action again:" << endl;
 						cin >> opt;

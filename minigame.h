@@ -1,6 +1,10 @@
 #ifndef MINIGAME_H
 #define MINIGAME_H
 
-int minigame(void checkwin(player * button, int publiccard[5][2],int poolsize)); //check which type of poker hand player have;
+#include "structures.h"
+
+void calodds(double (&odds)[3], int (&card)[2], int (&sto)[1]);
+void minigame(bool (&deck)[4][13],player * current);
+void checkchips(bool (&deck)[4][13], player * button, int playernum);
 
 #endif

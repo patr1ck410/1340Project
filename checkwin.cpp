@@ -3,27 +3,28 @@
 #include <algorithm>
 #include <map>
 #include <cmath>
-
+#include <string>
+#include "output.h"
 #include "checkwin.h"
 #include "structures.h"
 using namespace std;
 
 
 
-long assignvalue(int combine[7][2]){
+long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest , comment in combination.pdf
 	long value = 0; // default 0 first
 	int suit[4]={0,0,0,0};
 	int rank [13]={0,0,0,0,0,0,0,0,0,0,0,0,0}; // staticial data of the cards
 	map <int, int> trank; // key is the rank , and the value is the occurreence
 	for (int i =0;i<7;i++)
 		suit[combine[i][0]]+=1;
-	for (int i =0; i<7;i++){
+	for (int i =0; i<7;i++){// trank is map with keys are the rank , and the value is the occurenece , with A is smallest , 2 is largest
 		rank[combine[i][1]]+=1;
 		if (trank.find(combine[i][1])!=trank.end()){
-			trank[(combine[i][1]+12)%13]++;
+			trank[12-(combine[i][1]+12)%13]++; // add if exist
 		}
 		else{
-			trank[(combine[i][1]+12)%13]=1;
+			trank[12-(combine[i][1]+12)%13]=1; // create if not
 		}
 	}
 	int suited =4;
@@ -47,18 +48,18 @@ long assignvalue(int combine[7][2]){
 				suits.push_back(combine[i][1]);
 			}
 		}
-		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush
+		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush in acsedning order
 	}
 	int four=13;
 	int three=13; // only have one value of the highest rank 
 	vector <int> two;
 	for (const auto &pair : trank) {
 		if (pair.second==4)
-			four=pair.first;
+			four=pair.first; 
 		else if (pair.second==3)
 			if (three==13)
 				three=pair.first;
-			else if (pair.first >three) // A is 12 , K is 11, 2 is 0 
+			else if (pair.first >three)
 				three=pair.first;
 		else if (pair.second==2)
 			two.push_back(pair.second);
@@ -75,7 +76,7 @@ long assignvalue(int combine[7][2]){
 			else
 				count=0;
 			if (count>=5)
-				value=suits[i]; // so only 0-9 will be returned 
+				value=(9-suits[i]); // so only 0-9 will be returned 
 		}
 		if (value!=0)
 			return value;
@@ -83,7 +84,7 @@ long assignvalue(int combine[7][2]){
 	if (four !=13)
 	{
 		long local = localvalue(trank , 1 ,4);
-		value =10+local;
+		value =10+four*13+local;
 		return value ;
 	}  // checking for four of a kind
 	else if (three!=13 && two.size()!=0){
@@ -122,39 +123,74 @@ long assignvalue(int combine[7][2]){
 	return value;
 }
 
+void outputwinner(player * current,double reward){ // for output winner
+	cout << current-> name <<  " won chips : " << reward<< endl;
+	cout << "his hand is" ;
+	showhand (current);
+	cout << "Current chips: " << current->chips <<endl;
+}
+
 void givewinner(int poolsize, player * button)
 {
-	long min = 780000;
-	player * winner = NULL, * current=button;
-	do 
+	long min = 780000; // explanation in combination.pdf
+	player * current=button;
+	int winner=1;// defult 1 , check if there are co-winner 
+	bool playerallin=false; // check if any of co-winner are all in , have to distribute to them first
+	do // finding the smallest value , which their hand is largest 
 	{
 		if (current -> ingame==true )
 		{
 			if (current->value < min)
 			{
 				min = current->value;
-				winner = current;
+				winner=1;
+				playerallin=false; //initilize if someone has bigger hands
+				if (current -> allin)
+					playerallin=true;
+			}
+			else if (current -> value ==min){
+				winner++;
+				if (current -> allin)
+					playerallin=true;
 			}
 		}
-	} while (current != button);
-	cout << "Winner is: " << winner->name << endl;
-	if (winner-> allin==false){
-		winner->chips+=poolsize;
-		cout << "Chips won: " << poolsize << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		poolsize=0;
-	}
-	else{
-		winner->chips+=winner->sidepool;
-		cout << "Chips won: " << winner->sidepool << endl;
-		cout << "Current chips: " << winner->chips <<endl;
-		winner->ingame=false;
-		poolsize-=winner->sidepool; 
-	}
+	} while (current != button); // run through the linked-list
+	double split=poolsize/winner;
+	current = button;
+	bool second;
+	if (playerallin)
+		second = false; // have to disttibute to player allin first for easy distribution
+	else
+		second = true; // no need second round checking if no player allin win the game
+	do{
+		if (current->ingame && current -> value== min && (second || current -> allin==true)){
+			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
+				double rewards;
+				if (split > current -> sidepool)
+					rewards= current->sidepool;
+				else
+					rewards=split;
+				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
+				current->chips+=rewards;
+				outputwinner(current,rewards);
+			}
+			else{
+				current -> chips += split;
+				poolsize-=split;
+				outputwinner(current,split);
+			}
+			current->ingame=false;
+			winner--;
+		}
+		current=current->next;
+		if (current==button){
+			second =true;// second round checking
+			double split=poolsize/winner; // initilizing the splited pool
+		}
+	}while(winner!=0);
 	if (poolsize>0)
-		givewinner(poolsize, button);
+		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }
-
 
 long localvalue (  map<int,int> rank , int n , int used )// the local n highcards values 
 { 
@@ -162,18 +198,16 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 	vector<int> cardrank;
 	for (const auto &pair : rank) 
 	{
-		if (pair.second != used) 
+		if (pair.second != used)
 		{
 			cardrank.push_back(pair.first);
 		}
 	}
-	sort(cardrank.rbegin() , cardrank.rend());
+	sort(cardrank.begin() , cardrank.end()); // sort in asceding order
 	for (int i = 0;i < n ;i++)
 		value = pow (13,n-i-1) * cardrank[i]; 
 	return value;
 }
-
-
 void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
 { 
 	player * current = button;
@@ -185,18 +219,18 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 			{
 				for (int j=0 ;j<2;j++)
         		{
-					combine[i][j]=publiccard[i][j];
+					combine[i][j]=publiccard[i][j]; // add community cards
 				}
 			}
 			for (int i=5;i<7;i++)
 			{
 				for (int j=0;j<2;j++){
-					combine[i][j]=current->hand[i-5][j];
+					combine[i][j]=current->hand[i-5][j]; // add player's handd cards
 				}
 			}
 			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
 		}		
 		current = current -> next;
 	} while(current!= button);
-	givewinner(poolsize, button);
+	givewinner(poolsize, button); // for giving chips
 }

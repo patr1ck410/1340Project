@@ -1,4 +1,5 @@
 Team 34 members:
+
 Chan Kwok Wai
 
 Chen Junhao
@@ -120,6 +121,7 @@ Functions in the project:
 8. Checkwin.cpp: use of vector and map (stl container), using value to determine who has the best hand and distribute chips.
 9. Loadsave. cpp: file input and output.
 10. minigame.cpp: the implementation of minigame, to check whether players are having enough chips to continue the game. Also, to calculate the odds in minigame.
+11. delist: delete the circular linked list after the game is ended.
 (All the files have documentation and proper indentation.)
 
 

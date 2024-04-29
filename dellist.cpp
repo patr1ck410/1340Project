@@ -1,5 +1,10 @@
+#include "dellist.h"
+#include "structures.h"
+
 #include <iostream>
+
 using namespace std;
+
 void dellist(player * button) {
     player* current= button;
     player* next;

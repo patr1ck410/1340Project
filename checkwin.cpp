@@ -132,62 +132,34 @@ void outputwinner(player * current,double reward){ // for output winner
 
 void givewinner(int poolsize, player * button)
 {
-	long min = 780000; // explanation in combination.pdf
-	player * current=button;
-	int winner=1;// defult 1 , check if there are co-winner 
-	bool playerallin=false; // check if any of co-winner are all in , have to distribute to them first
-	do // finding the smallest value , which their hand is largest 
+	long min = 780000;
+	player * winner = NULL, * current=button;
+	do 
 	{
 		if (current -> ingame==true )
 		{
 			if (current->value < min)
 			{
 				min = current->value;
-				winner=1;
-				playerallin=false; //initilize if someone has bigger hands
-				if (current -> allin)
-					playerallin=true;
-			}
-			else if (current -> value ==min){
-				winner++;
-				if (current -> allin)
-					playerallin=true;
+				winner = current;
 			}
 		}
-	} while (current != button); // run through the linked-list
-	double split=poolsize/winner;
-	current = button;
-	bool second;
-	if (playerallin)
-		second = false; // have to disttibute to player allin first for easy distribution
-	else
-		second = true; // no need second round checking if no player allin win the game
-	do{
-		if (current->ingame && current -> value== min && (second || current -> allin==true)){
-			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
-				double rewards;
-				if (split > current -> sidepool)
-					rewards= current->sidepool;
-				else
-					rewards=split;
-				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
-				current->chips+=rewards;
-				outputwinner(current,rewards);
-			}
-			else{
-				current -> chips += split;
-				poolsize-=split;
-				outputwinner(current,split);
-			}
-			current->ingame=false;
-			winner--;
-		}
-		current=current->next;
-		if (current==button){
-			second =true;// second round checking
-			double split=poolsize/winner; // initilizing the splited pool
-		}
-	}while(winner!=0);
+		current = current->next;
+	} while (current != button);
+	cout << "Winner is: " << winner->name << endl;
+	if (winner-> allin==false){
+		winner->chips+=poolsize; // without allin can get the whole pool
+		outputwinner(winner, poolsize);
+		poolsize=0;
+	}
+	else{
+	
+		winner->chips+=winner->sidepool; // for player all in 
+		outputwinner(winner, winner->sidepool);
+		winner->ingame=false;
+		poolsize-=winner->sidepool; 
+	
+	}
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }

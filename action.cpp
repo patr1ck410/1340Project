@@ -26,116 +26,114 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 	}
 	while (!endturn)
 	{
-		if (current->ingame == false || current->allin == true)
+		if (!(current->ingame == false || current->allin == true))
 		{
-			current = current->next;
-			continue; // pass to next player if the player has all in or fold
-		}
-		cout << "\n";
-		cout << "\n";
-		cout << "Now, it is " << current->name << "'s turn!!!" << endl; // user-menu
-		cout << "\n";
-		cout << "Current pool size: " << poolsize << endl;
-		cout << "Your Dead chips: " << current->chipsput << endl;
-		cout << "Chips remaining: " << current->chips << endl;
-		double diff = max - current->chipsput;
-		cout << "Chips to call :" << diff << endl;
-		cout << "\n";
-		showhand(current); // user-menu
-		cout << "Please choose an action below:" << endl;
-		cout << "\n";
-		if (turn < playernum)
-		{
-			cout << "\t1. Check or call" << endl;
-			cout << "\t2. Bet" << endl;
-			cout << "\t3. Fold" << endl;
 			cout << "\n";
-			turn += 1;
-		}
-		else
-		{
-			cout << "\t1. Check or call" << endl;
-			cout << "\t2. Bet" << endl;
-			cout << "\t3. Fold" << endl;
-			cout << "\t4. Show community card" << endl;
 			cout << "\n";
-			turn ++;
-		}
-		bool check = false;
-		double betsize;
-		int opt;
-		cin >> opt;
-		while (!check) // validate the action, incorrect then input again
-		{
+			cout << "Now, it is " << current->name << "'s turn!!!" << endl; // user-menu
+			cout << "\n";
+			cout << "Current pool size: " << poolsize << endl;
+			cout << "Your Dead chips: " << current->chipsput << endl;
+			cout << "Chips remaining: " << current->chips << endl;
+			double diff = max - current->chipsput;
+			cout << "Chips to call :" << diff << endl;
+			cout << "\n";
+			showhand(current); // user-menu
+			cout << "Please choose an action below:" << endl;
+			cout << "\n";
 			if (turn < playernum)
 			{
-				while (opt > 3 || opt < 1)
-				{
-					cout << "Invalid choice! Please choose your action again:" << endl;
-					cin >> opt;
-					continue;
-				}
-			}
-			else if (turn >= playernum)
-			{
-				while (opt > 4 || opt < 1)
-				{
-					cout << "Invalid choice! Please choose your action again:" << endl;
-					cin >> opt;
-					continue;
-				}
-			}
-			if (opt == 2)
-			{
-				cout << "Input bet size: " << endl;
-				cin >> betsize;
-				if ((betsize < max * 2 && betsize!=current->chips ) || betsize > current->chips || betsize==max) // wrong betsize
-				{
-					cout << "Invalid betsize! Please choose your action again:" << endl;
-					cin >> opt;
-					continue;
-				}
-			}
-			check = true;
-		}
-		if (opt == 1)
-		{
-			if (diff >= current->chips)
-			{
-				current->allin = true;
-				current->chipsput += current->chips;
-				current->chips = 0; // allin if chips remaining is not enough
-				playerinpool -= 1;
+				cout << "\t1. Check or call" << endl;
+				cout << "\t2. Bet" << endl;
+				cout << "\t3. Fold" << endl;
+				cout << "\n";
+				turn += 1;
 			}
 			else
 			{
-				current->chipsput += diff;
-				current->chips -= diff;
+				cout << "\t1. Check or call" << endl;
+				cout << "\t2. Bet" << endl;
+				cout << "\t3. Fold" << endl;
+				cout << "\t4. Show community card" << endl;
+				cout << "\n";
+				turn ++;
 			}
-		}
-		else if (opt == 2) // raise
-		{
-			last = current;
-			max = betsize;
-			current->chips = current->chips - (betsize - current->chipsput);
-			current->chipsput = betsize;
-			if (current->chips == 0) // allin
+			bool check = false;
+			double betsize;
+			int opt;
+			cin >> opt;
+			while (!check) // validate the action, incorrect then input again
 			{
-				current->allin = true;
+				if (turn < playernum)
+				{
+					while (opt > 3 || opt < 1 || (opt==2 && current->chips==diff))
+					{
+						cout << "Invalid choice! Please choose your action again:" << endl;
+						cin >> opt;
+						continue;
+					}
+				}
+				else if (turn >= playernum)
+				{
+					while (opt > 4 || opt < 1 || (opt==2 && current->chips=diff))
+					{
+						cout << "Invalid choice! Please choose your action again:" << endl;
+						cin >> opt;
+						continue;
+					}
+				}
+				if (opt == 2)
+				{
+					cout << "Input bet size: " << endl;
+					cin >> betsize;
+					if ((betsize < max * 2 && betsize!=current->chips ) || betsize > current->chips ) // wrong betsize
+					{
+						cout << "Invalid betsize! Please choose your action again:" << endl;
+						cin >> opt;
+						continue;
+					}
+				}
+				check = true;
+			}
+			if (opt == 1)
+			{
+				if (diff >= current->chips)
+				{
+					current->allin = true;
+					current->chipsput += current->chips;
+					current->chips = 0; // allin if chips remaining is not enough
+					playerinpool -= 1;
+				}
+				else
+				{
+					current->chipsput += diff;
+					current->chips -= diff;
+				}
+			}
+			else if (opt == 2) // raise
+			{
+				last = current;
+				max = betsize;
+				current->chips = current->chips - (betsize - current->chipsput);
+				current->chipsput = betsize;
+				if (current->chips == 0) // allin
+				{
+					current->allin = true;
+					playerinpool -= 1;
+				}
+			}
+			else if (opt == 3) // fold
+			{
+				current->ingame = false;
+				playerleft -= 1;
 				playerinpool -= 1;
 			}
-		}
-		else if (opt == 3) // fold
-		{
-			current->ingame = false;
-			playerleft -= 1;
-			playerinpool -= 1;
-		}
-		else if (opt == 4) // show community card
-		{	
-			turn--;
-			showpublic(publiccard, 2 + turn/playernum); // turn/playernum will get which round in the match, then can know how many card should be shown
-			continue;
+			else if (opt == 4) // show community card
+			{	
+				turn--;
+				showpublic(publiccard, 2 + turn/playernum); // turn/playernum will get which round in the match, then can know how many card should be shown
+				continue;
+			}
 		}
 		current = current->next;
 		if (last == current)
@@ -171,7 +169,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 		giverewards(button, poolsize);
 		allfold = true;
 	}
-	else if (playerinpool == 1) // one one has not fold and all in
+	else if (playerinpool <= 1) // one one has not fold and all in
 	{
 		terminate = true;
 	}

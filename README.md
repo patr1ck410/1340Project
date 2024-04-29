@@ -98,9 +98,12 @@ High Card
 e.g. A♥K♣10♥2♦3♣ is an ace-high combination, and 7♥6♣5♥4♦2♣ is a seven-high combination.
 
 Special implementation
-	When any player does not have enough chips to pay for the blind or continue the game, the game will ask whether players would like to join the minigame.
+
+When any player does not have enough chips to pay for the blind or continue the game, the game will ask whether players would like to join the minigame.
+
 Minigame
-	The minigame is a guessing game. The computer will randomly draw a card from a brand-new deck (52 cards). Players have to make the decision to guess whether the next card is Smaller (press s), Larger (press l), or The Same (press t). If players make the correct guess, they can get chips according to the odds. Otherwise, players could still get 30BB to continue the game.
+
+The minigame is a guessing game. The computer will randomly draw a card from a brand-new deck (52 cards). Players have to make the decision to guess whether the next card is Smaller (press s), Larger (press l), or The Same (press t). If players make the correct guess, they can get chips according to the odds. Otherwise, players could still get 30BB to continue the game.
 
 Functions in the project:
 1. Main.cpp : a collection of functions including save game and game initialization input interface. There is while loop to handle every round of the game (Program codes in multiple files).

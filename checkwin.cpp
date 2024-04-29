@@ -135,7 +135,7 @@ void givewinner(int poolsize, player * button)
 	long min = 780000; // explanation in combination.pdf
 	player * current=button;
 	int winner=1;// defult 1 , check if there are co-winner 
-	bool playerallin=false; // check if any of co-winner are all in , have to distribute to them first
+	vector <int> allinsize; //store player->sidepool who have allin , have to distribte for smallest to highest
 	do // finding the smallest value , which their hand is largest 
 	{
 		if (current -> ingame==true )
@@ -144,38 +144,48 @@ void givewinner(int poolsize, player * button)
 			{
 				min = current->value;
 				winner=1;
-				playerallin=false; //initilize if someone has bigger hands
-				if (current -> allin)
+				allinsize.clear();//initilize if someone has bigger hands
+				if (current -> allin){
+					allinsize.push_back(min);
 					playerallin=true;
+				}
 			}
 			else if (current -> value ==min){
 				winner++;
-				if (current -> allin)
+				if (current -> allin){
+					allinsize.push_back(min);
 					playerallin=true;
+				}
 			}
 		}
+		current=current->next;
 	} while (current != button); // run through the linked-list
-	double split=poolsize/winner;
+	sort(allinsize.rbeign(),allinsize.rend()); // descending order so can pop the smallest sidepoolsize first
 	current = button;
-	bool second;
-	if (playerallin)
-		second = false; // have to disttibute to player allin first for easy distribution
-	else
-		second = true; // no need second round checking if no player allin win the game
 	do{
-		if (current->ingame && current -> value== min && (second || current -> allin==true)){
+		double split=poolsize/winner; // initilizing the splited pool
+		if (current->ingame && current -> value== min && (allinsize.size()==0 || (current -> allin==true && current->sidepool==allinsize.back())){ // have to distribute to allin player first
 			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
 				double rewards;
-				if (split > current -> sidepool)
-					rewards= current->sidepool;
+				if (split >= (current -> sidepool)/winner)
+					rewards= (current->sidepool)/winner;
 				else
 					rewards=split;
 				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
 				current->chips+=rewards;
 				outputwinner(current,rewards);
+				allinsize.pop_back(); // remove it from the vector int
+				if (allinsize.size()!=0){ // for calculation of sidepool
+					player * deduct = button;
+					do {
+						if( deduct -> allin==true)
+							deduct->sidepool-=rewards;
+						deduct=decut->next;
+					}while (deduct!=button);
+				}		
 			}
 			else{
-				current -> chips += split;
+				current -> chips += split; // add chips 
 				poolsize-=split;
 				outputwinner(current,split);
 			}
@@ -183,10 +193,6 @@ void givewinner(int poolsize, player * button)
 			winner--;
 		}
 		current=current->next;
-		if (current==button){
-			second =true;// second round checking
-			double split=poolsize/winner; // initilizing the splited pool
-		}
 	}while(winner!=0);
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players

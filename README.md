@@ -43,12 +43,16 @@ Compilation and execution instruction:
 3. check your cards and take action.
 4. wait a period of time for the game result output
 5. terminate the program --> control C
+
 -What action can players take? 
+
 1. Check/Fold (choose 1 in-game)
 2. Bet/re-raise (choose 2 in-game)
 3. Fold (choose 3 in-game)
 4. Check for the community cards (choose 4 in-game and it is only feasible after the flop is distributed)
+
 -How to determine the winner?
+
 1. Be the only player left in-game 
   - convincing other players to fold their hole cards before the last card (River) is. Distributed.
 2. Win by having the best hand

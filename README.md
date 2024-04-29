@@ -2,18 +2,39 @@ Team 34 members:
 Chan Kwok Wai
 
 Chen Junhao
+
 Cheng Ching Lok
+
 Li Pak Long
+
 Yeung Cheuk Yik
+
 In this group project, a classical Texas Hold’em(Poker) game was designed.
-In a Texas poker game, a standard 52-card deck is used. Rank from lowest to highest: 2 3 4 5 6 7 8 9 10 J Q K A Suits: Clubs, Diamonds, Hearts, Spades (all suits worth the same)
+
+In a Texas poker game, a standard 52-card deck is used. Rank from lowest to highest: 2 3 4 5 6 7 8 9 10 J Q K A Suits: Clubs, Diamonds, Hearts, 
+
+Spades (all suits worth the same)
+
 Before the game starts, each player will be allocated 100BB for the poker game.
+
 Game Rules
+
 Before the game starts, two players (small blind and big blind) are forced to pay 0.5BB and 1BB respectively as blind bets.
+
 Two hole cards will randomly be distributed to each player. 
-Once each player gets their hole cards, the game starts with the first betting round. The first betting round is known as the pre-flop round which player take action only based on their hole cards. 
-When the pre-flop round is over, the first three of five community cards will be distributed which is known as flop cards. Once flop cards are distributed, the second betting round starts, and then players have to take action again. 
-Then, the fourth community card (Turn) will be distributed, and once players take action, the final round will start. The final community card (River) will be placed, and players will take action for the last time.
+
+Once each player gets their hole cards, the game starts with the first betting round. The first betting round is known as the pre-flop round which 
+
+player take action only based on their hole cards. 
+
+When the pre-flop round is over, the first three of five community cards will be distributed which is known as flop cards. Once flop cards are 
+
+distributed, the second betting round starts, and then players have to take action again. 
+
+Then, the fourth community card (Turn) will be distributed, and once players take action, the final round will start. The final community card 
+
+(River) will be placed, and players will take action for the last time.
+
 At last, players have to show their two hidden cards and compare them to find the winner(s). The winner in that round will take all the chips in the chips pool.
 
 Compilation and execution instruction:
@@ -33,27 +54,48 @@ Compilation and execution instruction:
 2. Win by having the best hand
   - having the best hand when the final betting round is over.
   Using the hole cards in hand and the five community cards, whoever gets the best combinations/ranks will be the winner.
+
 Ranking of combinations from highest to lowest:
+
 Royal Flush (holding AKQJT of all the same suit)
+
 Straight Flush (Five consecutive cards of the same suit) 
+
 e.g. Q♥J♥10♥9♥8♥ and 8♠7♠6♠5♠4♠
+
 Four of a Kind (Four cards of the same rank) 
+
 e.g. A♥A♦A♠A♣5♦ or 9♥9♦9♣9♠4♠
+
 Full House (Three of a Kind and a Pair) 
+
 e.g. A♥A♦A♠6♣6♦ and 10♣10♠10♥4♠4♥
+
 Flush (Five cards of the same suit, not in sequence)
+
 If two flushes go head-to-head, combinations with best high cards win
+
 A♠J♠7♠4♠2♠ (an ace-high flush) beats T♥7♥5♥3♥2♥ (a ten-high flush) 
+
 Straight (Five consecutive cards of mixed suits) 
+
 e.g. 9♠8♠7♣6♥5♦
+
 Three-of-a-Kind (Three cards with the same rank with any two cards not in different ranks)
+
 e.g. 10♥10♣10♣4♦3♠
+
 Two Pair 
+
 e.g. 8♠8♦7♠7♦2♣
+
 One Pair 
+
 e.g. 9♥9♣6♥5♦2♣
+
 High Card
-  e.g. A♥K♣10♥2♦3♣ is an ace-high combination, and 7♥6♣5♥4♦2♣ is a seven-high combination.
+
+e.g. A♥K♣10♥2♦3♣ is an ace-high combination, and 7♥6♣5♥4♦2♣ is a seven-high combination.
 
 Special implementation
 	When any player does not have enough chips to pay for the blind or continue the game, the game will ask whether players would like to join the minigame.

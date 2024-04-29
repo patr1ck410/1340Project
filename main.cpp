@@ -9,6 +9,7 @@
 #include "output.h"
 #include "structures.h"
 #include "terminate.h"
+#include "dellist.h"
 #include <random>
 #include <cstdlib>
 #include <string>
@@ -137,6 +138,7 @@ int main()
 		}
 	}
 	savegame(button);
+	dellist(button);
 	cout << "Game saved successfully, BYE!!" << endl;
 	return 0;
 }

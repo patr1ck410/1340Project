@@ -20,7 +20,7 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 		suit[combine[i][0]]+=1;
 	for (int i =0; i<7;i++){// trank is map with keys are the rank , and the value is the occurenece , with A is smallest , 2 is largest
 		rank[combine[i][1]]+=1;
-		if (trank.find(combine[i][1])!=trank.end()){
+		if (trank.find(12-(12+combine[i][1])%13)!=trank.end()){
 			trank[12-(combine[i][1]+12)%13]++; // add if exist
 		}
 		else{
@@ -67,9 +67,7 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	}
 	for (map<int, int> ::iterator card = trank.begin(); card!=trank.end(); ++card){
 		cout << card->first << ":" << card->second<<endl;
-	}
-	for (int i =0; i < two.size();i++)
-		cout << two[i] << endl; 
+	} 
 	sort(two.rbegin(),two.rend());
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
@@ -179,13 +177,9 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 			cardrank.push_back(pair->first);
 		}
 	}
-	sort(cardrank.begin() , cardrank.end()); // sort in asceding order
-	for (int i =0; i < cardrank.size();i++)
-		cout << cardrank[i] << " ";
-	cout << endl;	
+	sort(cardrank.begin() , cardrank.end()); // sort in asceding order	
 	for (int i = 0;i < n ;i++)
 		value += pow (13,n-i-1) * cardrank[i];
-	cout << value <<endl; 
 	return value;
 }
 void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
@@ -209,9 +203,11 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 				}
 			}
 			cout << "Name:" << current-> name<< endl;
-			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
+			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf" 
+			cout << "Value: " << current->value <<endl;
 		}		
 		current = current -> next;
+		
 	} while(current!= button);
 	givewinner(poolsize, button); // for giving chips
 }

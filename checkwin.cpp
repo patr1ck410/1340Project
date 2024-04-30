@@ -53,17 +53,23 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	int four=13;
 	int three=13; // only have one value of the highest rank 
 	vector <int> two;
-	for (const auto &pair : trank) {
-		if (pair.second==4)
-			four=pair.first; 
-		else if (pair.second==3)
+	for (map<int, int>::iterator card = trank.begin(); card != trank.end(); ++card) {
+		if (card->second==4)
+			four=card->first; 
+		else if (card->second==3){
 			if (three==13)
-				three=pair.first;
-			else if (pair.first >three)
-				three=pair.first;
-		else if (pair.second==2)
-			two.push_back(pair.second);
+				three=card->first;
+			else if (card->first <three)
+				three=card->first;
+		}
+		else if (card->second==2)
+			two.push_back(card->first);
 	}
+	for (map<int, int> ::iterator card = trank.begin(); card!=trank.end(); ++card){
+		cout << card->first << ":" << card->second<<endl;
+	}
+	for (int i =0; i < two.size();i++)
+		cout << two[i] << endl; 
 	sort(two.rbegin(),two.rend());
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
@@ -116,7 +122,7 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 		return value;
 	}// checking for pair
 	else {
-		long local = localvalue(trank , 1 ,4);
+		long local = localvalue(trank , 5 ,0);
 		value = 404606+local;
 		return value;
 	}// checking for highcard
@@ -125,73 +131,40 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 
 void outputwinner(player * current,double reward){ // for output winner
 	cout << current-> name <<  " won chips : " << reward<< endl;
-	cout << "his hand is" ;
 	showhand (current);
 	cout << "Current chips: " << current->chips <<endl;
 }
 
 void givewinner(int poolsize, player * button)
 {
-	long min = 780000; // explanation in combination.pdf
-	player * current=button;
-	int winner=1;// defult 1 , check if there are co-winner 
-	vector <int> allinsize; //store player->sidepool who have allin , have to distribte for smallest to highest
-	do // finding the smallest value , which their hand is largest 
+	long min = 780000;
+	player * winner = NULL, * current=button;
+	do 
 	{
 		if (current -> ingame==true )
 		{
 			if (current->value < min)
 			{
 				min = current->value;
-				winner=1;
-				allinsize.clear();//initilize if someone has bigger hands
-				if (current -> allin){
-					allinsize.push_back(min);
-				}
-			}
-			else if (current -> value ==min){
-				winner++;
-				if (current -> allin){
-					allinsize.push_back(min);
-				}
+				winner = current;
 			}
 		}
-		current=current->next;
-	} while (current != button); // run through the linked-list
-	sort(allinsize.rbegin(),allinsize.rend()); // descending order so can pop the smallest sidepoolsize first
-	current = button;
-	do{
-		double split=poolsize/winner; // initilizing the splited pool
-		if (current->ingame && current -> value== min && (allinsize.size()==0) || (current -> allin==true && current->sidepool==allinsize.back())){ // have to distribute to allin player first
-			if (current->allin){ // for allin , hv to distribute to them first and they have cap on the sidepool
-				double rewards;
-				if (split >= (current -> sidepool)/winner)
-					rewards= (current->sidepool)/winner;
-				else
-					rewards=split;
-				poolsize-=rewards; // operation for adding chips and redcue the poolsize for redistribution
-				current->chips+=rewards;
-				outputwinner(current,rewards);
-				allinsize.pop_back(); // remove it from the vector int
-				if (allinsize.size()!=0){ // for calculation of sidepool
-					player * deduct = button;
-					do {
-						if( deduct -> allin==true)
-							deduct->sidepool-=rewards;
-						deduct=deduct->next;
-					}while (deduct!=button);
-				}		
-			}
-			else{
-				current -> chips += split; // add chips 
-				poolsize-=split;
-				outputwinner(current,split);
-			}
-			current->ingame=false;
-			winner--;
-		}
-		current=current->next;
-	}while(winner!=0);
+		current = current->next;
+	} while (current != button);
+	cout << "Winner is: " << winner->name << endl;
+	if (winner-> allin==false){
+		winner->chips+=poolsize; // without allin can get the whole pool
+		outputwinner(winner, poolsize);
+		poolsize=0;
+	}
+	else{
+	
+		winner->chips+=winner->sidepool; // for player all in 
+		outputwinner(winner, winner->sidepool);
+		winner->ingame=false;
+		poolsize-=winner->sidepool; 
+	
+	}
 	if (poolsize>0)
 		givewinner(poolsize, button); // the pool is not yet 0, means still can distribute chips to players
 }
@@ -200,16 +173,19 @@ long localvalue (  map<int,int> rank , int n , int used )// the local n highcard
 { 
 	long value=0;
 	vector<int> cardrank;
-	for (const auto &pair : rank) 
-	{
-		if (pair.second != used)
-		{
-			cardrank.push_back(pair.first);
+	for (map<int, int>::iterator pair = rank.begin(); pair != rank.end(); ++pair) {
+		if (pair->second != used)
+		{	
+			cardrank.push_back(pair->first);
 		}
 	}
 	sort(cardrank.begin() , cardrank.end()); // sort in asceding order
+	for (int i =0; i < cardrank.size();i++)
+		cout << cardrank[i] << " ";
+	cout << endl;	
 	for (int i = 0;i < n ;i++)
-		value = pow (13,n-i-1) * cardrank[i]; 
+		value += pow (13,n-i-1) * cardrank[i];
+	cout << value <<endl; 
 	return value;
 }
 void checkwin(player * button, int publiccard[5][2],int poolsize) //check which type of poker hand player have
@@ -232,6 +208,7 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 					combine[i][j]=current->hand[i-5][j]; // add player's handd cards
 				}
 			}
+			cout << "Name:" << current-> name<< endl;
 			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf"  
 		}		
 		current = current -> next;

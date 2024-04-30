@@ -62,31 +62,38 @@ void minigame(bool (&deck)[4][13],player * current) {
    cardDraw(deck, card);
    sto[0] = card[1]; //storing the first card drawn
    printcard(card[0], card[1]);    // Display the selected card
+   cout << "" << endl; 
    cout << "Please choose whether next card drawn will be Larger (L) or Smaller (S) or The Same (D):" << endl;
    cin >> choice;
    cardDraw(deck, card);
    calodds(odds, card, sto);
    if (card[1] > sto[0]) {
       if (choice == 'S') {
+         cout << "Correct Choice!!" << endl;
          current ->chips = 100 * odds[0];
       }
       else {
+         cout << "Wrong Choice!!" << endl;
          current -> chips = 30;
       }
    }
    if (card[1] == sto[0])  {
       if (choice == 'D') {
+         cout << "Correct Choice!!" << endl;
          current ->chips = 100* odds[1];
       }
       else {
+         cout << "Wrong Choice!!" << endl;
          current -> chips = 30;
       }
    }
    else {
       if (choice == 'L') {
+         cout << "Correct Choice!!" << endl;
          current ->chips = 100* odds[2];
       }
       else {
+         cout << "Wrong Choice!!" << endl;
          current -> chips = 30;
       }
    }

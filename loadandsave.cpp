@@ -9,12 +9,12 @@ using namespace std;
 bool checkempty(string filename) // check whether the file is empty or not
 {
     ifstream data(filename);
-    if (!data.is_open()) 
+    if (!data.is_open()) //if file cannot open
     {
         cerr << "Failed to open the data." << endl;
         return true;
     }
-    if (data.eof()) 
+    if (data.eof()) // if the file only contain end of file
     {
         return false;
     }

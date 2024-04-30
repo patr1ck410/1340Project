@@ -26,14 +26,14 @@ int main()
 	int playernum = 0;
 	bool newgame = true;
 	player *button = NULL, *tail = NULL;
-	if (checkempty("lastgame.txt")){    // lastgame.txt exists
+	if (checkempty("lastgame.txt")){    // check is lastgame.txt empty or not
 		string ans;
 		bool flag= false;
 		cout << "previous game dedected . Retrieve ? (1=Yes/0=No)" <<endl;
 		do{
 		cin >> ans;
 		if (ans == "1" ){
-			retrievegame(button, tail, playernum);//not done
+			retrievegame(button, tail, playernum); //read previous game data
 			newgame=false;
 			flag = true;
 		}else if (ans == "0")
@@ -60,7 +60,7 @@ int main()
 			}
 			else 
 				flag=true;
-		}while (!flag);// restricting playernum has to >4
+		}while (!flag);// restricting playernum has to > 4 and < 10
 
 		for (int i = 0; i < playernum; i++)
 		{
@@ -81,7 +81,7 @@ int main()
 		bool allfold = false;
 		bool terminate = false;				 // boolean value for
 		bool deck[4][13];					 // set up the deck
-		checkchips(deck, button, playernum);
+		checkchips(deck, button, playernum); // check if any player don't have chips
 		gamestart(deck, button, tail);		 // reset the deck
 		distribute(deck, button, playernum); // for distributing two cards to each player
 		int publiccard[5][2];
@@ -89,7 +89,7 @@ int main()
 		int playerleft = playernum;	  // onlyfor not have fold
 		int turn = 0;
 		action(button, poolsize, playernum, playerinpool, terminate, true, allfold, playerleft, publiccard, turn);
-		if (allfold)
+		if (allfold) //all player fold
 		{
 			button = button->next;
 			break;
@@ -120,7 +120,7 @@ int main()
 				}
 			}
 		}
-		button = button->next;
+		button = button->next; // pass the button to next player
 		if (allfold)
 			continue;
 		checkwin(button, publiccard, poolsize);
@@ -137,8 +137,8 @@ int main()
 			ongoing = false;
 		}
 	}
-	savegame(button);
-	dellist(button);
+	savegame(button); // save the game into "lastgame.txt"
+	dellist(button); // delete the linked list
 	cout << "Game saved successfully, BYE!!" << endl;
 	return 0;
 }

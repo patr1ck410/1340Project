@@ -157,6 +157,7 @@ void action(player *button, double &poolsize, int playernum, int &playerinpool, 
 			}
 			current->sidepool = reward;
 		}
+		current=current->next;
 	}
 	for (int i = 0; i < playernum; i++) // adding dead chips to the pool
 	{

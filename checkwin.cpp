@@ -70,9 +70,6 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 		else if (card->second==2)
 			two.push_back(card->first);
 	}
-	for (map<int, int> ::iterator card = trank.begin(); card!=trank.end(); ++card){
-		cout << card->first << ":" << card->second<<endl;
-	} 
 	sort(two.begin(),two.end()); // sort in asending order
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
@@ -207,9 +204,7 @@ void checkwin(player * button, int publiccard[5][2],int poolsize) //check which 
 					combine[i][j]=current->hand[i-5][j]; // add player's handd cards
 				}
 			}
-			cout << "Name:" << current-> name<< endl;
 			current->value = assignvalue(combine); //the approach here you can refer to the file "combination.pdf" 
-			cout << "Value: " << current->value <<endl;
 		}		
 		current = current -> next;
 		

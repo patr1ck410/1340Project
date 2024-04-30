@@ -70,7 +70,7 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	for (map<int, int> ::iterator card = trank.begin(); card!=trank.end(); ++card){
 		cout << card->first << ":" << card->second<<endl;
 	} 
-	sort(two.rbegin(),two.rend());
+	sort(two.begin(),two.end()); // sort in asending order
 	if (suited !=4 && straight !=14){ //possibility in striaght flush
 		int count=1;
 		int prev=suits[suits.size()-1]; // checking from the back 
@@ -113,12 +113,12 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 	}// checking for three of a kind
 	else if (two.size()>=2){
 		long local = localvalue(trank , 1 , 2);
-		value = 373848+local;
+		value = 373848+pow(13,2)*two[0]+13*two[1]+local;
 		return value;
 	}// checking for two pairs
 	else if (two.size()==1){
 		long local = localvalue(trank , 3 , 2);
-		value = 376045+local;
+		value = 376045+pow(13,3)*two[0]+local;
 		return value;
 	}// checking for pair
 	else {

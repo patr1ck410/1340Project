@@ -38,8 +38,11 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 			count+=1;
 		else 
 			count=0;
-		if (count>=5)
-			straight=i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
+		if (count==5)
+		{
+			straight = 9 - i; // if straight !=14 , then exist straight , the value straight representing is useful in assigning values
+			break;
+		}
 	}
 	vector <int> suits;
 	map <int,int> suitmap;// use to count highcard 
@@ -47,7 +50,7 @@ long assignvalue(int combine[7][2]){ // assigning values with 0 is the largest ,
 		for (int i=0 ; i<7 ; i++){
 			if(combine[i][0]==suited){
 				suits.push_back(combine[i][1]);
-				suitmap[12-(combine[i][1]+12)%13)]=1;
+				suitmap[12-((combine[i][1]+12)%13)]=1;
 			}
 		}
 		sort(suits.begin(), suits.end()); // sorted vector for ranks in same flush in acsedning order

@@ -77,7 +77,7 @@ void minigame(bool (&deck)[4][13],player * current) {
          current -> chips = 30;
       }
    }
-   if (card[1] == sto[0])  {
+   else if (card[1] == sto[0])  {
       if (choice == 'D') {
          cout << "Correct Choice!!" << endl;
          current ->chips = 100* odds[1];

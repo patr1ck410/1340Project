@@ -125,14 +125,14 @@ int main()
 			continue;
 		checkwin(button, publiccard, poolsize);
 		cout << "Continue playing? (1: Yes / 0: No)"; // ask quit game or not
-		string quitoption;
+		int quitoption;
 		cin >> quitoption; // if quit, set ongoing = false
-		while (quitoption != "1" && quitoption != "0")
+		while (quitoption != 1 && quitoption != 0)
 		{
 			cout << "Invalid choice! Please choose again." << endl;
 			cin >> quitoption;
 		}
-		if (quitoption == "0")
+		if (quitoption == 0)
 		{
 			ongoing = false;
 		}

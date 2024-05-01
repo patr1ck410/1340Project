@@ -127,7 +127,7 @@ int main()
 		cout << "Continue playing? (1: Yes / 0: No)"; // ask quit game or not
 		string quitoption;
 		cin >> quitoption; // if quit, set ongoing = false
-		while (quitoption != "1" || quitoption != "0")
+		while (quitoption != "1" && quitoption != "0")
 		{
 			cout << "Invalid choice! Please choose again." << endl;
 			cin >> quitoption;
